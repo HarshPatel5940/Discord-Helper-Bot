@@ -43,7 +43,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:929607022675120239> Command Can Only Be Used In A Server"
+                            "<:Fail:935098896919707700> Command Can Only Be Used In A Server"
                         )
                         .setColor("RED"),
                 ],
@@ -71,7 +71,7 @@ export default {
                     embeds: [
                         new MessageEmbed()
                             .setDescription(
-                                `"<:Fail:929607022675120239> Could not find a user with id \`${userId}\``
+                                `"<:Fail:935098896919707700> Could not find a user with id \`${userId}\``
                             )
                             .setColor("RED"),
                     ],
@@ -89,7 +89,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:929607022675120239> Please Mention the User to Mute!"
+                            "<:Fail:935098896919707700> Please Mention the User to Mute!"
                         )
                         .setColor("RED"),
                 ],
@@ -103,7 +103,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:929607022675120239> Cannot Mute Yourself **DUMB!!!**"
+                            "<:Fail:935098896919707700> Cannot Mute Yourself **DUMB!!!**"
                         )
                         .setColor("RED"),
                 ],
@@ -117,7 +117,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:929607022675120239> Maximum Only 400 Characters are allowed!"
+                            "<:Fail:935098896919707700> Maximum Only 400 Characters are allowed!"
                         )
                         .setColor("RED"),
                 ],
@@ -136,7 +136,7 @@ export default {
                         embeds: [
                             new MessageEmbed()
                                 .setDescription(
-                                    "<:Fail:929607022675120239> Cannot Find 'Muted' Role."
+                                    "<:Fail:935098896919707700> Cannot Find 'Muted' Role."
                                 )
                                 .setColor("RED"),
                         ],
@@ -152,7 +152,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:929607022675120239> Cannot Mute that User!! \n" +
+                            "<:Fail:935098896919707700> Cannot Mute that User!! \n" +
                                 "```" +
                                 error +
                                 "```"
@@ -168,7 +168,7 @@ export default {
             embeds: [
                 new MessageEmbed()
                     .setDescription(
-                        `<:Success:929606936977084427> <@${target.id}> was **Muted** Indefinitely | \`${target.id}\``
+                        `<:Success:935099107163394061> <@${target.id}> was **Muted** Indefinitely | \`${target.id}\``
                     )
                     .setColor("GREEN"),
             ],

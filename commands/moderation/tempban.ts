@@ -27,7 +27,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:929607022675120239> Command Can Only Be Used In A Server"
+                            "<:Fail:935098896919707700> Command Can Only Be Used In A Server"
                         )
                         .setColor("RED"),
                 ],
@@ -56,7 +56,7 @@ export default {
                     embeds: [
                         new MessageEmbed()
                             .setDescription(
-                                `<:Fail:929607022675120239> Could Not Find a user with the ID of \`${userId}\``
+                                `<:Fail:935098896919707700> Could Not Find a user with the ID of \`${userId}\``
                             )
                             .setColor("RED"),
                     ],
@@ -80,7 +80,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:929607022675120239> Invalid Time Format"
+                            "<:Fail:935098896919707700> Invalid Time Format"
                         )
                         .setColor("RED"),
                 ],
@@ -120,7 +120,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            `<:Fail:929607022675120239> <@${userId}> is already banned! \`${user.id}\``
+                            `<:Fail:935098896919707700> <@${userId}> is already banned! \`${user.id}\``
                         )
                         .setColor("RED"),
                 ],
@@ -144,7 +144,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:929607022675120239> Could Not Ban User"
+                            "<:Fail:935098896919707700> Could Not Ban User"
                         )
                         .setColor("RED"),
                 ],

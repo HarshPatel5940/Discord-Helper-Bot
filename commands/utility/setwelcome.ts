@@ -15,7 +15,7 @@ export default {
     slash: "both",
     guildOnly: true,
 
-    cooldown:'1m',
+    cooldown: "1m",
 
     options: [
         {
@@ -44,7 +44,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:929607022675120239> Please use this command within a server."
+                            "<:Fail:935098896919707700> Please use this command within a server."
                         )
                         .setColor("RED"),
                 ],
@@ -58,7 +58,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:929607022675120239> Please Tag a Valid Text Channel."
+                            "<:Fail:935098896919707700> Please Tag a Valid Text Channel."
                         )
                         .setColor("RED"),
                 ],
@@ -91,7 +91,7 @@ export default {
             embeds: [
                 new MessageEmbed()
                     .setDescription(
-                        "<:Success:929606936977084427> Welcome Channel is setup done!"
+                        "<:Success:935099107163394061> Welcome Channel is setup done!"
                     )
                     .setColor("GREEN"),
             ],

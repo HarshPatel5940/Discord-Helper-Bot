@@ -41,7 +41,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:929607022675120239> Please Use this Command within a Server."
+                            "<:Fail:935098896919707700> Please Use this Command within a Server."
                         )
                         .setColor("RED"),
                 ],
@@ -55,7 +55,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:929607022675120239> Please tag a valid text channel."
+                            "<:Fail:935098896919707700> Please tag a valid text channel."
                         )
                         .setColor("RED"),
                 ],

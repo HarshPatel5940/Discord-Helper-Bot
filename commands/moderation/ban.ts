@@ -69,7 +69,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:929607022675120239> Please Mention the User to Ban!"
+                            "<:Fail:935098896919707700> Please Mention the User to Ban!"
                         )
                         .setColor("RED"),
                 ],
@@ -82,7 +82,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:929607022675120239> Cannot Ban this User!"
+                            "<:Fail:935098896919707700> Cannot Ban this User!"
                         )
                         .setColor("RED"),
                 ],
@@ -95,7 +95,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:929607022675120239> Cannot Ban Yourself **DUMB!!!**"
+                            "<:Fail:935098896919707700> Cannot Ban Yourself **DUMB!!!**"
                         )
                         .setColor("RED"),
                 ],
@@ -109,7 +109,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:929607022675120239> Maximum Only 400 Characters are allowed!"
+                            "<:Fail:935098896919707700> Maximum Only 400 Characters are allowed!"
                         )
                         .setColor("RED"),
                 ],
@@ -126,7 +126,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:929607022675120239> Cannot Ban that User!!!**"
+                            "<:Fail:935098896919707700> Cannot Ban that User!!!**"
                         )
                         .setColor("RED"),
                 ],
@@ -137,9 +137,10 @@ export default {
         return {
             custom: true,
             embeds: [
-                new MessageEmbed().setDescription(
-                `<:Success:929606936977084427> @${target.id}> was **Banned** Indefinitely | \`${target.id}\``
-        )
+                new MessageEmbed()
+                    .setDescription(
+                        `<:Success:935099107163394061> @${target.id}> was **Banned** Indefinitely | \`${target.id}\``
+                    )
                     .setColor("GREEN"),
             ],
             ephemeral: false,

@@ -24,11 +24,11 @@ client.on("ready", async () => {
 
         mongoUri: process.env.MONGO_URI,
 
-        // <:Success:929606936977084427>
-        //<:Fail:929607022675120239>
+        // <:Success:935099107163394061>
+        //<:Fail:935098896919707700>
     }).setDefaultPrefix(">>");
 });
-    /*
+/*
     1) npm init -y
     2) npm install discord.js dotenv wokcommands ms
     3) npm install -g typescript ts-node

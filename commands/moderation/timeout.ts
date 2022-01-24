@@ -51,7 +51,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:929607022675120239> Command Can Only Be Used In A Server"
+                            "<:Fail:935098896919707700> Command Can Only Be Used In A Server"
                         )
                         .setColor("RED"),
                 ],
@@ -80,7 +80,7 @@ export default {
                     embeds: [
                         new MessageEmbed()
                             .setDescription(
-                                `<:Fail:929607022675120239> Couldn't find user with id ${userId}`
+                                `<:Fail:935098896919707700> Couldn't find user with id ${userId}`
                             )
                             .setColor("RED"),
                     ],
@@ -95,7 +95,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:929607022675120239> Cannot Mute Yourself **DUMB!!!**"
+                            "<:Fail:935098896919707700> Cannot Mute Yourself **DUMB!!!**"
                         )
                         .setColor("RED"),
                 ],
@@ -118,7 +118,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            `<:Fail:929607022675120239> Invalid Time Format`
+                            `<:Fail:935098896919707700> Invalid Time Format`
                         )
                         .setColor("RED"),
                 ],
@@ -159,7 +159,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            `<:Fail:929607022675120239> Couldn't timeout user with id ${user.id}`
+                            `<:Fail:935098896919707700> Couldn't timeout user with id ${user.id}`
                         )
                         .setColor("RED"),
                 ],
@@ -171,7 +171,7 @@ export default {
             embeds: [
                 new MessageEmbed()
                     .setDescription(
-                        `<:Success:929606936977084427> <@${userId}> has been timeout for ${time}m! | \`${user.id}\``
+                        `<:Success:935099107163394061> <@${userId}> has been timeout for ${time}m! | \`${user.id}\``
                     )
                     .setColor("GREEN"),
             ],

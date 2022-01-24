@@ -69,7 +69,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:929607022675120239> Please Mention the User to Unmute!"
+                            "<:Fail:935098896919707700> Please Mention the User to Unmute!"
                         )
                         .setColor("RED"),
                 ],
@@ -83,7 +83,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:929607022675120239> Cannot Unmute Yourself **DUMB!!!**"
+                            "<:Fail:935098896919707700> Cannot Unmute Yourself **DUMB!!!**"
                         )
                         .setColor("RED"),
                 ],
@@ -97,7 +97,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:929607022675120239> Maximum Only 400 Characters are allowed!"
+                            "<:Fail:935098896919707700> Maximum Only 400 Characters are allowed!"
                         )
                         .setColor("RED"),
                 ],
@@ -116,7 +116,7 @@ export default {
                         embeds: [
                             new MessageEmbed()
                                 .setDescription(
-                                    "<:Fail:929607022675120239> Cannot Find 'Muted' Role."
+                                    "<:Fail:935098896919707700> Cannot Find 'Muted' Role."
                                 )
                                 .setColor("RED"),
                         ],
@@ -132,7 +132,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:929607022675120239> Cannot Unmute that User!!"
+                            "<:Fail:935098896919707700> Cannot Unmute that User!!"
                         )
                         .setColor("RED"),
                 ],
@@ -145,7 +145,7 @@ export default {
             embeds: [
                 new MessageEmbed()
                     .setDescription(
-                        `<:Success:929606936977084427> <@${user.id}> has been Unmuted! | \`${user.id}\``
+                        `<:Success:935099107163394061> <@${user.id}> has been Unmuted! | \`${user.id}\``
                     )
                     .setColor("GREEN"),
             ],

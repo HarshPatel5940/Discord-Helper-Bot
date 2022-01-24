@@ -38,7 +38,7 @@ export default {
             embeds: [
                 new MessageEmbed()
                     .setDescription(
-                        `<:Success:929606936977084427> Status Chaneged to ${text}`
+                        `<:Success:935099107163394061> Status Chaneged to ${text}`
                     )
                     .setColor("GREEN"),
             ],

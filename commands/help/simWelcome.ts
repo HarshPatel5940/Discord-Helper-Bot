@@ -12,9 +12,11 @@ export default {
         return {
             custom: true,
             embeds: [
-                new MessageEmbed().setDescription(
-                    "<:Success:929606936977084427> Welcome Message Sent! **Event Has Triggered!**"
-                ).setColor("GREEN"),
+                new MessageEmbed()
+                    .setDescription(
+                        "<:Success:935099107163394061> Welcome Message Sent! **Event Has Triggered!**"
+                    )
+                    .setColor("GREEN"),
             ],
             ephemeral: false,
         };

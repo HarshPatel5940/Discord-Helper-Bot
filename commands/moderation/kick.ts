@@ -69,7 +69,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:929607022675120239> Please Mention the User to Kick!"
+                            "<:Fail:935098896919707700> Please Mention the User to Kick!"
                         )
                         .setColor("RED"),
                 ],
@@ -82,7 +82,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:929607022675120239> Cannot Kick this User!"
+                            "<:Fail:935098896919707700> Cannot Kick this User!"
                         )
                         .setColor("RED"),
                 ],
@@ -95,7 +95,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:929607022675120239> Cannot Kick Yourself **DUMB!!!**"
+                            "<:Fail:935098896919707700> Cannot Kick Yourself **DUMB!!!**"
                         )
                         .setColor("RED"),
                 ],
@@ -109,7 +109,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:929607022675120239> Maximum Only 400 Characters are allowed!"
+                            "<:Fail:935098896919707700> Maximum Only 400 Characters are allowed!"
                         )
                         .setColor("RED"),
                 ],
@@ -126,7 +126,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:929607022675120239> Cannot Kick that User!!!**"
+                            "<:Fail:935098896919707700> Cannot Kick that User!!!**"
                         )
                         .setColor("RED"),
                 ],
@@ -139,7 +139,7 @@ export default {
             embeds: [
                 new MessageEmbed()
                     .setDescription(
-                        `<:Success:929606936977084427> <@${target.id}> was **Kicked** | \`${target.id}\``
+                        `<:Success:935099107163394061> <@${target.id}> was **Kicked** | \`${target.id}\``
                     )
                     .setColor("GREEN"),
             ],

@@ -16,13 +16,13 @@ export default {
 
         // const ping = `Bot Latency is ${msgping}`;
 
-        // `<:Success:929606936977084427> API Latency: ${message.client.ws.ping}ms`
+        // `<:Success:935099107163394061> API Latency: ${message.client.ws.ping}ms`
         return {
             custom: true,
             embeds: [
                 new MessageEmbed()
                     .setDescription(
-                        `<:Success:929606936977084427> API Latency: ${message.client.ws.ping}ms |\`bot latency: coming soon\``
+                        `<:Success:935099107163394061> API Latency: ${message.client.ws.ping}ms |\`bot latency: coming soon\``
                     )
                     .setColor("GREEN"),
             ],
