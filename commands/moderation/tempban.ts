@@ -4,7 +4,7 @@ import PunishmentSchema from "../../models/Punishment-schema";
 
 export default {
     category: "moderation",
-    description: "Bans a user from the server.",
+    description: "Bans a user from the server for a specific time.",
 
     // permissions: ["MANAGE_ROLES"],
     requireRoles: true,

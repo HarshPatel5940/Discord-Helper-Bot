@@ -3,7 +3,7 @@ import { ICommand } from "wokcommands";
 
 export default {
     category: "moderation",
-    description: "Kick a user from the server.",
+    description: "Unmute a user from the server.",
 
     slash: "both",
 

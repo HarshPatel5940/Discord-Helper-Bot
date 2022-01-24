@@ -136,7 +136,21 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            'Please Use "m" "h" or "d" for minutes, hours and days respectively'
+                            'Please Use "m" "h" or "d" for minutes, hours and days respectively (min: 1m => max: 28d)\n\n**Example:`!timeout @user 1h`'
+                        )
+                        .setColor("RED"),
+                ],
+                ephemeral: true,
+            };
+        }
+
+        if (time > 40320) {
+            return {
+                custom: true,
+                embeds: [
+                    new MessageEmbed()
+                        .setDescription(
+                            `<:Fail:935098896919707700> You cannot timeout a user for more than 28 days`
                         )
                         .setColor("RED"),
                 ],
