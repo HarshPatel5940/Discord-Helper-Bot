@@ -1,0 +1,29 @@
+import mongoose, { Schema } from "mongoose";
+
+const reqString = {
+    type: String,
+    require: true,
+};
+
+const reqBoolean = {
+    type: Boolean,
+    require: true,
+};
+
+const reqArray = {
+    type: [String],
+    require: true,
+};
+
+const TicketSystemSchema = new Schema({
+    GuildID: reqString,
+    MembersId: reqArray,
+    ChannelID: reqString,
+    Closed: reqBoolean,
+    Locked: reqBoolean,
+});
+
+const name = "guild-ticket-system";
+
+export default mongoose.models[name] ||
+    mongoose.model(name, TicketSystemSchema, name);

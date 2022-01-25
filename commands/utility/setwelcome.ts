@@ -15,7 +15,7 @@ export default {
     slash: "both",
     guildOnly: true,
 
-    cooldown: "1m",
+    cooldown: "10s",
 
     options: [
         {
