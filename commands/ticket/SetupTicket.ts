@@ -3,7 +3,6 @@ import DJS, {
     MessageEmbed,
     MessageActionRow,
     MessageButton,
-    Client,
 } from "discord.js";
 import TicketConfigSchema from "../../models/ticketconfig-schema";
 
@@ -178,6 +177,7 @@ export default {
             await TicketConfigSchema.findOneAndUpdate(
                 { GuildID: guild.id },
                 {
+                    GuildTicketCount:"0",
                     ChannelID: Channel.id,
                     TranscriptID: Transcript.id,
                     OpenCategoryID: OpenTicketsCategory.id,

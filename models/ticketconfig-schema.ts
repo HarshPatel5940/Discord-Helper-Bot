@@ -17,6 +17,7 @@ const reqArray = {
 
 const TicketConfigSchema = new Schema({
     GuildID: reqString,
+    GuildTicketCount: reqString,
     ChannelID: reqString,
     TranscriptID: reqString,
     OpenCategoryID: reqString,
