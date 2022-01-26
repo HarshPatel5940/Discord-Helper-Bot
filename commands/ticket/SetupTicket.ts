@@ -80,14 +80,14 @@ export default {
             name: "secondbutton",
             description:
                 "Give Your Second Button (Primary Style) | name and an emoji by adding a comma | SYNTAX: NAME,EMOJI",
-            required: true,
+            required: false,
             type: TYPES.STRING,
         },
         {
             name: "thirdbutton",
             description:
                 "Give Your Third Button (Secondary Style)| name and an emoji by adding a comma | SYNTAX: NAME,EMOJI",
-            required: true,
+            required: false,
             type: TYPES.STRING,
         },
     ],
@@ -127,23 +127,20 @@ export default {
             const rawButton2 = options.getString("secondbutton");
             const rawButton3 = options.getString("thirdbutton");
 
-            if (!rawButton1 || !rawButton2 || !rawButton3) {
+            if (!rawButton1) {
                 return {
                     custom: true,
                     embeds: [
                         new MessageEmbed()
 
                             .setDescription(
-                                "<:Fail:935098896919707700> Please provide all the buttons!"
+                                "<:Fail:935098896919707700> Please Provide Name and Id for Atleast Button 1"
                             )
                             .setColor("RED"),
                     ],
                     ephemeral: true,
                 };
             }
-            const Button1 = rawButton1.split(",");
-            const Button2 = rawButton2.split(",");
-            const Button3 = rawButton3.split(",");
 
             if (
                 !Channel ||
@@ -166,6 +163,16 @@ export default {
                     ],
                     ephemeral: true,
                 };
+            }
+
+            const Button1 = rawButton1.split(",");
+            let Button2 = ["none"];
+            if (rawButton2 !== null) {
+                Button2 = rawButton2.split(",");
+            }
+            let Button3 = ["none"];
+            if (rawButton3) {
+                Button3 = rawButton3.split(",");
             }
 
             await TicketConfigSchema.findOneAndUpdate(
@@ -192,18 +199,28 @@ export default {
                     .setCustomId(Button1[0])
                     .setLabel(Button1[0])
                     .setStyle("SUCCESS")
-                    .setEmoji(Button1[1]),
-                new MessageButton()
-                    .setCustomId(Button2[0])
-                    .setLabel(Button2[0])
-                    .setStyle("PRIMARY")
-                    .setEmoji(Button2[1]),
-                new MessageButton()
-                    .setCustomId(Button3[0])
-                    .setLabel(Button3[0])
-                    .setStyle("PRIMARY")
-                    .setEmoji(Button3[1])
+                    .setEmoji(Button1[1])
             );
+
+            if (Button2[0] !== "none") {
+                Buttons.addComponents(
+                    new MessageButton()
+                        .setCustomId(Button2[0])
+                        .setLabel(Button2[0])
+                        .setStyle("PRIMARY")
+                        .setEmoji(Button2[1])
+                );
+            }
+
+            if (Button3[0] !== "none") {
+                Buttons.addComponents(
+                    new MessageButton()
+                        .setCustomId(Button3[0])
+                        .setLabel(Button3[0])
+                        .setStyle("SECONDARY")
+                        .setEmoji(Button3[1])
+                );
+            }
 
             const Embed = new MessageEmbed()
                 .setAuthor({
