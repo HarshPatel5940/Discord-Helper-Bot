@@ -1,14 +1,12 @@
-import DJS, {
-    ButtonInteraction,
+import {
     MessageEmbed,
     MessageActionRow,
     MessageButton,
     Client,
-    Interaction,
 } from "discord.js";
 
-import TicketConfigSchema from "../models/ticketconfig-schema";
-import TicketSystemSchema from "../models/ticketsystem-schema";
+import TicketConfigSchema from "../../models/ticketconfig-schema";
+import TicketSystemSchema from "../../models/ticketsystem-schema";
 
 export default (client: Client) => {
     client.on("interactionCreate", async (ButtonInteraction) => {
