@@ -11,7 +11,7 @@ const reqBoolean = {
 };
 
 const reqArray = {
-    type: [String],
+    type: Array,
     require: true,
 };
 

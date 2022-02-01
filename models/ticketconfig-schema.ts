@@ -21,7 +21,7 @@ const TicketConfigSchema = new Schema({
     ChannelID: reqString,
     TranscriptID: reqString,
     OpenCategoryID: reqString,
-    CloseCategoryID: reqString,
+    // CloseCategoryID: reqString,
     EveryoneRoleID: reqString,
     SupportRoleID: reqString,
     Description: reqString,

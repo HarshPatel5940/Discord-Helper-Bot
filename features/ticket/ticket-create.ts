@@ -16,16 +16,22 @@ export default (client: Client) => {
         if (!guild) return;
         if (!member) return;
 
-        const Data = await TicketConfigSchema.findOne({ guildId: guild.id });
+        const Data = await TicketConfigSchema.findOne({ GuildId: guild.id });
         if (!Data) return;
 
         if (!Data.Buttons.includes(customId)) return;
 
         let TicketCount = Data.GuildTicketCount;
 
+        ButtonInteraction.reply({
+            content: "creating....",
+            ephemeral: true,
+        });
+
         await guild.channels
             .create(`${customId}-Ticket-${TicketCount}`, {
                 type: "GUILD_TEXT",
+                reason: `Ticket Created by: ${member.user.username} | id= ${member.user.id}`,
                 parent: Data.OpenCategoryID,
                 permissionOverwrites: [
                     {
@@ -39,7 +45,7 @@ export default (client: Client) => {
                     },
                     {
                         id: Data.EveryoneRoleID,
-                        deny: ["VIEW_CHANNEL"],
+                        deny: ["VIEW_CHANNEL", "SEND_MESSAGES"],
                     },
                     {
                         id: Data.SupportRoleID,
@@ -54,22 +60,9 @@ export default (client: Client) => {
                 ],
             })
             .then(async (channel) => {
-                ButtonInteraction.reply({
+                ButtonInteraction.followUp({
                     content: `${member} your ticket has been created! ${channel}`,
                     ephemeral: true,
-                });
-                TicketCount = (parseInt(TicketCount) + 1).toString();
-                await TicketConfigSchema.findOneAndUpdate(
-                    { GuildID: guild.id },
-                    { GuildTicketCount: TicketCount },
-                    { upsert: true }
-                );
-                await TicketSystemSchema.create({
-                    GuildID: guild.id,
-                    MembersID: member.user.id,
-                    ChannelID: channel.id,
-                    Closed: false,
-                    Locked: false,
                 });
                 const Embed = new MessageEmbed()
                     .setColor("BLURPLE")
@@ -86,27 +79,46 @@ export default (client: Client) => {
                 const Buttons = new MessageActionRow();
                 Buttons.addComponents(
                     new MessageButton()
-                        .setCustomId("close")
-                        .setLabel("Save & Close")
-                        .setEmoji("💾")
+                        .setCustomId("ticket-close")
+                        .setLabel("Save & Delete")
+                        .setEmoji("⛔")
                         .setStyle("SUCCESS"),
                     new MessageButton()
-                        .setCustomId("lock")
+                        .setCustomId("ticket-lock")
                         .setLabel("lock")
                         .setEmoji("🔒")
                         .setStyle("SECONDARY"),
                     new MessageButton()
-                        .setCustomId("unlock")
+                        .setCustomId("ticket-unlock")
                         .setLabel("unlock")
                         .setEmoji("🔓")
                         .setStyle("SECONDARY")
                 );
-
-                channel.send({
+                const msg1 = channel.send({
                     content: `<@${member.user.id}> Your Ticket Has Been Created!`,
                     embeds: [Embed],
                     components: [Buttons],
                 });
+
+                TicketCount = (parseInt(TicketCount) + 1).toString();
+                await TicketConfigSchema.findOneAndUpdate(
+                    { GuildID: guild.id },
+                    { GuildTicketCount: TicketCount },
+                    { upsert: true }
+                );
+
+                var MemberArray: string[] = new Array();
+                MemberArray.push(member.user.id);
+
+                await TicketSystemSchema.create({
+                    GuildID: guild.id,
+                    MembersID: MemberArray,
+                    ChannelID: channel.id,
+                    Closed: false,
+                    Locked: false,
+                });
+
+                (await msg1).pin();
             });
     });
 };

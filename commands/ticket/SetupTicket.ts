@@ -9,7 +9,7 @@ import TicketConfigSchema from "../../models/ticketconfig-schema";
 const TYPES = DJS.Constants.ApplicationCommandOptionTypes;
 
 export default {
-    category: "utility",
+    category: "ticket",
     description: "Setup Ticket System For Your Server!",
 
     slash: true,
@@ -42,14 +42,14 @@ export default {
             type: TYPES.CHANNEL,
             channelTypes: ["GUILD_CATEGORY"],
         },
-        {
-            name: "closedticketscategory",
-            description:
-                "Select the Category in which Closed Tickets will be Kept!.",
-            required: true,
-            type: TYPES.CHANNEL,
-            channelTypes: ["GUILD_CATEGORY"],
-        },
+        // {
+        //     name: "closedticketscategory",
+        //     description:
+        //         "Select the Category in which Closed Tickets will be Kept!.",
+        //     required: true,
+        //     type: TYPES.CHANNEL,
+        //     channelTypes: ["GUILD_CATEGORY"],
+        // },
         {
             name: "supportrole",
             description: "Provide the Ticket Support's Role",
@@ -114,9 +114,9 @@ export default {
             const OpenTicketsCategory = options.getChannel(
                 "openticketscategory"
             );
-            const ClosedTicketsCategory = options.getChannel(
-                "closedticketscategory"
-            );
+            // const ClosedTicketsCategory = options.getChannel(
+            //     "closedticketscategory"
+            // );
             const SupportRole = options.getRole("supportrole");
             const EveryoneRole = options.getRole("everyonerole");
 
@@ -145,7 +145,7 @@ export default {
                 !Channel ||
                 !Transcript ||
                 !OpenTicketsCategory ||
-                !ClosedTicketsCategory ||
+                // !ClosedTicketsCategory ||
                 !SupportRole ||
                 !EveryoneRole ||
                 !DescriptionMsg
@@ -181,7 +181,7 @@ export default {
                     ChannelID: Channel.id,
                     TranscriptID: Transcript.id,
                     OpenCategoryID: OpenTicketsCategory.id,
-                    CloseCategoryID: ClosedTicketsCategory.id,
+                    // CloseCategoryID: ClosedTicketsCategory.id,
                     EveryoneRoleID: EveryoneRole.id,
                     SupportRoleID: SupportRole.id,
                     Description: DescriptionMsg,
