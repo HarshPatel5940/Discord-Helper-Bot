@@ -106,11 +106,12 @@ export default (client: Client) => {
                             `🔒 This Ticket is Now Locked by ${member}`
                         );
 
-                        docs.MembersID.forEach((m: any) => {
-                            channel.permissionOverwrites.edit(m, {
+                        channel.permissionOverwrites.edit(
+                            docs.MembersID.toString(),
+                            {
                                 SEND_MESSAGES: false,
-                            });
-                        });
+                            }
+                        );
 
                         ButtonInteraction.reply({ embeds: [Embed] });
                         break;
@@ -137,11 +138,12 @@ export default (client: Client) => {
                             `🔒 This Ticket is Now Unlocked by ${member}`
                         );
 
-                        docs.MembersID.forEach((m: GuildMember) => {
-                            channel.permissionOverwrites.edit(m, {
+                        channel.permissionOverwrites.edit(
+                            docs.MembersID.toString(),
+                            {
                                 SEND_MESSAGES: true,
-                            });
-                        });
+                            }
+                        );
 
                         ButtonInteraction.reply({ embeds: [Embed] });
                         break;
@@ -191,7 +193,7 @@ export default (client: Client) => {
 
                         setTimeout(() => {
                             channel.delete();
-                        }, 10 * 1000);
+                        }, 15 * 1000);
                 }
             }
         );

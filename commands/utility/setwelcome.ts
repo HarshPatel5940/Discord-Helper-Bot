@@ -78,7 +78,7 @@ export default {
             },
             {
                 _id: guild.id,
-                text,
+                text: text,
                 channelId: target.id,
             },
             {

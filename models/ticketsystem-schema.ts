@@ -17,7 +17,7 @@ const reqArray = {
 
 const TicketSystemSchema = new Schema({
     GuildID: reqString,
-    MembersId: reqArray,
+    MembersID: reqString,
     ChannelID: reqString,
     Closed: reqBoolean,
     Locked: reqBoolean,

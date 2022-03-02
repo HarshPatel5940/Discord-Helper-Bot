@@ -23,10 +23,7 @@ export default (client: Client) => {
 
         let TicketCount = Data.GuildTicketCount;
 
-        ButtonInteraction.reply({
-            content: "creating....",
-            ephemeral: true,
-        });
+        ButtonInteraction.reply({ content: "Creating...", ephemeral: true });
 
         await guild.channels
             .create(`${customId}-Ticket-${TicketCount}`, {
@@ -60,10 +57,6 @@ export default (client: Client) => {
                 ],
             })
             .then(async (channel) => {
-                ButtonInteraction.followUp({
-                    content: `${member} your ticket has been created! ${channel}`,
-                    ephemeral: true,
-                });
                 const Embed = new MessageEmbed()
                     .setColor("BLURPLE")
                     .setTitle(`${member.user.username} Ticket | ${customId}`)
@@ -94,7 +87,7 @@ export default (client: Client) => {
                         .setEmoji("🔓")
                         .setStyle("SECONDARY")
                 );
-                const msg1 = channel.send({
+                await channel.send({
                     content: `<@${member.user.id}> Your Ticket Has Been Created!`,
                     embeds: [Embed],
                     components: [Buttons],
@@ -107,18 +100,13 @@ export default (client: Client) => {
                     { upsert: true }
                 );
 
-                var MemberArray: string[] = new Array();
-                MemberArray.push(member.user.id);
-
                 await TicketSystemSchema.create({
                     GuildID: guild.id,
-                    MembersID: MemberArray,
+                    MembersID: member.user.id,
                     ChannelID: channel.id,
                     Closed: false,
                     Locked: false,
                 });
-
-                (await msg1).pin();
             });
     });
 };
