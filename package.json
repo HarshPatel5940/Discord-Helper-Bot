@@ -1,11 +1,11 @@
 {
   "name": "discordianshelper",
-  "version": "1.0.1",
+  "version": "1.0.4",
   "description": "A Simple and Cool Discord Bot Written in Typescript (discord.js)",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.ts"
   },
   "repository": {
     "type": "git",
@@ -19,8 +19,10 @@
   },
   "homepage": "https://github.com/HarshPatel5940/DiscordiansHelper#readme",
   "dependencies": {
+    "discord-html-transcripts": "^1.1.3",
     "discord.js": "^13.6.0",
     "dotenv": "^14.2.0",
+    "mongoose": "^6.1.8",
     "ms": "^2.1.3",
     "nodemon": "^2.0.15",
     "ts-node": "^10.4.0",

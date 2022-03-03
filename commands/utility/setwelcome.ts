@@ -15,7 +15,7 @@ export default {
     slash: "both",
     guildOnly: true,
 
-    cooldown: "1m",
+    cooldown: "10s",
 
     options: [
         {
@@ -78,7 +78,7 @@ export default {
             },
             {
                 _id: guild.id,
-                text,
+                text: text,
                 channelId: target.id,
             },
             {

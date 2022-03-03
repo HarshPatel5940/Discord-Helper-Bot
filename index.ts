@@ -30,8 +30,9 @@ client.on("ready", async () => {
 });
 /*
     1) npm init -y
-    2) npm install discord.js dotenv wokcommands ms
+    2) npm install discord.js dotenv wokcommands ms mongoose 
     3) npm install -g typescript ts-node
+    4) npm i discord-html-transcripts
     */
 
 client.login(process.env.TOKEN);

@@ -48,7 +48,7 @@ export default {
         await msgInt.reply({
             embeds: [
                 new MessageEmbed()
-                    .setDescription("Choose on of the Buttons")
+                    .setDescription("Choose one of the Buttons")
                     .setColor("BLURPLE"),
             ],
             components: [row],
