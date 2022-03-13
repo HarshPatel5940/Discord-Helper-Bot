@@ -63,8 +63,8 @@ export default {
         }
         try {
             args.shift();
-            const text = args.join(" ");
-            const json = JSON.parse(text);
+            const text1 = args.join(" ");
+            const json = JSON.parse(text1);
 
             const embed = new MessageEmbed(json);
 

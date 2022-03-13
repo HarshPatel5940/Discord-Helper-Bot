@@ -33,6 +33,7 @@ client.on("ready", async () => {
     2) npm install discord.js dotenv wokcommands ms mongoose 
     3) npm install -g typescript ts-node
     4) npm i discord-html-transcripts
+    5) tsc -init
     */
 
 client.login(process.env.TOKEN);
