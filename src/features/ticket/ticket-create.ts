@@ -23,7 +23,7 @@ export default (client: Client) => {
 
         let TicketCount = Data.GuildTicketCount;
 
-        ButtonInteraction.reply({ content: "Creating...", ephemeral: true });
+        ButtonInteraction.reply({content: 'creating ticket...', ephemeral:true});
 
         await guild.channels
             .create(`${customId}-Ticket-${TicketCount}`, {
@@ -87,7 +87,7 @@ export default (client: Client) => {
                         .setEmoji("🔓")
                         .setStyle("SECONDARY")
                 );
-                await channel.send({
+                const msg1 = await channel.send({
                     content: `<@${member.user.id}> Your Ticket Has Been Created!`,
                     embeds: [Embed],
                     components: [Buttons],
@@ -107,6 +107,10 @@ export default (client: Client) => {
                     Closed: false,
                     Locked: false,
                 });
+                ButtonInteraction.editReply({
+                    content: `Created Ticket Channel ${channel}`,
+                });
+                msg1.pin();
             });
     });
 };

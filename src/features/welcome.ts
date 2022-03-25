@@ -12,6 +12,10 @@ export default (client: Client) => {
 
         let data = welcomeData[guild.id];
         let timestamp1 = member.user.createdTimestamp / 1000;
+
+        if (!member.joinedTimestamp) return;
+        let timestamp2 = member.joinedTimestamp / 1000;
+
         if (!data) {
             const results = await welcomeSchema.findById(guild.id);
             if (!results) {
@@ -29,9 +33,12 @@ export default (client: Client) => {
                 new MessageEmbed()
                     .setColor("BLURPLE")
                     .setDescription(
-                        `Member: <@${id}>,\nMember ID: ${id},\nCreated At: <t:${parseInt(
-                            timestamp1.toString()
-                        )}:R>`
+                        `
+                    Member: <@${id}>
+                    Member ID: ${id}
+                    Created: <t:${parseInt(timestamp1.toString())}:R>
+                    Joined: <t:${parseInt(timestamp2.toString())}:R>
+                    `
                     )
                     .setThumbnail(member.displayAvatarURL())
                     .setTitle(`${member.displayName} Welcome To The Server!`)

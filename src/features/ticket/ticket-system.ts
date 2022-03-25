@@ -32,13 +32,8 @@ export default (client: Client) => {
 
         if (
             !["ticket-close", "ticket-lock", "ticket-unlock"].includes(customId)
-        ) {
-            return ButtonInteraction.reply({
-                content:
-                    "The Data For This system is outdated! `setup the ticket system again!`",
-                ephemeral: true,
-            });
-        }
+        )
+            return;
 
         if (
             !ButtonInteraction.member.roles.cache.find(
@@ -177,7 +172,7 @@ export default (client: Client) => {
                         if (!TChannel) return;
                         if (TChannel.type !== "GUILD_TEXT") return;
                         Embed.setTitle(
-                            `Name: ${channel.name} | Number: ${docs.TicketCount}`
+                            `Name: ${channel.name}`
                         );
                         Embed.setDescription(
                             "<:Success:935099107163394061> Channel Closed by " +

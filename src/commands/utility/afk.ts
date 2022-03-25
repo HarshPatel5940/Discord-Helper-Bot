@@ -8,6 +8,7 @@ export default {
 
     slash: "both",
     guildOnly: true,
+    testOnly: true,
 
     cooldown: "2m",
 
