@@ -12,14 +12,14 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License. */
-   
+
 import DJS, { MessageEmbed } from "discord.js";
 import { ICommand } from "wokcommands";
 
 export default {
     category: "fun",
     description: "Embed a message",
-    aliases: ["emb"],
+    aliases: ["cemb"],
 
     slash: "both",
 
@@ -35,11 +35,11 @@ export default {
             description: "Target Channel",
             required: true,
             type: DJS.Constants.ApplicationCommandOptionTypes.CHANNEL,
+            channelTypes: ["GUILD_TEXT"],
         },
-
         {
             name: "text",
-            description: "The Message You Want to Embed",
+            description: "Send JSON form of Discord Embeds!!",
             required: true,
             type: DJS.Constants.ApplicationCommandOptionTypes.STRING,
         },
@@ -70,21 +70,24 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:935098896919707700> Please tag a valid text channel."
+                            "<:Fail:935098896919707700> Please Tag a Valid Text Channel."
                         )
                         .setColor("RED"),
                 ],
                 ephemeral: true,
             };
         }
-        args.shift();
-        let text = args.join(" ");
+        try {
+            args.shift();
+            const text1 = args.join(" ");
+            const json = JSON.parse(text1);
 
-        await target.send({
-            embeds: [
-                new MessageEmbed().setDescription(text).setColor("BLURPLE"),
-            ],
-        });
+            const embed = new MessageEmbed(json);
+
+            await target.send({ embeds: [embed] });
+        } catch (e) {
+            return `Invalid JSON: ${e}`;
+        }
 
         return {
             custom: true,

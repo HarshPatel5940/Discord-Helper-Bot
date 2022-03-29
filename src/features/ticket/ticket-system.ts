@@ -12,18 +12,18 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License. */
-   
+
 import {
     MessageEmbed,
     Client,
-    GuildChannel,
-    Guild,
-    GuildMember,
+    MessageActionRow,
+    MessageButton,
 } from "discord.js";
 
 import TicketSystemSchema from "../../models/ticketsystem-schema";
 import TicketConfigSchema from "../../models/ticketconfig-schema";
 import { createTranscript } from "discord-html-transcripts";
+import ticketsystemSchema from "../../models/ticketsystem-schema";
 
 export default (client: Client) => {
     client.on("interactionCreate", async (ButtonInteraction) => {
@@ -37,7 +37,6 @@ export default (client: Client) => {
         if (channel.type !== "GUILD_TEXT") return;
 
         const sysData = await TicketSystemSchema.findOne({ GuildID: guild.id });
-        // const sysData = await TicketSystemSchema.findone({ GuildId: guild.id });
         if (!sysData) return;
 
         const configData = await TicketConfigSchema.findOne({
@@ -117,12 +116,11 @@ export default (client: Client) => {
                         );
 
                         channel.permissionOverwrites.edit(
-                            docs.MembersID.toString(),
+                            configData.EveryoneRoleID,
                             {
                                 SEND_MESSAGES: false,
                             }
                         );
-
                         ButtonInteraction.reply({ embeds: [Embed] });
                         break;
 
@@ -149,7 +147,7 @@ export default (client: Client) => {
                         );
 
                         channel.permissionOverwrites.edit(
-                            docs.MembersID.toString(),
+                            configData.EveryoneRoleID,
                             {
                                 SEND_MESSAGES: true,
                             }
@@ -159,51 +157,100 @@ export default (client: Client) => {
                         break;
                     case "ticket-close":
                         if (docs.Closed == true) {
+                            docs.Closed = true;
                             return ButtonInteraction.reply({
                                 ephemeral: true,
                                 embeds: [
                                     new MessageEmbed()
                                         .setColor("RED")
                                         .setDescription(
-                                            "<:Fail:935098896919707700> The Ticket is already Closed."
+                                            "<:Fail:935098896919707700> The Ticket was already Closed. (Unlocking it)"
                                         ),
                                 ],
                             });
                         }
-                        const attachment = await createTranscript(channel, {
-                            limit: -1,
-                            returnBuffer: false,
-                            fileName: `${channel.name}.html`,
-                        });
-                        await TicketSystemSchema.updateOne(
-                            { ChannelID: channel.id },
-                            { Closed: true }
-                        );
 
-                        const TChannel = await guild.channels.fetch(
-                            configData.TranscriptID
-                        );
-
-                        if (!TChannel) return;
-                        if (TChannel.type !== "GUILD_TEXT") return;
                         Embed.setTitle(
-                            `Name: ${channel.name}`
+                            "This Channel Will Be Deleted Shortly | You can reopen ticket if you want"
                         );
-                        Embed.setDescription(
-                            "<:Success:935099107163394061> Channel Closed by " +
-                                member
-                        );
-                        TChannel.send({ embeds: [Embed], files: [attachment] });
 
                         Embed.setDescription(
                             `🔒 This Ticket is Locked by ${member}`
                         );
 
-                        ButtonInteraction.reply({ embeds: [Embed] });
+                        const row = new MessageActionRow().addComponents(
+                            new MessageButton()
+                                .setCustomId("ticket-reopen")
+                                .setLabel("Reopen Ticket 🔓")
+                                .setStyle("SUCCESS")
+                        );
 
-                        setTimeout(() => {
-                            channel.delete();
-                        }, 15 * 1000);
+                        ButtonInteraction.reply({
+                            content: `${ButtonInteraction.member}`,
+                            embeds: [Embed],
+                            components: [row],
+                        });
+
+                        channel.permissionOverwrites.edit(
+                            configData.EveryoneRoleID,
+                            {
+                                SEND_MESSAGES: true,
+                            }
+                        );
+
+                        const collector =
+                            channel.createMessageComponentCollector({
+                                max: 1,
+                            });
+
+                        collector.on("end", async (collection) => {
+                            if (
+                                collection.first()?.customId === "ticket-reopen"
+                            ) {
+                                await ButtonInteraction.reply({
+                                    content:
+                                        "Reopening Ticket/Close Action Cancelled",
+                                });
+                                return;
+                            }
+
+                            const attachment = await createTranscript(channel, {
+                                limit: -1,
+                                returnBuffer: false,
+                                fileName: `${channel.name}.html`,
+                            });
+                            await TicketSystemSchema.updateOne(
+                                { ChannelID: channel.id },
+                                { Closed: true }
+                            );
+
+                            const TChannel = await guild.channels.fetch(
+                                configData.TranscriptID
+                            );
+
+                            if (!TChannel) return;
+                            if (TChannel.type !== "GUILD_TEXT") return;
+
+                            Embed.setTitle(`Name: ${channel.name}`);
+                            Embed.setDescription(
+                                "<:Success:935099107163394061> Channel Closed by " +
+                                    member
+                            );
+                            Embed.setColor("GREEN");
+
+                            TChannel.send({
+                                embeds: [Embed],
+                                files: [attachment],
+                            });
+
+                            ticketsystemSchema.deleteOne({
+                                ChannelID: channel.id,
+                            });
+
+                            setTimeout(() => {
+                                channel.delete();
+                            }, 15 * 1000);
+                        });
                 }
             }
         );

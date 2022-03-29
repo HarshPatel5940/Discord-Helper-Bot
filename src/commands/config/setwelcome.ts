@@ -13,7 +13,7 @@ import { ICommand } from "wokcommands";
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License. */
-   
+
 import DJS, { MessageEmbed } from "discord.js";
 import welcomeSchema from "../../models/welcome-schema";
 
@@ -38,6 +38,7 @@ export default {
             description: "Target Channel",
             required: true,
             type: DJS.Constants.ApplicationCommandOptionTypes.CHANNEL,
+            channelTypes: ["GUILD_TEXT"],
         },
 
         {
@@ -98,7 +99,7 @@ export default {
             },
             {
                 new: true,
-                upsert: true
+                upsert: true,
             }
         );
 

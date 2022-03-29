@@ -17,7 +17,7 @@ import { MessageActionRow, MessageButton, MessageEmbed } from "discord.js";
 import { ICommand } from "wokcommands";
 
 export default {
-    category: "fun",
+    category: "Learn",
     description: "Check The Buttons in discord",
 
     slash: "both",

@@ -13,7 +13,6 @@
    See the License for the specific language governing permissions and
    limitations under the License. */
 
-
 import DJS, { MessageEmbed } from "discord.js";
 import { ICommand } from "wokcommands";
 
@@ -35,6 +34,7 @@ export default {
             description: "Target Channel",
             required: true,
             type: DJS.Constants.ApplicationCommandOptionTypes.CHANNEL,
+            channelTypes: ["GUILD_TEXT"],
         },
 
         {

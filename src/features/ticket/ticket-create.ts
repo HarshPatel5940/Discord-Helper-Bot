@@ -12,7 +12,7 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License. */
-   
+
 import {
     MessageEmbed,
     MessageActionRow,
@@ -34,11 +34,15 @@ export default (client: Client) => {
         const Data = await TicketConfigSchema.findOne({ GuildId: guild.id });
         if (!Data) return;
 
-        if (!Data.Buttons.includes(customId)) return;
+        // if (!Data.Buttons.includes(customId))
+        //     return console.log("data upload problem");
 
         let TicketCount = Data.GuildTicketCount;
 
-        ButtonInteraction.reply({content: 'creating ticket...', ephemeral:true});
+        ButtonInteraction.reply({
+            content: "creating ticket...",
+            ephemeral: true,
+        });
 
         await guild.channels
             .create(`${customId}-Ticket-${TicketCount}`, {
@@ -49,10 +53,10 @@ export default (client: Client) => {
                     {
                         id: member.user.id,
                         allow: [
-                            "SEND_MESSAGES",
                             "VIEW_CHANNEL",
                             "READ_MESSAGE_HISTORY",
                             "ATTACH_FILES",
+                            "EMBED_LINKS",
                         ],
                     },
                     {
@@ -67,6 +71,7 @@ export default (client: Client) => {
                             "READ_MESSAGE_HISTORY",
                             "ATTACH_FILES",
                             "MANAGE_MESSAGES",
+                            "MENTION_EVERYONE",
                         ],
                     },
                 ],

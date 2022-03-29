@@ -13,12 +13,8 @@
    See the License for the specific language governing permissions and
    limitations under the License. */
 
-   import { ICommand } from "wokcommands";
-import DJS, {
-    MessageEmbed,
-    MessageActionRow,
-    MessageButton,
-} from "discord.js";
+import { ICommand } from "wokcommands";
+import DJS, { MessageEmbed, MessageActionRow, MessageButton } from "discord.js";
 import TicketConfigSchema from "../../models/ticketconfig-schema";
 
 const TYPES = DJS.Constants.ApplicationCommandOptionTypes;
@@ -192,7 +188,7 @@ export default {
             await TicketConfigSchema.findOneAndUpdate(
                 { GuildID: guild.id },
                 {
-                    GuildTicketCount:"0",
+                    GuildTicketCount: "0",
                     ChannelID: Channel.id,
                     TranscriptID: Transcript.id,
                     OpenCategoryID: OpenTicketsCategory.id,
@@ -258,7 +254,7 @@ export default {
                 ephmeral: false,
             };
         } catch (err) {
-            // console.log(err);
+            console.log(err);
             return {
                 custom: true,
                 embeds: [
