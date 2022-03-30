@@ -26,7 +26,6 @@ export default {
     slash: true,
     guildOnly: true,
 
-    testOnly: true,
     cooldown: "10s",
     permissions: ["ADMINISTRATOR"],
 
@@ -191,8 +190,7 @@ export default {
                     GuildTicketCount: "0",
                     ChannelID: Channel.id,
                     TranscriptID: Transcript.id,
-                    OpenCategoryID: OpenTicketsCategory.id,
-                    // CloseCategoryID: ClosedTicketsCategory.id,
+                    CategoryID: OpenTicketsCategory.id,
                     EveryoneRoleID: EveryoneRole.id,
                     SupportRoleID: SupportRole.id,
                     Description: DescriptionMsg,
@@ -207,7 +205,7 @@ export default {
             const Buttons = new MessageActionRow();
             Buttons.addComponents(
                 new MessageButton()
-                    .setCustomId(Button1[0])
+                    .setCustomId("ticket-create-0")
                     .setLabel(Button1[0])
                     .setStyle("SUCCESS")
                     .setEmoji(Button1[1])
@@ -216,7 +214,7 @@ export default {
             if (Button2[0] !== "none") {
                 Buttons.addComponents(
                     new MessageButton()
-                        .setCustomId(Button2[0])
+                        .setCustomId("ticket-create-1")
                         .setLabel(Button2[0])
                         .setStyle("PRIMARY")
                         .setEmoji(Button2[1])
@@ -226,19 +224,22 @@ export default {
             if (Button3[0] !== "none") {
                 Buttons.addComponents(
                     new MessageButton()
-                        .setCustomId(Button3[0])
+                        .setCustomId("ticket-create-2")
                         .setLabel(Button3[0])
-                        .setStyle("SECONDARY")
+                        .setStyle("DANGER")
                         .setEmoji(Button3[1])
                 );
             }
 
             const Embed = new MessageEmbed()
                 .setAuthor({
-                    name: guild.name + " | Ticketing System",
+                    name: guild.name + " Ticketing System",
                 })
                 .setDescription(DescriptionMsg)
                 .setColor("BLURPLE");
+
+            let icon = guild.iconURL()?.toString();
+            if (icon) Embed.setThumbnail(icon);
 
             if (Channel.type === "GUILD_TEXT") {
                 Channel.send({ embeds: [Embed], components: [Buttons] });
@@ -247,9 +248,11 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed().setDescription(
-                        "<:Success:935099107163394061> Ticket System Setup Done!!"
-                    ),
+                    new MessageEmbed()
+                        .setDescription(
+                            "<:Success:935099107163394061> Ticket System Setup Done!!"
+                        )
+                        .setColor("GREEN"),
                 ],
                 ephmeral: false,
             };

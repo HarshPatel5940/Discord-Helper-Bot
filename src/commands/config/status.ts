@@ -41,7 +41,7 @@ export default {
 
     callback: async ({ client, text }) => {
         client.user?.setPresence({
-            status: "dnd",
+            status: "online",
             activities: [
                 {
                     name: text,

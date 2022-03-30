@@ -34,8 +34,15 @@ export default (client: Client) => {
         const Data = await TicketConfigSchema.findOne({ GuildId: guild.id });
         if (!Data) return;
 
-        // if (!Data.Buttons.includes(customId))
-        //     return console.log("data upload problem");
+        if (!customId.startsWith("ticket-create")) return;
+
+        let label1 = "";
+        try {
+            const id1 = customId.slice(customId.length - 1);
+            label1 = Data.Buttons[id1];
+        } catch (err) {
+            console.log("Ticket Create ERROR: -->", err);
+        }
 
         let TicketCount = Data.GuildTicketCount;
 
@@ -45,7 +52,7 @@ export default (client: Client) => {
         });
 
         await guild.channels
-            .create(`${customId}-Ticket-${TicketCount}`, {
+            .create(`${label1}-Ticket-${TicketCount}`, {
                 type: "GUILD_TEXT",
                 reason: `Ticket Created by: ${member.user.username} | id= ${member.user.id}`,
                 parent: Data.OpenCategoryID,
@@ -79,11 +86,11 @@ export default (client: Client) => {
             .then(async (channel) => {
                 const Embed = new MessageEmbed()
                     .setColor("BLURPLE")
-                    .setTitle(`${member.user.username} Ticket | ${customId}`)
+                    .setTitle(`${member.user.username} | ${label1} Ticket `)
                     .setDescription(
                         `Ticket Created by <@${member.user.id}>
                 Member Id: \`${member.user.id}\`
-                Ticket Category: ${customId}
+                Ticket Category: ${label1}
 
                 **Please Wait patiently for a response from Staff/Support Team!**`
                     )

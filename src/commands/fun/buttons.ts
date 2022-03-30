@@ -17,7 +17,7 @@ import { MessageActionRow, MessageButton, MessageEmbed } from "discord.js";
 import { ICommand } from "wokcommands";
 
 export default {
-    category: "Learn",
+    category: "fun",
     description: "Check The Buttons in discord",
 
     slash: "both",
@@ -85,9 +85,9 @@ export default {
                     content: "You Choosed Secondary Button",
                     ephemeral: true,
                 });
-            } else if (collection.first()?.customId === "Sucess") {
+            } else if (collection.first()?.customId === "Success") {
                 await msgInt.followUp({
-                    content: "You Choosed Sucess Button",
+                    content: "You Choosed Success Button",
                     ephemeral: true,
                 });
             } else if (collection.first()?.customId === "Danger") {

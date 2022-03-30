@@ -18,12 +18,15 @@ import {
     Client,
     MessageActionRow,
     MessageButton,
+    Interaction,
+    GuildAuditLogsEntry,
 } from "discord.js";
 
 import TicketSystemSchema from "../../models/ticketsystem-schema";
 import TicketConfigSchema from "../../models/ticketconfig-schema";
 import { createTranscript } from "discord-html-transcripts";
 import ticketsystemSchema from "../../models/ticketsystem-schema";
+import timeout from "../../commands/moderation/timeout";
 
 export default (client: Client) => {
     client.on("interactionCreate", async (ButtonInteraction) => {
@@ -158,8 +161,7 @@ export default (client: Client) => {
                     case "ticket-close":
                         if (docs.Closed == true) {
                             docs.Closed = true;
-                            return ButtonInteraction.reply({
-                                ephemeral: true,
+                            ButtonInteraction.reply({
                                 embeds: [
                                     new MessageEmbed()
                                         .setColor("RED")
@@ -168,6 +170,13 @@ export default (client: Client) => {
                                         ),
                                 ],
                             });
+
+                            await TicketSystemSchema.updateOne(
+                                { ChannelID: channel.id },
+                                { Closed: false }
+                            );
+
+                            return;
                         }
 
                         Embed.setTitle(
@@ -198,22 +207,9 @@ export default (client: Client) => {
                             }
                         );
 
-                        const collector =
-                            channel.createMessageComponentCollector({
-                                max: 1,
-                            });
+                        const Msg1 = await ButtonInteraction.fetchReply();
 
-                        collector.on("end", async (collection) => {
-                            if (
-                                collection.first()?.customId === "ticket-reopen"
-                            ) {
-                                await ButtonInteraction.reply({
-                                    content:
-                                        "Reopening Ticket/Close Action Cancelled",
-                                });
-                                return;
-                            }
-
+                        const ST = setTimeout(async () => {
                             const attachment = await createTranscript(channel, {
                                 limit: -1,
                                 returnBuffer: false,
@@ -231,7 +227,9 @@ export default (client: Client) => {
                             if (!TChannel) return;
                             if (TChannel.type !== "GUILD_TEXT") return;
 
-                            Embed.setTitle(`Name: ${channel.name}`);
+                            Embed.setTitle(
+                                `Name: ${channel.name} | ID: ${channel.id}`
+                            );
                             Embed.setDescription(
                                 "<:Success:935099107163394061> Channel Closed by " +
                                     member
@@ -243,20 +241,36 @@ export default (client: Client) => {
                                 files: [attachment],
                             });
 
-                            ticketsystemSchema.deleteOne({
+                            ticketsystemSchema.findOneAndDelete({
                                 ChannelID: channel.id,
                             });
+                            channel.delete();
+                        }, 15 * 1000);
 
-                            setTimeout(() => {
-                                channel.delete();
-                            }, 15 * 1000);
+                        const collector =
+                            channel.createMessageComponentCollector({
+                                max: 1,
+                            });
+
+                        collector.on("end", async (collection) => {
+                            if (
+                                collection.first()?.customId === "ticket-reopen"
+                            ) {
+                                ButtonInteraction.followUp({
+                                    ephemeral: true,
+                                    content:
+                                        "Reopening Ticket/Close Action Cancelled",
+                                });
+                                Msg1.delete();
+
+                                clearTimeout(ST);
+                            }
                         });
                 }
             }
         );
     });
 };
-
 export const config = {
     displayName: "CLOSE A TICKET",
     dbName: "TICKET_CLOSE",
