@@ -31,7 +31,13 @@ export default (client: Client) => {
         if (!guild) return;
         if (!member) return;
 
-        const Data = await TicketConfigSchema.findOne({ GuildId: guild.id });
+        const Data = await TicketConfigSchema.findById(guild.id);
+        let {
+            EveryoneRoleID,
+            SupportRoleID,
+            OpenCategoryID,
+            GuildTicketCount,
+        } = Data;
         if (!Data) return;
 
         if (!customId.startsWith("ticket-create")) return;
@@ -44,18 +50,16 @@ export default (client: Client) => {
             console.log("Ticket Create ERROR: -->", err);
         }
 
-        let TicketCount = Data.GuildTicketCount;
-
         ButtonInteraction.reply({
             content: "creating ticket...",
             ephemeral: true,
         });
 
         await guild.channels
-            .create(`${label1}-Ticket-${TicketCount}`, {
+            .create(`${label1}-Ticket-${GuildTicketCount}`, {
                 type: "GUILD_TEXT",
                 reason: `Ticket Created by: ${member.user.username} | id= ${member.user.id}`,
-                parent: Data.OpenCategoryID,
+                parent: OpenCategoryID,
                 permissionOverwrites: [
                     {
                         id: member.user.id,
@@ -67,11 +71,11 @@ export default (client: Client) => {
                         ],
                     },
                     {
-                        id: Data.EveryoneRoleID,
-                        deny: ["VIEW_CHANNEL", "SEND_MESSAGES"],
+                        id: EveryoneRoleID,
+                        deny: ["VIEW_CHANNEL"],
                     },
                     {
-                        id: Data.SupportRoleID,
+                        id: SupportRoleID,
                         allow: [
                             "SEND_MESSAGES",
                             "VIEW_CHANNEL",
@@ -94,7 +98,7 @@ export default (client: Client) => {
 
                 **Please Wait patiently for a response from Staff/Support Team!**`
                     )
-                    .setFooter({ text: `Ticket Count: ${TicketCount}` });
+                    .setFooter({ text: `Ticket Count: ${GuildTicketCount}` });
 
                 const Buttons = new MessageActionRow();
                 Buttons.addComponents(
@@ -120,14 +124,17 @@ export default (client: Client) => {
                     components: [Buttons],
                 });
 
-                TicketCount = (parseInt(TicketCount) + 1).toString();
-                await TicketConfigSchema.findOneAndUpdate(
-                    { GuildID: guild.id },
-                    { GuildTicketCount: TicketCount },
-                    { upsert: true }
+                let NewTicketCount = (
+                    parseInt(GuildTicketCount) + 1
+                ).toString();
+                await TicketConfigSchema.findByIdAndUpdate(
+                    { _id: guild.id },
+                    { GuildTicketCount: NewTicketCount },
+                    { upsert: true, new: true }
                 );
 
                 await TicketSystemSchema.create({
+                    _id: channel.id,
                     GuildID: guild.id,
                     MembersID: member.user.id,
                     ChannelID: channel.id,

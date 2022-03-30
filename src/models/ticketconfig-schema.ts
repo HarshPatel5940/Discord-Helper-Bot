@@ -12,7 +12,7 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License. */
-   
+
 import mongoose, { Schema } from "mongoose";
 
 const reqString = {
@@ -31,6 +31,7 @@ const reqArray = {
 };
 
 const TicketConfigSchema = new Schema({
+    _id: reqString,
     GuildID: reqString,
     GuildTicketCount: reqString,
     ChannelID: reqString,
@@ -40,7 +41,7 @@ const TicketConfigSchema = new Schema({
     EveryoneRoleID: reqString,
     SupportRoleID: reqString,
     Description: reqString,
-    Buttons: reqArray
+    Buttons: reqArray,
 });
 
 const name = "guild-ticket-config";

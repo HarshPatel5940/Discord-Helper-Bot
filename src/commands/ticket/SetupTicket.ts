@@ -185,12 +185,14 @@ export default {
             }
 
             await TicketConfigSchema.findOneAndUpdate(
-                { GuildID: guild.id },
+                { _id: guild.id },
                 {
-                    GuildTicketCount: "0",
+                    _id: guild.id,
+                    GuildID: guild.id,
+                    GuildTicketCount: "1",
                     ChannelID: Channel.id,
                     TranscriptID: Transcript.id,
-                    CategoryID: OpenTicketsCategory.id,
+                    OpenCategoryID: OpenTicketsCategory.id,
                     EveryoneRoleID: EveryoneRole.id,
                     SupportRoleID: SupportRole.id,
                     Description: DescriptionMsg,

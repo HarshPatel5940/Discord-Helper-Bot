@@ -39,12 +39,10 @@ export default (client: Client) => {
         if (!ButtonInteraction.inCachedGuild()) return;
         if (channel.type !== "GUILD_TEXT") return;
 
-        const sysData = await TicketSystemSchema.findOne({ GuildID: guild.id });
+        const sysData = await TicketSystemSchema.findById(channel.id);
         if (!sysData) return;
 
-        const configData = await TicketConfigSchema.findOne({
-            GuildId: guild.id,
-        });
+        const configData = await TicketConfigSchema.findById(guild.id);
         if (!configData) return;
 
         if (

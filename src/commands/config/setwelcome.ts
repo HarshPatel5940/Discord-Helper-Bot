@@ -98,8 +98,8 @@ export default {
                 channelId: target.id,
             },
             {
-                new: true,
                 upsert: true,
+                new: true,
             }
         );
 
