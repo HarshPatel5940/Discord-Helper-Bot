@@ -12,17 +12,17 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License. */
-   
 
 import DJS, { MessageEmbed } from "discord.js";
 import { ICommand } from "wokcommands";
 
 export default {
-    category: "utility",
-    description: "Change the Status of the Bot",
+    category: "config",
+    description: "Change the Status of the Bot to DND",
 
     slash: "both",
-    // testOnly: true,
+    guildOnly: true,
+    testOnly: true,
 
     ownerOnly: true,
 
@@ -41,7 +41,7 @@ export default {
 
     callback: async ({ client, text }) => {
         client.user?.setPresence({
-            status: "dnd",
+            status: "online",
             activities: [
                 {
                     name: text,

@@ -21,6 +21,9 @@ export default {
     description: "Used to Check a Welcome cmd",
 
     slash: "both",
+    guildOnly: true,
+
+    permissions: ["MANAGE_MESSAGES"],
 
     callback: ({ member, client }) => {
         client.emit("guildMemberAdd", member);

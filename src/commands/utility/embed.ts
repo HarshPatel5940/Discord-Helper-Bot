@@ -19,7 +19,7 @@ import { ICommand } from "wokcommands";
 export default {
     category: "fun",
     description: "Embed a message",
-    aliases: ["cemb"],
+    aliases: ["emb"],
 
     slash: "both",
 
@@ -35,7 +35,9 @@ export default {
             description: "Target Channel",
             required: true,
             type: DJS.Constants.ApplicationCommandOptionTypes.CHANNEL,
+            channelTypes: ["GUILD_TEXT"]
         },
+
         {
             name: "text",
             description: "The Message You Want to Embed",
@@ -69,24 +71,21 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:935098896919707700> Please Tag a Valid Text Channel."
+                            "<:Fail:935098896919707700> Please tag a valid text channel."
                         )
                         .setColor("RED"),
                 ],
                 ephemeral: true,
             };
         }
-        try {
-            args.shift();
-            const text1 = args.join(" ");
-            const json = JSON.parse(text1);
+        args.shift();
+        let text = args.join(" ");
 
-            const embed = new MessageEmbed(json);
-
-            await target.send({ embeds: [embed] });
-        } catch (e) {
-            return `Invalid JSON: ${e}`;
-        }
+        await target.send({
+            embeds: [
+                new MessageEmbed().setDescription(text).setColor("BLURPLE"),
+            ],
+        });
 
         return {
             custom: true,

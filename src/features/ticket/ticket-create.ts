@@ -12,7 +12,7 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License. */
-   
+
 import {
     MessageEmbed,
     MessageActionRow,
@@ -34,14 +34,25 @@ export default (client: Client) => {
         const Data = await TicketConfigSchema.findOne({ GuildId: guild.id });
         if (!Data) return;
 
-        if (!Data.Buttons.includes(customId)) return;
+        if (!customId.startsWith("ticket-create")) return;
+
+        let label1 = "";
+        try {
+            const id1 = customId.slice(customId.length - 1);
+            label1 = Data.Buttons[id1];
+        } catch (err) {
+            console.log("Ticket Create ERROR: -->", err);
+        }
 
         let TicketCount = Data.GuildTicketCount;
 
-        ButtonInteraction.reply({content: 'creating ticket...', ephemeral:true});
+        ButtonInteraction.reply({
+            content: "creating ticket...",
+            ephemeral: true,
+        });
 
         await guild.channels
-            .create(`${customId}-Ticket-${TicketCount}`, {
+            .create(`${label1}-Ticket-${TicketCount}`, {
                 type: "GUILD_TEXT",
                 reason: `Ticket Created by: ${member.user.username} | id= ${member.user.id}`,
                 parent: Data.OpenCategoryID,
@@ -49,10 +60,10 @@ export default (client: Client) => {
                     {
                         id: member.user.id,
                         allow: [
-                            "SEND_MESSAGES",
                             "VIEW_CHANNEL",
                             "READ_MESSAGE_HISTORY",
                             "ATTACH_FILES",
+                            "EMBED_LINKS",
                         ],
                     },
                     {
@@ -67,6 +78,7 @@ export default (client: Client) => {
                             "READ_MESSAGE_HISTORY",
                             "ATTACH_FILES",
                             "MANAGE_MESSAGES",
+                            "MENTION_EVERYONE",
                         ],
                     },
                 ],
@@ -74,11 +86,11 @@ export default (client: Client) => {
             .then(async (channel) => {
                 const Embed = new MessageEmbed()
                     .setColor("BLURPLE")
-                    .setTitle(`${member.user.username} Ticket | ${customId}`)
+                    .setTitle(`${member.user.username} | ${label1} Ticket `)
                     .setDescription(
                         `Ticket Created by <@${member.user.id}>
                 Member Id: \`${member.user.id}\`
-                Ticket Category: ${customId}
+                Ticket Category: ${label1}
 
                 **Please Wait patiently for a response from Staff/Support Team!**`
                     )
