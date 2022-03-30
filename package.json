@@ -1,5 +1,5 @@
 {
-  "name": "discordianshelper",
+  "name": "Discord-Helper-Bot",
   "version": "1.0.7",
   "description": "A Simple and Cool Discord Bot Written in Typescript (discord.js)",
   "main": "index.ts",
@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/HarshPatel5940/DiscordiansHelper.git"
+    "url": "git+https://github.com/HarshPatel5940/Discord-Helper-Bot.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/HarshPatel5940/DiscordiansHelper/issues"
+    "url": "https://github.com/HarshPatel5940/Discord-Helper-Bot/issues"
   },
-  "homepage": "https://github.com/HarshPatel5940/DiscordiansHelper#readme",
+  "homepage": "https://github.com/HarshPatel5940/Discord-Helper-Bot#readme",
   "dependencies": {
     "discord-html-transcripts": "^1.2.4",
     "discord.js": "^13.6.0",
