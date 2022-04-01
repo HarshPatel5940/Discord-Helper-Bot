@@ -29,7 +29,7 @@ export default {
         return {
             custom: true,
             content:
-                "[Link To Github 🔗](<https://github.com/HarshPatel5940/Discord-Helper-Bot>)",
+                "[Link To This Bot's Source Code In Github 🔗](<https://github.com/HarshPatel5940/Discord-Helper-Bot>)",
         };
     },
 } as ICommand;
