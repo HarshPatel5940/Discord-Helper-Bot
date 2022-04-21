@@ -54,11 +54,11 @@ export default {
             embeds: [
                 new MessageEmbed()
                     .setDescription(
-                        `<:Success:935099107163394061> Status Chaneged to ${text}`
+                        `<:Success:935099107163394061> Status Changed to ${text}`
                     )
                     .setColor("GREEN"),
             ],
-            ephmeral: false,
+            ephemeral: false,
         };
     },
 } as ICommand;

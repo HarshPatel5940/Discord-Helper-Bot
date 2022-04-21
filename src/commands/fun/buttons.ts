@@ -23,6 +23,8 @@ export default {
     slash: "both",
     Cooldown: "10s",
 
+    serverOnly: true,
+
     callback: async ({ interaction: msgInt, channel }) => {
         const row = new MessageActionRow()
             .addComponents(

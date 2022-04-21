@@ -54,9 +54,9 @@ export default {
             connection.readyState
         )}\`
         <:Success:935099107163394061> **Client Ping**: \`${client.ws.ping}ms\`
-        <:Success:935099107163394061> **Message Ping**: \` ${
+        <:Success:935099107163394061> **Message Ping**: \` ${Math.abs(
             createdTimestamp - Date.now()
-        }ms \`
+        )}ms \`
         <:Success:935099107163394061> **Uptime**: ${days} Days ${hours} Hours ${minutes} Minutes ${seconds} Seconds`
             );
 

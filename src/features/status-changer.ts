@@ -12,16 +12,15 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License. */
-   
 import { Client } from "discord.js";
 
 export default (client: Client) => {
     const statusOptions = [
-        "HARSHPATEL5940",
-        "DiscordJS Bots Growing",
-        "TypeScript Community",
-        ">>help - /help ",
-        "Version 1.0.5",
+        "HarshPatel5940",
+        "Discord.JS Bots",
+        "OpenSource Community",
+        ">>help - /help",
+        "Bot Version 1.0.7 | D.js version 13",
     ];
     let counter = 0;
 
@@ -32,7 +31,7 @@ export default (client: Client) => {
             counter = 0;
         }
 
-        setTimeout(updateStatus, 1000 * 60 * 5);
+        setTimeout(updateStatus, 1000 * 60 * 2);
     };
     updateStatus();
 };
