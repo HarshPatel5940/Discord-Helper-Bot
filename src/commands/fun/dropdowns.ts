@@ -13,12 +13,11 @@
    See the License for the specific language governing permissions and
    limitations under the License. */
 
-// make a command which sends a dropdown message
 import {
-    Interaction,
     MessageActionRow,
     MessageSelectMenu,
     MessageEmbed,
+    Client,
 } from "discord.js";
 import { ICommand } from "wokcommands";
 
@@ -31,7 +30,42 @@ export default {
     serverOnly: true,
     Cooldown: "10s",
 
-    callback: async ({ interaction: Msg, channel }) => {
+    init: (client: Client) => {
+        client.on("interactionCreate", async (interaction) => {
+            if (!interaction.isSelectMenu()) return;
+            const { customId, values } = interaction;
+
+            if (customId !== "dropdowns-color") return;
+            console.log(values);
+            if (values === ["red"]) {
+                interaction.followUp({
+                    embeds: [
+                        new MessageEmbed()
+                            .setColor("RED")
+                            .setDescription("You have selected RED"),
+                    ],
+                });
+            } else if (values === ["green"]) {
+                interaction.followUp({
+                    embeds: [
+                        new MessageEmbed()
+                            .setColor("GREEN")
+                            .setDescription("You have selected GREEN"),
+                    ],
+                });
+            } else if (values === ["blue"]) {
+                interaction.followUp({
+                    embeds: [
+                        new MessageEmbed()
+                            .setColor("BLUE")
+                            .setDescription("You have selected BLUE"),
+                    ],
+                });
+            }
+        });
+    },
+
+    callback: async ({ interaction: Msg }) => {
         const row1 = new MessageActionRow().addComponents(
             new MessageSelectMenu()
                 .setCustomId("dropdowns-color")
@@ -65,6 +99,15 @@ export default {
                     ]
                 )
         );
-        // TODO: make a callback for the dropdown
+
+        Msg.reply({
+            embeds: [
+                new MessageEmbed()
+                    .setColor(0x00ff00)
+                    .setDescription("Please Choose a Colour from below"),
+            ],
+            components: [row1],
+            ephemeral: true,
+        });
     },
 } as ICommand;

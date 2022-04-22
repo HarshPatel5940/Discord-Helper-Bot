@@ -1,6 +1,6 @@
 {
   "name": "discord-helper-bot",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A Simple and Cool Discord Bot Written in Typescript (discord.js)",
   "main": "index.ts",
   "scripts": {
