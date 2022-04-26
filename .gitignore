@@ -75,6 +75,11 @@ typings/
 .env
 .env.test
 
+# Token Files
+config.py
+secret.py
+tokens.json
+
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 

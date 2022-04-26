@@ -47,12 +47,61 @@ client.on("ready", async () => {
 
         // <:Success:935099107163394061>
         //<:Fail:935098896919707700>
-    }).setDefaultPrefix(">>");
+    })
+        .setDefaultPrefix(">>")
+        .setCategorySettings([
+            {
+                name: "help",
+                emoji: "📃",
+                description: "Help Commands",
+                color: "GREEN",
+                aliases: ["h", "help"],
+            },
+            {
+                name: "moderation",
+                emoji: "⚒️",
+                description: "Moderation Commands",
+                color: "BLURPLE",
+                aliases: ["m", "mod", "moderation"],
+            },
+            {
+                name: "fun",
+                emoji: "🎉",
+                description: "Fun Commands | Learn more about discord features",
+            },
+            {
+                name: "config",
+                emoji: "🔧",
+                description: "Config Commands",
+                color: "BLUE",
+                aliases: ["c", "config"],
+            },
+            {
+                name: "owner",
+                emoji: "👑",
+                description: "Owner Commands",
+                color: "RED",
+                aliases: ["o", "owner"],
+            },
+            {
+                name: "utility",
+                emoji: "👊",
+                description: "Utility Commands",
+                color: "PURPLE",
+                aliases: ["u", "utility"],
+            },
+            {
+                name: "ticket",
+                emoji: "🎫",
+                description: "Ticket Commands",
+                color: "YELLOW",
+                aliases: ["t", "ticket"],
+            },
+        ]);
 
     if (process.env.WEBHOOK) {
         const wc = new WebhookClient({
-            id: "967046902178791475",
-            token: "WUJ_FnFlbV2hSleHlXcL_LusjiuExL0wJJLzor9UI9EtFZze6gcdcoiZOBjknmvun3I9",
+            url: "https://discord.com/api/webhooks/967046902178791475/WUJ_FnFlbV2hSleHlXcL_LusjiuExL0wJJLzor9UI9EtFZze6gcdcoiZOBjknmvun3I9",
             // process.env.WEBHOOK | let's see how many are copying the bot :D
         });
 

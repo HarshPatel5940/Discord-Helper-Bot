@@ -12,14 +12,14 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License. */
-   
+
 import { ICommand } from "wokcommands";
 import DJS, { MessageEmbed, User } from "discord.js";
 import AFK_schema from "../../models/afksystem-schema";
 
 export default {
     description: "Set Your AFK In All Guilds",
-    category: "Utility",
+    category: "utility",
 
     slash: "both",
     guildOnly: true,

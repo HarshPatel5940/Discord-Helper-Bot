@@ -36,31 +36,37 @@ export default {
             const { customId, values } = interaction;
 
             if (customId !== "dropdowns-color") return;
-            console.log(values);
-            if (values === ["red"]) {
-                interaction.followUp({
+            let value = values[0];
+            if (value === "red") {
+                interaction.reply({
                     embeds: [
                         new MessageEmbed()
                             .setColor("RED")
                             .setDescription("You have selected RED"),
                     ],
+                    ephemeral: true,
                 });
-            } else if (values === ["green"]) {
-                interaction.followUp({
+                return;
+            } else if (value === "green") {
+                interaction.reply({
                     embeds: [
                         new MessageEmbed()
                             .setColor("GREEN")
                             .setDescription("You have selected GREEN"),
                     ],
+                    ephemeral: true,
                 });
-            } else if (values === ["blue"]) {
-                interaction.followUp({
+                return;
+            } else if (value === "blue") {
+                interaction.reply({
                     embeds: [
                         new MessageEmbed()
                             .setColor("BLUE")
                             .setDescription("You have selected BLUE"),
                     ],
+                    ephemeral: true,
                 });
+                return;
             }
         });
     },

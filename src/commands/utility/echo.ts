@@ -17,7 +17,7 @@ import DJS, { MessageEmbed } from "discord.js";
 import { ICommand } from "wokcommands";
 
 export default {
-    category: "fun",
+    category: "utility",
     description: "Embed a message",
 
     slash: "both",

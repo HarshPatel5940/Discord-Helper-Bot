@@ -17,7 +17,7 @@ import { MessageEmbed } from "discord.js";
 import { ICommand } from "wokcommands";
 
 export default {
-    category: "help",
+    category: "config",
     description: "Used to Check a Welcome cmd",
 
     slash: "both",

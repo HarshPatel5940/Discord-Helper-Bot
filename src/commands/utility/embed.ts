@@ -17,7 +17,7 @@ import DJS, { MessageEmbed } from "discord.js";
 import { ICommand } from "wokcommands";
 
 export default {
-    category: "fun",
+    category: "utility",
     description: "Embed a message",
     aliases: ["emb"],
 
@@ -35,7 +35,7 @@ export default {
             description: "Target Channel",
             required: true,
             type: DJS.Constants.ApplicationCommandOptionTypes.CHANNEL,
-            channelTypes: ["GUILD_TEXT"]
+            channelTypes: ["GUILD_TEXT"],
         },
 
         {

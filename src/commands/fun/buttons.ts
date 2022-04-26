@@ -73,7 +73,7 @@ export default {
         });
 
         const collector = channel.createMessageComponentCollector({
-            max: 1,
+            max: 4,
         });
 
         collector.on("end", async (collection) => {

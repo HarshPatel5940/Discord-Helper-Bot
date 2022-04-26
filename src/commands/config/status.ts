@@ -17,7 +17,7 @@ import DJS, { MessageEmbed } from "discord.js";
 import { ICommand } from "wokcommands";
 
 export default {
-    category: "config",
+    category: "owner",
     description: "Change the Status of the Bot to DND",
 
     slash: "both",

@@ -18,7 +18,7 @@ import DJS, { MessageEmbed } from "discord.js";
 import welcomeSchema from "../../models/welcome-schema";
 
 export default {
-    category: "Config",
+    category: "config",
     description: "Set's welcome Message in channel.",
 
     permissions: ["ADMINISTRATOR"],
