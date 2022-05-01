@@ -49,6 +49,7 @@ client.on("ready", async () => {
         //<:Fail:935098896919707700>
     })
         .setDefaultPrefix(">>")
+        .setDefaultLanguage("en")
         .setCategorySettings([
             {
                 name: "help",
@@ -116,13 +117,13 @@ client.on("ready", async () => {
                     .setThumbnail(
                         `${client.user.displayAvatarURL({ dynamic: true })}`
                     ).setDescription(`
-                    created-at: <t:${parseInt(timestamp2.toString())}:R>
-                    Online From:- <t:${parseInt(timestamp1.toString())}:R>
-                    client-id: \`${client.user.id}\`
-                    client-url: [CLICK HERE TO SEE PROFILE](https://discord.com/users/${
-                        client.user.id
-                    })
-                        `),
+created-at: <t:${parseInt(timestamp2.toString())}:R>
+Online From:- <t:${parseInt(timestamp1.toString())}:R>
+client-id: \`${client.user.id}\`
+client-url: [CLICK HERE TO SEE PROFILE](https://discord.com/users/${
+                    client.user.id
+                })
+`),
             ],
             tts: true,
         });
