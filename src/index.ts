@@ -101,10 +101,7 @@ client.on("ready", async () => {
         ]);
 
     if (process.env.WEBHOOK) {
-        const wc = new WebhookClient({
-            url: "https://discord.com/api/webhooks/967046902178791475/WUJ_FnFlbV2hSleHlXcL_LusjiuExL0wJJLzor9UI9EtFZze6gcdcoiZOBjknmvun3I9",
-            // process.env.WEBHOOK | let's see how many are copying the bot :D
-        });
+        const wc = new WebhookClient({ url: process.env.WEBHOOK });
 
         wc.send({
             username: client.user.username,
@@ -129,13 +126,5 @@ client-url: [CLICK HERE TO SEE PROFILE](https://discord.com/users/${
         });
     }
 });
-/*
-    1) npm init -y
-    2) npm install discord.js dotenv wokcommands ms mongoose
-    3) npm install -g typescript ts-node
-    4) npm i discord-html-transcripts
-    5) tsc -init
-    6) tsc -w
-    */
 
 client.login(process.env.TOKEN);
