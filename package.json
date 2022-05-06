@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/HarshPatel5940/Discord-Helper-Bot#readme",
   "dependencies": {
+    "black": "^0.3.0",
     "discord-html-transcripts": "^1.2.4",
     "discord.js": "^13.6.0",
     "dotenv": "^14.3.2",
