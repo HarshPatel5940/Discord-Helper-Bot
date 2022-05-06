@@ -22,6 +22,7 @@ import { WebhookClient } from "discord.js";
 const wait = require("timers/promises").setTimeout;
 var timestamp1 = Date.now() / 1000;
 
+// dotenv.config({ path: ".env.test" });
 dotenv.config();
 
 const client = new DiscordJS.Client({
