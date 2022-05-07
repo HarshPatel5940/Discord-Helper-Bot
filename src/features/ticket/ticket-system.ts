@@ -18,15 +18,12 @@ import {
     Client,
     MessageActionRow,
     MessageButton,
-    Interaction,
-    GuildAuditLogsEntry,
 } from "discord.js";
 
 import TicketSystemSchema from "../../models/ticketsystem-schema";
 import TicketConfigSchema from "../../models/ticketconfig-schema";
 import { createTranscript } from "discord-html-transcripts";
 import ticketsystemSchema from "../../models/ticketsystem-schema";
-import timeout from "../../commands/moderation/timeout";
 
 export default (client: Client) => {
     client.on("interactionCreate", async (ButtonInteraction) => {
@@ -164,16 +161,10 @@ export default (client: Client) => {
                                     new MessageEmbed()
                                         .setColor("RED")
                                         .setDescription(
-                                            "<:Fail:935098896919707700> The Ticket was already Closed. (Unlocking it)"
+                                            "<:Fail:935098896919707700> The Ticket was already Closed."
                                         ),
                                 ],
                             });
-
-                            await TicketSystemSchema.updateOne(
-                                { ChannelID: channel.id },
-                                { Closed: false }
-                            );
-
                             return;
                         }
 
@@ -190,6 +181,11 @@ export default (client: Client) => {
                                 .setCustomId("ticket-reopen")
                                 .setLabel("Reopen Ticket 🔓")
                                 .setStyle("SUCCESS")
+                        );
+
+                        await TicketSystemSchema.updateOne(
+                            { ChannelID: channel.id },
+                            { Closed: true }
                         );
 
                         ButtonInteraction.reply({
@@ -213,10 +209,6 @@ export default (client: Client) => {
                                 returnBuffer: false,
                                 fileName: `${channel.name}.html`,
                             });
-                            await TicketSystemSchema.updateOne(
-                                { ChannelID: channel.id },
-                                { Closed: true }
-                            );
 
                             const TChannel = await guild.channels.fetch(
                                 configData.TranscriptID
@@ -239,9 +231,15 @@ export default (client: Client) => {
                                 files: [attachment],
                             });
 
-                            ticketsystemSchema.findOneAndDelete({
-                                ChannelID: channel.id,
-                            });
+                            // ! ticketsystemSchema.findByIdAndDelete(channel.id);
+                            ticketsystemSchema.findByIdAndDelete(
+                                {
+                                    _id: channel.id,
+                                },
+                                {
+                                    ChannelID: channel.id,
+                                }
+                            );
                             channel.delete();
                         }, 15 * 1000);
 
@@ -262,6 +260,11 @@ export default (client: Client) => {
                                 Msg1.delete();
 
                                 clearTimeout(ST);
+
+                                await TicketSystemSchema.updateOne(
+                                    { ChannelID: channel.id },
+                                    { Closed: false }
+                                );
                             }
                         });
                 }
