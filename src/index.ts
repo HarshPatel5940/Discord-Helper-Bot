@@ -22,8 +22,8 @@ import { WebhookClient } from "discord.js";
 const wait = require("timers/promises").setTimeout;
 var timestamp1 = Date.now() / 1000;
 
-// dotenv.config({ path: ".env.test" });
-dotenv.config();
+dotenv.config({ path: ".env.test" });
+// dotenv.config();
 
 const client = new DiscordJS.Client({
     intents: 32767,
@@ -115,12 +115,9 @@ client.on("ready", async () => {
                     .setThumbnail(
                         `${client.user.displayAvatarURL({ dynamic: true })}`
                     ).setDescription(`
-created-at: <t:${parseInt(timestamp2.toString())}:R>
-Online From:- <t:${parseInt(timestamp1.toString())}:R>
-client-id: \`${client.user.id}\`
-client-url: [CLICK HERE TO SEE PROFILE](https://discord.com/users/${
-                    client.user.id
-                })
+created-at: <t:${parseInt(timestamp2.toString())}:F>
+Online From:- <t:${parseInt(time:stamp1.toString())}:F> | <t:${parseInt(time:stamp1.toString())}:R>
+client-id: \`${client.user.id}\` [🔗](https://discord.com/users/${client.user.id})
 `),
             ],
             tts: true,
