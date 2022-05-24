@@ -36,7 +36,6 @@ const TicketSystemSchema = new Schema({
     MembersID: reqString,
     ChannelID: reqString,
     Closed: reqBoolean,
-    Locked: reqBoolean,
 });
 
 const name = "guild-ticket-system";

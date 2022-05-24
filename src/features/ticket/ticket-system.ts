@@ -23,7 +23,6 @@ import {
 import TicketSystemSchema from "../../models/ticketsystem-schema";
 import TicketConfigSchema from "../../models/ticketconfig-schema";
 import { createTranscript } from "discord-html-transcripts";
-import ticketsystemSchema from "../../models/ticketsystem-schema";
 
 export default (client: Client) => {
     client.on("interactionCreate", async (ButtonInteraction) => {
@@ -43,22 +42,14 @@ export default (client: Client) => {
         if (!configData) return;
 
         if (
-            !["ticket-close", "ticket-lock", "ticket-unlock"].includes(customId)
+            ![
+                "ticket-close",
+                "ticket-close-confirm",
+                "ticket-delete",
+                "ticket-reopen",
+            ].includes(customId)
         )
             return;
-
-        if (
-            !ButtonInteraction.member.roles.cache.find(
-                (r) => r.id === configData.SupportRoleID
-            )
-        ) {
-            return ButtonInteraction.reply({
-                content:
-                    "You Cannot Use these Buttons!! | **SUPPORT STAFF ROLE CAN ONLY USE THESE**",
-                ephemeral: true,
-            });
-        }
-        const Embed = new MessageEmbed().setColor("BLURPLE");
 
         TicketSystemSchema.findOne(
             { ChannelID: channel.id },
@@ -66,7 +57,7 @@ export default (client: Client) => {
                 err: any,
                 docs: {
                     Locked: boolean;
-                    MembersID: any[];
+                    MembersID: any;
                     Closed: boolean;
                     TicketCount: any;
                     GuildID: any;
@@ -85,163 +76,44 @@ export default (client: Client) => {
                     });
                 }
 
-                if (!docs.MembersID || docs.MembersID === undefined)
-                    return console.log(
-                        "something went wrong with insertion in database"
-                    );
-
                 switch (customId) {
-                    case "ticket-lock":
-                        if (docs.Locked == true) {
-                            return ButtonInteraction.reply({
-                                embeds: [
-                                    new MessageEmbed()
-                                        .setColor("RED")
-                                        .setDescription(
-                                            "<:Fail:935098896919707700> The Ticket is already Locked."
-                                        ),
-                                ],
-                                ephemeral: true,
-                            });
-                        }
-
-                        await TicketSystemSchema.updateOne(
-                            { ChannelID: channel.id },
-                            { Locked: true }
-                        );
-                        Embed.setDescription(
-                            `🔒 This Ticket is Now Locked by ${member}`
-                        );
-
-                        channel.permissionOverwrites.edit(
-                            configData.EveryoneRoleID,
-                            {
-                                SEND_MESSAGES: false,
-                            }
-                        );
-                        ButtonInteraction.reply({ embeds: [Embed] });
-                        break;
-
-                    case "ticket-unlock":
-                        if (docs.Locked == false) {
-                            return ButtonInteraction.reply({
-                                ephemeral: true,
-                                embeds: [
-                                    new MessageEmbed()
-                                        .setColor("RED")
-                                        .setDescription(
-                                            "<:Fail:935098896919707700> The Ticket is already Unlocked."
-                                        ),
-                                ],
-                            });
-                        }
-
-                        await TicketSystemSchema.updateOne(
-                            { ChannelID: channel.id },
-                            { Locked: false }
-                        );
-                        Embed.setDescription(
-                            `🔒 This Ticket is Now Unlocked by ${member}`
-                        );
-
-                        channel.permissionOverwrites.edit(
-                            configData.EveryoneRoleID,
-                            {
-                                SEND_MESSAGES: true,
-                            }
-                        );
-
-                        ButtonInteraction.reply({ embeds: [Embed] });
-                        break;
                     case "ticket-close":
                         if (docs.Closed == true) {
-                            docs.Closed = true;
                             ButtonInteraction.reply({
                                 embeds: [
                                     new MessageEmbed()
                                         .setColor("RED")
                                         .setDescription(
-                                            "<:Fail:935098896919707700> The Ticket was already Closed."
+                                            "<:Fail:935098896919707700> The Ticket is already Closed."
                                         ),
                                 ],
+                                ephemeral: true,
                             });
                             return;
                         }
 
-                        Embed.setTitle(
-                            "This Channel Will Be Deleted Shortly | You can reopen ticket if you want"
-                        );
-
-                        Embed.setDescription(
-                            `🔒 This Ticket is Locked by ${member}`
-                        );
-
-                        const row = new MessageActionRow().addComponents(
+                        const row = new MessageActionRow();
+                        row.addComponents(
                             new MessageButton()
-                                .setCustomId("ticket-reopen")
-                                .setLabel("Reopen Ticket 🔓")
-                                .setStyle("SUCCESS")
-                        );
-
-                        await TicketSystemSchema.updateOne(
-                            { ChannelID: channel.id },
-                            { Closed: true }
+                                .setCustomId("ticket-close-confirm")
+                                .setLabel("Close")
+                                .setEmoji("✔️")
+                                .setStyle("PRIMARY")
                         );
 
                         ButtonInteraction.reply({
                             content: `${ButtonInteraction.member}`,
-                            embeds: [Embed],
+                            embeds: [
+                                new MessageEmbed()
+                                    .setDescription(
+                                        "Are you sure you want to close this ticket?"
+                                    )
+                                    .setColor("RED"),
+                            ],
                             components: [row],
                         });
 
-                        channel.permissionOverwrites.edit(
-                            configData.EveryoneRoleID,
-                            {
-                                SEND_MESSAGES: true,
-                            }
-                        );
-
                         const Msg1 = await ButtonInteraction.fetchReply();
-
-                        const ST = setTimeout(async () => {
-                            const attachment = await createTranscript(channel, {
-                                limit: -1,
-                                returnBuffer: false,
-                                fileName: `${channel.name}.html`,
-                            });
-
-                            const TChannel = await guild.channels.fetch(
-                                configData.TranscriptID
-                            );
-
-                            if (!TChannel) return;
-                            if (TChannel.type !== "GUILD_TEXT") return;
-
-                            Embed.setTitle(
-                                `Name: ${channel.name} | ID: ${channel.id}`
-                            );
-                            Embed.setDescription(
-                                "<:Success:935099107163394061> Channel Closed by " +
-                                    member
-                            );
-                            Embed.setColor("GREEN");
-
-                            TChannel.send({
-                                embeds: [Embed],
-                                files: [attachment],
-                            });
-
-                            // ! ticketsystemSchema.findByIdAndDelete(channel.id);
-                            ticketsystemSchema.findByIdAndDelete(
-                                {
-                                    _id: channel.id,
-                                },
-                                {
-                                    ChannelID: channel.id,
-                                }
-                            );
-                            channel.delete();
-                        }, 15 * 1000);
 
                         const collector =
                             channel.createMessageComponentCollector({
@@ -250,23 +122,170 @@ export default (client: Client) => {
 
                         collector.on("end", async (collection) => {
                             if (
-                                collection.first()?.customId === "ticket-reopen"
+                                collection.first()?.customId ===
+                                "ticket-close-confirm"
                             ) {
-                                ButtonInteraction.followUp({
-                                    ephemeral: true,
-                                    content:
-                                        "Reopening Ticket/Close Action Cancelled",
-                                });
+                                channel.permissionOverwrites.edit(
+                                    sysData.MembersID,
+                                    {
+                                        VIEW_CHANNEL: false,
+                                    }
+                                );
+
                                 Msg1.delete();
 
-                                clearTimeout(ST);
+                                const row1 = new MessageActionRow();
+                                row1.addComponents(
+                                    new MessageButton()
+                                        .setCustomId("ticket-reopen")
+                                        .setLabel("Reopen Ticket")
+                                        .setEmoji("🔄")
+                                        .setStyle("SUCCESS"),
 
-                                await TicketSystemSchema.updateOne(
-                                    { ChannelID: channel.id },
-                                    { Closed: false }
+                                    new MessageButton()
+                                        .setCustomId("ticket-delete")
+                                        .setLabel("Delete Ticket")
+                                        .setEmoji("✅")
+                                        .setStyle("DANGER")
                                 );
+
+                                ButtonInteraction.followUp({
+                                    embeds: [
+                                        new MessageEmbed()
+                                            .setColor("GREEN")
+                                            .setDescription(
+                                                `<:Success:935099107163394061> Ticket Closed Successfully!`
+                                            ),
+                                    ],
+                                    components: [row1],
+                                });
                             }
                         });
+
+                        setTimeout(async () => {
+                            try {
+                                Msg1.delete();
+                            } catch (err) {}
+                        }, 30 * 1000);
+
+                        break;
+
+                    case "ticket-reopen":
+                        if (docs.Closed == false) {
+                            ButtonInteraction.reply({
+                                embeds: [
+                                    new MessageEmbed()
+                                        .setColor("RED")
+                                        .setDescription(
+                                            "<:Fail:935098896919707700> The Ticket is already Open."
+                                        ),
+                                ],
+                                ephemeral: true,
+                            });
+                            return;
+                        }
+                        channel.permissionOverwrites.edit(sysData.MembersID, {
+                            VIEW_CHANNEL: true,
+                        });
+
+                        await TicketSystemSchema.updateOne(
+                            { ChannelID: channel.id },
+                            { Closed: false }
+                        );
+                        ButtonInteraction.reply({
+                            embeds: [
+                                new MessageEmbed()
+                                    .setColor("GREEN")
+                                    .setDescription(
+                                        `<:Success:935099107163394061> Ticket Reopened Successfully!`
+                                    ),
+                            ],
+                        });
+                        break;
+                    case "ticket-delete":
+                        if (docs.Closed == false) {
+                            ButtonInteraction.reply({
+                                embeds: [
+                                    new MessageEmbed()
+                                        .setColor("RED")
+                                        .setDescription(
+                                            "<:Fail:935098896919707700> *PLEASE CLOSE this ticket first!!*"
+                                        ),
+                                ],
+                                ephemeral: true,
+                            });
+                            return;
+                        }
+                        ButtonInteraction.reply({
+                            embeds: [
+                                new MessageEmbed()
+                                    .setColor("GREEN")
+                                    .setDescription(
+                                        `<:Success:935099107163394061> Ticket Deletion has been started!`
+                                    ),
+                            ],
+                        });
+                        const attachment = await createTranscript(channel, {
+                            limit: -1,
+                            returnBuffer: false,
+                            fileName: `${channel.name}.html`,
+                        });
+
+                        const TChannel = await guild.channels.fetch(
+                            configData.TranscriptID
+                        );
+
+                        if (!TChannel) return;
+                        if (TChannel.type !== "GUILD_TEXT") return;
+
+                        const user1 = await guild.members.fetch(
+                            sysData.MembersID
+                        );
+
+                        try {
+                            TChannel.send({
+                                embeds: [
+                                    new MessageEmbed()
+                                        .setColor("GREEN")
+                                        .setTitle(
+                                            `Name: ${channel.name} | ID: ${channel.id}`
+                                        )
+                                        .setDescription(
+                                            `<:Success:935099107163394061> Channel Closed by ${member} `
+                                        ),
+                                ],
+                                files: [attachment],
+                            });
+
+                            user1.send({
+                                embeds: [
+                                    new MessageEmbed()
+                                        .setColor("GREEN")
+                                        .setTitle(
+                                            `<:Success:935099107163394061> Your Ticket has been Closed!`
+                                        )
+                                        .setDescription(
+                                            `
+                                            # Channel name: #${channel.name} | ${channel.id}
+                                            # Server name: ${guild.name} | ${guild.id}
+                                            `
+                                        ),
+                                ],
+                                files: [attachment],
+                            });
+                        } catch (e) {
+                            console.log(e);
+                        }
+
+                        await TicketSystemSchema.deleteOne({
+                            _id: channel.id,
+                        });
+
+                        setTimeout(async () => {
+                            await channel.delete();
+                        }, 5 * 1000);
+
+                        break;
                 }
             }
         );

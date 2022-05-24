@@ -234,11 +234,9 @@ export default {
             }
 
             const Embed = new MessageEmbed()
-                .setAuthor({
-                    name: guild.name + " Ticketing System",
-                })
-                .setDescription(DescriptionMsg)
-                .setColor("BLURPLE");
+                .setTitle(`${guild.name} Tickets Panel`)
+                .setDescription(DescriptionMsg.toString())
+                .setColor("#0099ff");
 
             let icon = guild.iconURL()?.toString();
             if (icon) Embed.setThumbnail(icon);
