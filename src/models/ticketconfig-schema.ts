@@ -20,11 +20,6 @@ const reqString = {
     require: true,
 };
 
-// const reqBoolean = {
-//     type: Boolean,
-//     require: true,
-// };
-
 const reqArray = {
     type: [String],
     require: true,
@@ -37,11 +32,12 @@ const TicketConfigSchema = new Schema({
     ChannelID: reqString,
     TranscriptID: reqString,
     OpenCategoryID: reqString,
-    // CloseCategoryID: reqString,
     EveryoneRoleID: reqString,
     SupportRoleID: reqString,
+    Title: reqString,
     Description: reqString,
-    Buttons: reqArray,
+    ButtonsName: reqArray,
+    ButtonsEmoji: reqArray,
 });
 
 const name = "guild-ticket-config";

@@ -159,6 +159,11 @@ export default (client: Client) => {
                                     ],
                                     components: [row1],
                                 });
+
+                                await TicketSystemSchema.updateOne(
+                                    { ChannelID: channel.id },
+                                    { Closed: true }
+                                );
                             }
                         });
 

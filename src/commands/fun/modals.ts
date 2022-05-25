@@ -12,7 +12,6 @@ export default {
     category: "fun",
     description: "Check The Modals in discord",
 
-    testOnly: true,
     slash: "both",
     serverOnly: true,
     Cooldown: "5s",
@@ -40,7 +39,7 @@ export default {
     },
 
     callback: async ({ interaction }) => {
-        const modal = new Modal().setCustomId("myModal").setTitle("Testing Modals | New Discord Feature");
+        const modal = new Modal().setCustomId("myModal").setTitle("Modals - New Discord Feature");
 
         const favoriteColorInput = new TextInputComponent()
             .setCustomId("favoriteColorInput")
