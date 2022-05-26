@@ -37,6 +37,7 @@ export default (client: Client) => {
             SupportRoleID,
             OpenCategoryID,
             GuildTicketCount,
+            ButtonsName,
         } = Data;
         if (!Data) return;
 
@@ -45,7 +46,7 @@ export default (client: Client) => {
         let label1 = "";
         try {
             const id1 = customId.slice(customId.length - 1);
-            label1 = Data.Buttons[id1];
+            label1 = ButtonsName[id1];
         } catch (err) {
             console.log("Ticket Create ERROR: -->", err);
         }
@@ -106,7 +107,7 @@ Ticket Category: ${label1}
                         .setCustomId("ticket-close")
                         .setLabel("Close Ticket")
                         .setEmoji("⛔")
-                        .setStyle("SECONDARY"),
+                        .setStyle("SECONDARY")
                 );
                 const msg1 = await channel.send({
                     content: `<@${member.user.id}> Your Ticket Has Been Created!`,

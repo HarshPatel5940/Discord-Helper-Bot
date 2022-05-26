@@ -19,6 +19,7 @@ import DJS, {
     MessageActionRow,
     MessageButton,
     Message,
+    WebhookClient,
 } from "discord.js";
 import TicketConfigSchema from "../../models/ticketconfig-schema";
 
@@ -99,9 +100,21 @@ export default {
         },
     ],
 
-    callback: async ({ interaction, message }) => {
+    callback: async ({ interaction }) => {
         if (!interaction) return;
+
+        interaction.reply({
+            embeds: [
+                new MessageEmbed().setDescription(
+                    "Please Provide The Embed Description Content within 2 minutes"
+                ),
+            ],
+            ephemeral: true,
+        });
+
         const { guild, options, channel } = interaction;
+
+        // interaction.deferReply({ ephemeral: true });
 
         if (!guild || !channel) {
             return {
@@ -169,61 +182,16 @@ export default {
                 };
             }
 
-            interaction.reply({
-                embeds: [
-                    new MessageEmbed().setDescription(
-                        "Please Provide The Embed Description Content within 2 minutes"
-                    ),
-                ],
-                ephemeral: true,
-            });
-
-            const collector = channel.createMessageCollector({
-                max: 1,
-                time: 10000 * 60 * 2,
-            });
-
-            collector.on("collect", message => {
-                CDescriptionMsg = message.content;
-                // await message.delete();
-                interaction.reply("description noted...");
-            });
-
-            if (CDescriptionMsg !== "--/--") {
-                DescriptionMsg = CDescriptionMsg.toString();
-            }
+            let Button2 = ["none", "none"];
+            let Button3 = ["none", "none"];
 
             const Button1 = rawButton1.split(",");
-            let Button2 = ["none"];
             if (rawButton2 !== null) {
                 Button2 = rawButton2.split(",");
             }
-            let Button3 = ["none"];
             if (rawButton3) {
                 Button3 = rawButton3.split(",");
             }
-
-            await TicketConfigSchema.findOneAndUpdate(
-                { _id: guild.id },
-                {
-                    _id: guild.id,
-                    GuildID: guild.id,
-                    GuildTicketCount: "1",
-                    ChannelID: Channel.id,
-                    TranscriptID: Transcript.id,
-                    OpenCategoryID: OpenTicketsCategory.id,
-                    EveryoneRoleID: EveryoneRole.id,
-                    SupportRoleID: SupportRole.id,
-                    Title: TitleMsg,
-                    Description: DescriptionMsg,
-                    ButtonsName: [Button1[0], Button2[0], Button3[0]],
-                    ButtonsEmoji: [Button1[1], Button2[1], Button3[1]],
-                },
-                {
-                    new: true,
-                    upsert: true,
-                }
-            );
 
             const Buttons = new MessageActionRow();
             Buttons.addComponents(
@@ -254,27 +222,90 @@ export default {
                 );
             }
 
-            const Embed = new MessageEmbed()
-                .setTitle(TitleMsg)
-                .setDescription(DescriptionMsg)
-                .setColor("#0099ff");
+            const collector = channel.createMessageCollector({
+                filter: (m: Message) =>
+                    m.member?.user.id === interaction.user.id,
+                max: 1,
+                time: 10000 * 60 * 2,
+            });
 
-            let icon = guild.iconURL()?.toString();
-            if (icon) Embed.setThumbnail(icon);
+            collector.on("collect", async (message) => {
+                CDescriptionMsg = message.content;
 
-            if (Channel.type === "GUILD_TEXT") {
-                Channel.send({ embeds: [Embed], components: [Buttons] });
-            }
+                console.log("==> ", CDescriptionMsg);
 
-            interaction.reply({
-                embeds: [
-                    new MessageEmbed()
-                        .setDescription(
-                            "<:Success:935099107163394061> Ticket System Setup Done!!"
-                        )
-                        .setColor("GREEN"),
-                ],
-                ephemeral: false,
+                if (CDescriptionMsg !== "--/--") {
+                    DescriptionMsg = CDescriptionMsg;
+                }
+
+                const Embed = new MessageEmbed()
+                    .setTitle(TitleMsg)
+                    .setDescription(DescriptionMsg)
+                    .setColor("#0099ff");
+
+                let icon = guild.iconURL()?.toString();
+                if (icon) Embed.setThumbnail(icon);
+
+                if (Channel.type === "GUILD_TEXT") {
+                    Channel.send({ embeds: [Embed], components: [Buttons] });
+
+                    await Channel.createWebhook(`${guild.name} Bot`, {
+                        avatar: guild.iconURL()?.toString(),
+                        reason: `Ticket Setup Cmd by ${interaction.user.tag}`,
+                    }).then(async (webhook) => {
+                        const wc123 = new WebhookClient({ url: webhook.url });
+                        await wc123.send({
+                            embeds: [Embed],
+                            components: [Buttons],
+                        });
+
+                        await webhook.delete();
+                    });
+                }
+                interaction.editReply({
+                    embeds: [
+                        new MessageEmbed()
+                            .setDescription(
+                                "<:Success:935099107163394061> saving configuration..."
+                            )
+                            .setColor("GREEN"),
+                    ],
+                });
+
+                await TicketConfigSchema.findOneAndUpdate(
+                    { _id: guild.id },
+                    {
+                        _id: guild.id,
+                        GuildID: guild.id,
+                        GuildTicketCount: "1",
+                        ChannelID: Channel.id,
+                        TranscriptID: Transcript.id,
+                        OpenCategoryID: OpenTicketsCategory.id,
+                        EveryoneRoleID: EveryoneRole.id,
+                        SupportRoleID: SupportRole.id,
+                        Title: TitleMsg,
+                        Description: DescriptionMsg,
+                        ButtonsName: [Button1[0], Button2[0], Button3[0]],
+                        ButtonsEmoji: [Button1[1], Button2[1], Button3[1]],
+                    },
+                    {
+                        new: true,
+                        upsert: true,
+                    }
+                );
+
+                interaction.editReply({
+                    embeds: [
+                        new MessageEmbed()
+                            .setDescription(
+                                "<:Success:935099107163394061> Ticket System Setup Done!!"
+                            )
+                            .setColor("GREEN"),
+                    ],
+                    // ephemeral: true,
+                });
+
+                await message.delete();
             });
         } catch (err) {
             console.log(err);

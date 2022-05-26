@@ -167,12 +167,6 @@ export default (client: Client) => {
                             }
                         });
 
-                        setTimeout(async () => {
-                            try {
-                                Msg1.delete();
-                            } catch (err) {}
-                        }, 30 * 1000);
-
                         break;
 
                     case "ticket-reopen":
@@ -286,9 +280,7 @@ export default (client: Client) => {
                             _id: channel.id,
                         });
 
-                        setTimeout(async () => {
-                            await channel.delete();
-                        }, 5 * 1000);
+                        channel.delete();
 
                         break;
                 }

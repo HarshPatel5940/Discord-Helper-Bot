@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License. */
 
-   import { Client, TextChannel, MessageEmbed } from "discord.js";
+import { Client, TextChannel, MessageEmbed } from "discord.js";
 import welcomeSchema from "../models/welcome-schema";
 
 const welcomeData = {} as {
@@ -46,21 +46,17 @@ export default (client: Client) => {
             content: data[1].replace(/@/g, `<@${id}>`),
             embeds: [
                 new MessageEmbed()
-                    .setColor("BLURPLE")
+                    .setColor("GREEN")
+                    .setTitle(`Member Info`)
                     .setDescription(
                         `
-                    Member: <@${id}>
-                    Member ID: ${id}
-                    Created: <t:${parseInt(timestamp1.toString())}:R>
-                    Joined: <t:${parseInt(timestamp2.toString())}:R>
+                    Member: <@${id}> | \`${id}\`
+                    Created: <t:${parseInt(
+                        timestamp1.toString()
+                    )}:R> | Joined: <t:${parseInt(timestamp2.toString())}:R>
+                    Total Server Members: ${guild.memberCount}
                     `
-                    )
-                    .setThumbnail(member.displayAvatarURL())
-                    .setTitle(`${member.displayName} Welcome To The Server!`)
-                    .setFooter({
-                        text: `${guild.name} | members: ${guild.memberCount}`,
-                        iconURL: guild.iconURL()?.toString(),
-                    }),
+                    ),
             ],
         });
     });
