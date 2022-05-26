@@ -25,7 +25,6 @@ export default {
     category: "fun",
     description: "Check The Dropdowns in discord",
 
-    testOnly: true,
     slash: "both",
     serverOnly: true,
     Cooldown: "10s",

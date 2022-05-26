@@ -14,17 +14,24 @@
    limitations under the License. */
 
 import { ICommand } from "wokcommands";
-import DJS, { MessageEmbed, MessageActionRow, MessageButton } from "discord.js";
+import DJS, {
+    MessageEmbed,
+    MessageActionRow,
+    MessageButton,
+    Message,
+    WebhookClient,
+} from "discord.js";
 import TicketConfigSchema from "../../models/ticketconfig-schema";
 
 const TYPES = DJS.Constants.ApplicationCommandOptionTypes;
 
 export default {
-    category: "ticket",
+    category: "testticket",
     description: "Setup Ticket System For Your Server!",
 
     slash: true,
     guildOnly: true,
+    testOnly: true,
 
     cooldown: "10s",
     permissions: ["ADMINISTRATOR"],
@@ -45,21 +52,13 @@ export default {
             channelTypes: ["GUILD_TEXT"],
         },
         {
-            name: "openticketscategory",
+            name: "tickets-category",
             description:
                 "Select the Category in which Open Tickets will be Created.",
             required: true,
             type: TYPES.CHANNEL,
             channelTypes: ["GUILD_CATEGORY"],
         },
-        // {
-        //     name: "closedticketscategory",
-        //     description:
-        //         "Select the Category in which Closed Tickets will be Kept!.",
-        //     required: true,
-        //     type: TYPES.CHANNEL,
-        //     channelTypes: ["GUILD_CATEGORY"],
-        // },
         {
             name: "supportrole",
             description: "Provide the Ticket Support's Role",
@@ -73,44 +72,57 @@ export default {
             type: TYPES.ROLE,
         },
         {
-            name: "description",
-            description: "Provide the Description of Ticket Panel",
+            name: "embed-title",
+            description: "Provide the Title of Ticket Panel",
             required: true,
             type: TYPES.STRING,
         },
         {
-            name: "firstbutton",
+            name: "greenbutton",
             description:
                 "Give Your First Button (Success Style) | name and an emoji by adding a comma | SYNTAX: NAME,EMOJI",
             required: true,
             type: TYPES.STRING,
         },
         {
-            name: "secondbutton",
+            name: "bluebutton",
             description:
                 "Give Your Second Button (Primary Style) | name and an emoji by adding a comma | SYNTAX: NAME,EMOJI",
             required: false,
             type: TYPES.STRING,
         },
         {
-            name: "thirdbutton",
+            name: "redbutton",
             description:
-                "Give Your Third Button (Secondary Style)| name and an emoji by adding a comma | SYNTAX: NAME,EMOJI",
+                "Give Your Third Button (Danger Style)| name and an emoji by adding a comma | SYNTAX: NAME,EMOJI",
             required: false,
             type: TYPES.STRING,
         },
     ],
 
     callback: async ({ interaction }) => {
-        const { guild, options } = interaction;
+        if (!interaction) return;
 
-        if (!guild) {
+        interaction.reply({
+            embeds: [
+                new MessageEmbed().setDescription(
+                    "Please Provide The Embed Description Content within 2 minutes"
+                ),
+            ],
+            ephemeral: true,
+        });
+
+        const { guild, options, channel } = interaction;
+
+        // interaction.deferReply({ ephemeral: true });
+
+        if (!guild || !channel) {
             return {
                 custom: true,
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:935098896919707700> Please use this command within a server."
+                            "<:Fail:935098896919707700> Please use this command within a server and text channel"
                         )
                         .setColor("RED"),
                 ],
@@ -121,20 +133,17 @@ export default {
         try {
             const Channel = options.getChannel("channel");
             const Transcript = options.getChannel("transcript");
-            const OpenTicketsCategory = options.getChannel(
-                "openticketscategory"
-            );
-            // const ClosedTicketsCategory = options.getChannel(
-            //     "closedticketscategory"
-            // );
+            const OpenTicketsCategory = options.getChannel("tickets-category");
             const SupportRole = options.getRole("supportrole");
             const EveryoneRole = options.getRole("everyonerole");
+            const TitleMsg = options.getString("embed-title");
+            let DescriptionMsg =
+                "Click on the below buttons to create a ticket under appropriate category.";
+            let CDescriptionMsg = "--/--";
 
-            const DescriptionMsg = options.getString("description");
-
-            const rawButton1 = options.getString("firstbutton");
-            const rawButton2 = options.getString("secondbutton");
-            const rawButton3 = options.getString("thirdbutton");
+            const rawButton1 = options.getString("greenbutton");
+            const rawButton2 = options.getString("bluebutton");
+            const rawButton3 = options.getString("redbutton");
 
             if (!rawButton1) {
                 return {
@@ -155,10 +164,9 @@ export default {
                 !Channel ||
                 !Transcript ||
                 !OpenTicketsCategory ||
-                // !ClosedTicketsCategory ||
                 !SupportRole ||
                 !EveryoneRole ||
-                !DescriptionMsg
+                !TitleMsg
             ) {
                 return {
                     custom: true,
@@ -174,35 +182,16 @@ export default {
                 };
             }
 
+            let Button2 = ["none", "none"];
+            let Button3 = ["none", "none"];
+
             const Button1 = rawButton1.split(",");
-            let Button2 = ["none"];
             if (rawButton2 !== null) {
                 Button2 = rawButton2.split(",");
             }
-            let Button3 = ["none"];
             if (rawButton3) {
                 Button3 = rawButton3.split(",");
             }
-
-            await TicketConfigSchema.findOneAndUpdate(
-                { _id: guild.id },
-                {
-                    _id: guild.id,
-                    GuildID: guild.id,
-                    GuildTicketCount: "1",
-                    ChannelID: Channel.id,
-                    TranscriptID: Transcript.id,
-                    OpenCategoryID: OpenTicketsCategory.id,
-                    EveryoneRoleID: EveryoneRole.id,
-                    SupportRoleID: SupportRole.id,
-                    Description: DescriptionMsg,
-                    Buttons: [Button1[0], Button2[0], Button3[0]],
-                },
-                {
-                    new: true,
-                    upsert: true,
-                }
-            );
 
             const Buttons = new MessageActionRow();
             Buttons.addComponents(
@@ -233,31 +222,91 @@ export default {
                 );
             }
 
-            const Embed = new MessageEmbed()
-                .setAuthor({
-                    name: guild.name + " Ticketing System",
-                })
-                .setDescription(DescriptionMsg)
-                .setColor("BLURPLE");
+            const collector = channel.createMessageCollector({
+                filter: (m: Message) =>
+                    m.member?.user.id === interaction.user.id,
+                max: 1,
+                time: 10000 * 60 * 2,
+            });
 
-            let icon = guild.iconURL()?.toString();
-            if (icon) Embed.setThumbnail(icon);
+            collector.on("collect", async (message) => {
+                CDescriptionMsg = message.content;
 
-            if (Channel.type === "GUILD_TEXT") {
-                Channel.send({ embeds: [Embed], components: [Buttons] });
-            }
+                console.log("==> ", CDescriptionMsg);
 
-            return {
-                custom: true,
-                embeds: [
-                    new MessageEmbed()
-                        .setDescription(
-                            "<:Success:935099107163394061> Ticket System Setup Done!!"
-                        )
-                        .setColor("GREEN"),
-                ],
-                ephmeral: false,
-            };
+                if (CDescriptionMsg !== "--/--") {
+                    DescriptionMsg = CDescriptionMsg;
+                }
+
+                const Embed = new MessageEmbed()
+                    .setTitle(TitleMsg)
+                    .setDescription(DescriptionMsg)
+                    .setColor("#0099ff");
+
+                let icon = guild.iconURL()?.toString();
+                if (icon) Embed.setThumbnail(icon);
+
+                if (Channel.type === "GUILD_TEXT") {
+                    Channel.send({ embeds: [Embed], components: [Buttons] });
+
+                    await Channel.createWebhook(`${guild.name} Bot`, {
+                        avatar: guild.iconURL()?.toString(),
+                        reason: `Ticket Setup Cmd by ${interaction.user.tag}`,
+                    }).then(async (webhook) => {
+                        const wc123 = new WebhookClient({ url: webhook.url });
+                        await wc123.send({
+                            embeds: [Embed],
+                            components: [Buttons],
+                        });
+
+                        await webhook.delete();
+                    });
+                }
+                interaction.editReply({
+                    embeds: [
+                        new MessageEmbed()
+                            .setDescription(
+                                "<:Success:935099107163394061> saving configuration..."
+                            )
+                            .setColor("GREEN"),
+                    ],
+                });
+
+                await TicketConfigSchema.findOneAndUpdate(
+                    { _id: guild.id },
+                    {
+                        _id: guild.id,
+                        GuildID: guild.id,
+                        GuildTicketCount: "1",
+                        ChannelID: Channel.id,
+                        TranscriptID: Transcript.id,
+                        OpenCategoryID: OpenTicketsCategory.id,
+                        EveryoneRoleID: EveryoneRole.id,
+                        SupportRoleID: SupportRole.id,
+                        Title: TitleMsg,
+                        Description: DescriptionMsg,
+                        ButtonsName: [Button1[0], Button2[0], Button3[0]],
+                        ButtonsEmoji: [Button1[1], Button2[1], Button3[1]],
+                    },
+                    {
+                        new: true,
+                        upsert: true,
+                    }
+                );
+
+                interaction.editReply({
+                    embeds: [
+                        new MessageEmbed()
+                            .setDescription(
+                                "<:Success:935099107163394061> Ticket System Setup Done!!"
+                            )
+                            .setColor("GREEN"),
+                    ],
+                    // ephemeral: true,
+                });
+
+                await message.delete();
+            });
         } catch (err) {
             console.log(err);
             return {

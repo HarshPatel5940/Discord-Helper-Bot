@@ -37,6 +37,7 @@ export default (client: Client) => {
             SupportRoleID,
             OpenCategoryID,
             GuildTicketCount,
+            ButtonsName,
         } = Data;
         if (!Data) return;
 
@@ -45,7 +46,7 @@ export default (client: Client) => {
         let label1 = "";
         try {
             const id1 = customId.slice(customId.length - 1);
-            label1 = Data.Buttons[id1];
+            label1 = ButtonsName[id1];
         } catch (err) {
             console.log("Ticket Create ERROR: -->", err);
         }
@@ -92,11 +93,11 @@ export default (client: Client) => {
                     .setColor("BLURPLE")
                     .setTitle(`${member.user.username} | ${label1} Ticket `)
                     .setDescription(
-                        `Ticket Created by <@${member.user.id}>
-                Member Id: \`${member.user.id}\`
-                Ticket Category: ${label1}
+                        `
+Ticket Created by <@${member.user.id}> | \`${member.user.id}\`
+Ticket Category: ${label1}
 
-                **Please Wait patiently for a response from Staff/Support Team!**`
+**Please Wait patiently for a response from Staff/Support Team!**`
                     )
                     .setFooter({ text: `Ticket Count: ${GuildTicketCount}` });
 
@@ -104,18 +105,8 @@ export default (client: Client) => {
                 Buttons.addComponents(
                     new MessageButton()
                         .setCustomId("ticket-close")
-                        .setLabel("Save & Delete")
+                        .setLabel("Close Ticket")
                         .setEmoji("⛔")
-                        .setStyle("SUCCESS"),
-                    new MessageButton()
-                        .setCustomId("ticket-lock")
-                        .setLabel("lock")
-                        .setEmoji("🔒")
-                        .setStyle("SECONDARY"),
-                    new MessageButton()
-                        .setCustomId("ticket-unlock")
-                        .setLabel("unlock")
-                        .setEmoji("🔓")
                         .setStyle("SECONDARY")
                 );
                 const msg1 = await channel.send({
@@ -139,7 +130,6 @@ export default (client: Client) => {
                     MembersID: member.user.id,
                     ChannelID: channel.id,
                     Closed: false,
-                    Locked: false,
                 });
                 ButtonInteraction.editReply({
                     content: `Created Ticket Channel ${channel}`,

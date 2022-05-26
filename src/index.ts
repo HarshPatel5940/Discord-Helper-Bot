@@ -116,7 +116,7 @@ client.on("ready", async () => {
                         `${client.user.displayAvatarURL({ dynamic: true })}`
                     ).setDescription(`
 created-at: <t:${parseInt(timestamp2.toString())}:F>
-Online From:- <t:${parseInt(timestamp1.toString())}:F> | <t:${parseInt(timestamp1.toString())}:R
+Online From:- <t:${parseInt(timestamp1.toString())}:F> | <t:${parseInt(timestamp1.toString())}:R>
 client-id: \`${client.user.id}\` [🔗](https://discord.com/users/${client.user.id})
 `),
             ],
