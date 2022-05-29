@@ -20,7 +20,7 @@ export default (client: Client) => {
         "Discord.JS Bots",
         "OpenSource Community",
         ">>help - /help",
-        "Bot Version 1.0.7 | D.js version 13",
+        "Bot Version 1.1.2 | D.js & ts-node",
     ];
     let counter = 0;
 
