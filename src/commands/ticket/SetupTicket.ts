@@ -247,9 +247,8 @@ export default {
                 if (icon) Embed.setThumbnail(icon);
 
                 if (Channel.type === "GUILD_TEXT") {
-                    Channel.send({ embeds: [Embed], components: [Buttons] });
 
-                    await Channel.createWebhook(`${guild.name} Bot`, {
+                    await Channel.createWebhook(`${guild.name} Tickets`, {
                         avatar: guild.iconURL()?.toString(),
                         reason: `Ticket Setup Cmd by ${interaction.user.tag}`,
                     }).then(async (webhook) => {
