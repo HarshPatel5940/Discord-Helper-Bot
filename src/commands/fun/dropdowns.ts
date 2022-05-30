@@ -22,11 +22,12 @@ import {
 import { ICommand } from "wokcommands";
 
 export default {
+    name: "fun-dropdowns",
     category: "fun",
     description: "Check The Dropdowns in discord",
 
-    slash: "both",
-    serverOnly: true,
+    slash: true,
+    guildOnly: true,
     Cooldown: "10s",
 
     init: (client: Client) => {
@@ -35,38 +36,15 @@ export default {
             const { customId, values } = interaction;
 
             if (customId !== "dropdowns-color") return;
-            let value = values[0];
-            if (value === "red") {
-                interaction.reply({
-                    embeds: [
-                        new MessageEmbed()
-                            .setColor("RED")
-                            .setDescription("You have selected RED"),
-                    ],
-                    ephemeral: true,
-                });
-                return;
-            } else if (value === "green") {
-                interaction.reply({
-                    embeds: [
-                        new MessageEmbed()
-                            .setColor("GREEN")
-                            .setDescription("You have selected GREEN"),
-                    ],
-                    ephemeral: true,
-                });
-                return;
-            } else if (value === "blue") {
-                interaction.reply({
-                    embeds: [
-                        new MessageEmbed()
-                            .setColor("BLUE")
-                            .setDescription("You have selected BLUE"),
-                    ],
-                    ephemeral: true,
-                });
-                return;
-            }
+
+            interaction.reply({
+                embeds: [
+                    new MessageEmbed()
+                        .setColor("RED")
+                        .setDescription(`You have selected ${values}`),
+                ],
+                ephemeral: true,
+            });
         });
     },
 
@@ -75,7 +53,7 @@ export default {
             new MessageSelectMenu()
                 .setCustomId("dropdowns-color")
                 .setPlaceholder("select any one of the below colour")
-                .setMaxValues(1)
+                .setMaxValues(3)
                 .setMinValues(1)
                 .setOptions(
                     [

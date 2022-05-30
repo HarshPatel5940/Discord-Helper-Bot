@@ -12,7 +12,7 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License. */
-   
+
 import { MessageEmbed, User } from "discord.js";
 import { ICommand } from "wokcommands";
 import PunishmentSchema from "../../models/Punishment-schema";
@@ -42,7 +42,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:935098896919707700> Command Can Only Be Used In A Server"
+                            ":x: Command Can Only Be Used In A Server"
                         )
                         .setColor("RED"),
                 ],
@@ -71,7 +71,7 @@ export default {
                     embeds: [
                         new MessageEmbed()
                             .setDescription(
-                                `<:Fail:935098896919707700> Could Not Find a user with the ID of \`${userId}\``
+                                `:x: Could Not Find a user with the ID of \`${userId}\``
                             )
                             .setColor("RED"),
                     ],
@@ -94,9 +94,7 @@ export default {
                 custom: true,
                 embeds: [
                     new MessageEmbed()
-                        .setDescription(
-                            "<:Fail:935098896919707700> Invalid Time Format"
-                        )
+                        .setDescription(":x: Invalid Time Format")
                         .setColor("RED"),
                 ],
                 ephemeral: true,
@@ -135,7 +133,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            `<:Fail:935098896919707700> <@${userId}> is already banned! \`${user.id}\``
+                            `:x: <@${userId}> is already banned! \`${user.id}\``
                         )
                         .setColor("RED"),
                 ],
@@ -158,9 +156,7 @@ export default {
                 custom: true,
                 embeds: [
                     new MessageEmbed()
-                        .setDescription(
-                            "<:Fail:935098896919707700> Could Not Ban User"
-                        )
+                        .setDescription(":x: Could Not Ban User")
                         .setColor("RED"),
                 ],
                 ephemeral: true,

@@ -70,7 +70,7 @@ export default (client: Client) => {
                             new MessageEmbed()
                                 .setColor("RED")
                                 .setDescription(
-                                    "<:Fail:935098896919707700> No Data Was Found about this Channel, Delete/close it Manually!"
+                                    ":x: No Data Was Found about this Channel, Delete/close it Manually!"
                                 ),
                         ],
                     });
@@ -84,7 +84,7 @@ export default (client: Client) => {
                                     new MessageEmbed()
                                         .setColor("RED")
                                         .setDescription(
-                                            "<:Fail:935098896919707700> The Ticket is already Closed."
+                                            ":x: The Ticket is already Closed."
                                         ),
                                 ],
                                 ephemeral: true,
@@ -154,7 +154,7 @@ export default (client: Client) => {
                                         new MessageEmbed()
                                             .setColor("GREEN")
                                             .setDescription(
-                                                `<:Success:935099107163394061> Ticket Closed Successfully!`
+                                                `:white_check_mark: Ticket Closed Successfully!`
                                             ),
                                     ],
                                     components: [row1],
@@ -176,7 +176,7 @@ export default (client: Client) => {
                                     new MessageEmbed()
                                         .setColor("RED")
                                         .setDescription(
-                                            "<:Fail:935098896919707700> The Ticket is already Open."
+                                            ":x: The Ticket is already Open."
                                         ),
                                 ],
                                 ephemeral: true,
@@ -196,7 +196,7 @@ export default (client: Client) => {
                                 new MessageEmbed()
                                     .setColor("GREEN")
                                     .setDescription(
-                                        `<:Success:935099107163394061> Ticket Reopened Successfully!`
+                                        `:white_check_mark: Ticket Reopened Successfully!`
                                     ),
                             ],
                         });
@@ -208,7 +208,7 @@ export default (client: Client) => {
                                     new MessageEmbed()
                                         .setColor("RED")
                                         .setDescription(
-                                            "<:Fail:935098896919707700> *PLEASE CLOSE this ticket first!!*"
+                                            ":x: *PLEASE CLOSE this ticket first!!*"
                                         ),
                                 ],
                                 ephemeral: true,
@@ -220,7 +220,7 @@ export default (client: Client) => {
                                 new MessageEmbed()
                                     .setColor("GREEN")
                                     .setDescription(
-                                        `<:Success:935099107163394061> Ticket Deletion has been started!`
+                                        `:white_check_mark: Ticket Deletion has been started!`
                                     ),
                             ],
                         });
@@ -250,7 +250,7 @@ export default (client: Client) => {
                                             `Name: ${channel.name} | ID: ${channel.id}`
                                         )
                                         .setDescription(
-                                            `<:Success:935099107163394061> Channel Closed by ${member} `
+                                            `:white_check_mark: Channel Closed by ${member} `
                                         ),
                                 ],
                                 files: [attachment],
@@ -261,7 +261,7 @@ export default (client: Client) => {
                                     new MessageEmbed()
                                         .setColor("GREEN")
                                         .setTitle(
-                                            `<:Success:935099107163394061> Your Ticket has been Closed!`
+                                            `:white_check_mark: Your Ticket has been Closed!`
                                         )
                                         .setDescription(
                                             `

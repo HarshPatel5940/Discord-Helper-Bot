@@ -12,7 +12,7 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License. */
-   
+
 import DJS, { MessageEmbed, User } from "discord.js";
 import { ICommand } from "wokcommands";
 
@@ -84,7 +84,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:935098896919707700> Please Mention the User to Unmute!"
+                            ":x: Please Mention the User to Unmute!"
                         )
                         .setColor("RED"),
                 ],
@@ -98,7 +98,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:935098896919707700> Cannot Unmute Yourself **DUMB!!!**"
+                            ":x: Cannot Unmute Yourself **DUMB!!!**"
                         )
                         .setColor("RED"),
                 ],
@@ -112,7 +112,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:935098896919707700> Maximum Only 400 Characters are allowed!"
+                            ":x: Maximum Only 400 Characters are allowed!"
                         )
                         .setColor("RED"),
                 ],
@@ -130,9 +130,7 @@ export default {
                         custom: true,
                         embeds: [
                             new MessageEmbed()
-                                .setDescription(
-                                    "<:Fail:935098896919707700> Cannot Find 'Muted' Role."
-                                )
+                                .setDescription(":x: Cannot Find 'Muted' Role.")
                                 .setColor("RED"),
                         ],
                         ephemeral: true,
@@ -146,9 +144,7 @@ export default {
                 custom: true,
                 embeds: [
                     new MessageEmbed()
-                        .setDescription(
-                            "<:Fail:935098896919707700> Cannot Unmute that User!!"
-                        )
+                        .setDescription(":x: Cannot Unmute that User!!")
                         .setColor("RED"),
                 ],
                 ephemeral: true,
@@ -160,7 +156,7 @@ export default {
             embeds: [
                 new MessageEmbed()
                     .setDescription(
-                        `<:Success:935099107163394061> <@${user.id}> has been Unmuted! | \`${user.id}\``
+                        `:white_check_mark: <@${user.id}> has been Unmuted! | \`${user.id}\``
                     )
                     .setColor("GREEN"),
             ],

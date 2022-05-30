@@ -83,9 +83,7 @@ export default {
                 custom: true,
                 embeds: [
                     new MessageEmbed()
-                        .setDescription(
-                            "<:Fail:935098896919707700> Please Mention the User to Kick!"
-                        )
+                        .setDescription(":x: Please Mention the User to Kick!")
                         .setColor("RED"),
                 ],
                 ephemeral: true,
@@ -96,9 +94,7 @@ export default {
                 custom: true,
                 embeds: [
                     new MessageEmbed()
-                        .setDescription(
-                            "<:Fail:935098896919707700> Cannot Kick this User!"
-                        )
+                        .setDescription(":x: Cannot Kick this User!")
                         .setColor("RED"),
                 ],
                 ephemeral: true,
@@ -109,9 +105,7 @@ export default {
                 custom: true,
                 embeds: [
                     new MessageEmbed()
-                        .setDescription(
-                            "<:Fail:935098896919707700> Cannot Kick Yourself **DUMB!!!**"
-                        )
+                        .setDescription(":x: Cannot Kick Yourself **DUMB!!!**")
                         .setColor("RED"),
                 ],
                 ephemeral: true,
@@ -124,7 +118,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:935098896919707700> Maximum Only 400 Characters are allowed!"
+                            ":x: Maximum Only 400 Characters are allowed!"
                         )
                         .setColor("RED"),
                 ],
@@ -140,9 +134,7 @@ export default {
                 custom: true,
                 embeds: [
                     new MessageEmbed()
-                        .setDescription(
-                            "<:Fail:935098896919707700> Cannot Kick that User!!!**"
-                        )
+                        .setDescription(":x: Cannot Kick that User!!!**")
                         .setColor("RED"),
                 ],
                 ephemeral: true,
@@ -154,7 +146,7 @@ export default {
             embeds: [
                 new MessageEmbed()
                     .setDescription(
-                        `<:Success:935099107163394061> <@${target.id}> was **Kicked** | \`${target.id}\``
+                        `:white_check_mark: <@${target.id}> was **Kicked** | \`${target.id}\``
                     )
                     .setColor("GREEN"),
             ],

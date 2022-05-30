@@ -17,24 +17,19 @@ import DiscordJS from "discord.js";
 import WOKCommands from "wokcommands";
 import path from "path";
 import dotenv from "dotenv";
-import { WebhookClient } from "discord.js";
 
 const wait = require("timers/promises").setTimeout;
-var timestamp1 = Date.now() / 1000;
 
-dotenv.config({ path: ".env.test" });
-// dotenv.config();
+export var timestamp1 = Date.now() / 1000;
+
+// dotenv.config({ path: ".env.test" });
+dotenv.config();
 
 const client = new DiscordJS.Client({
     intents: 32767,
 });
 
 client.on("ready", async () => {
-    await wait(1000);
-    if (!client.user) return;
-    var timestamp2 = client.user.createdTimestamp / 1000;
-    console.log(client.user.username, "is online with id = ", client.user.id);
-
     new WOKCommands(client, {
         commandDir: path.join(__dirname, "commands"),
         featureDir: path.join(__dirname, "features"),
@@ -42,12 +37,8 @@ client.on("ready", async () => {
         typeScript: true,
 
         testServers: ["896301214269063218"],
-        botOwners: "448740493468106753",
-
+        botOwners: process.env.OWNER_ID,
         mongoUri: process.env.MONGO_URI,
-
-        // <:Success:935099107163394061>
-        //<:Fail:935098896919707700>
     })
         .setDefaultPrefix(">>")
         .setDefaultLanguage("en")
@@ -101,28 +92,11 @@ client.on("ready", async () => {
             },
         ]);
 
-    if (process.env.WEBHOOK) {
-        const wc = new WebhookClient({ url: process.env.WEBHOOK });
-
-        wc.send({
-            username: client.user.username,
-            avatarURL: client.user.displayAvatarURL({ dynamic: true }),
-            content: `<@&967042432552275999> ${client.user.username} has logged in\n`,
-            embeds: [
-                new DiscordJS.MessageEmbed()
-                    .setColor("GREEN")
-                    .setTitle(`${client.user.username} is online!!`)
-                    .setThumbnail(
-                        `${client.user.displayAvatarURL({ dynamic: true })}`
-                    ).setDescription(`
-created-at: <t:${parseInt(timestamp2.toString())}:F>
-Online From:- <t:${parseInt(timestamp1.toString())}:F> | <t:${parseInt(timestamp1.toString())}:R>
-client-id: \`${client.user.id}\` [🔗](https://discord.com/users/${client.user.id})
-`),
-            ],
-            tts: true,
-        });
-    }
+    await wait(1000);
+    if (!client.user) return;
+    console.log(
+        `(${client.user.id}) ${client.user.tag} is coming online | Prefix: >>\n`
+    );
 });
 
-client.login(process.env.TOKEN);
+client.login(process.env.BOT_TOKEN);

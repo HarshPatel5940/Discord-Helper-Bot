@@ -16,6 +16,7 @@
 import { MessageEmbed } from "discord.js";
 import { ICommand } from "wokcommands";
 import { connection } from "mongoose";
+import { timestamp1 } from "../../index";
 
 export default {
     name: "ping",
@@ -27,17 +28,8 @@ export default {
     cooldown: "5s",
 
     callback: async ({ message, interaction, client }) => {
-        let totalSeconds = 0;
-        if (client.uptime) {
-            totalSeconds = client.uptime / 1000;
-        }
-        let days = Math.floor(totalSeconds / 86400);
-        totalSeconds %= 86400;
-        let hours = Math.floor(totalSeconds / 3600);
-        totalSeconds %= 3600;
-        let minutes = Math.floor(totalSeconds / 60);
-        let seconds = Math.floor(totalSeconds % 60);
-        let createdTimestamp = 0;
+        if (!client.user) return "I am not ready yet!";
+        let createdTimestamp: string | number;
 
         if (message) {
             createdTimestamp = message.createdTimestamp;
@@ -47,18 +39,22 @@ export default {
 
         const Response = new MessageEmbed()
             .setColor("GREEN")
-            .setTitle("BOT STATUS")
+            .setTitle(`${client.user?.username} STATUS`)
             .setDescription(
-                `<:Success:935099107163394061> **Client**: \`🟢 Online!\`
-        <:Success:935099107163394061> **Database**: \`${switchTo(
-            connection.readyState
-        )}\`
-        <:Success:935099107163394061> **Client Ping**: \`${client.ws.ping}ms\`
-        <:Success:935099107163394061> **Message Ping**: \` ${Math.abs(
-            createdTimestamp - Date.now()
-        )}ms \`
-        <:Success:935099107163394061> **Uptime**: ${days} Days ${hours} Hours ${minutes} Minutes ${seconds} Seconds`
+                `
+        **ClientSatus**: \`🟢 Online!\`
+        **Database Status**: \`${switchTo(connection.readyState)}\`
+        **Websocket Ping**: \`${client.ws.ping}ms\`
+        **Client Ping**: \` ${Math.abs(createdTimestamp - Date.now())}ms \`
+        **Uptime**: <t:${parseInt(timestamp1.toString())}:F> | <t:${parseInt(
+                    timestamp1.toString()
+                )}:R>`
             );
+
+        const url = client.user.avatarURL();
+        if (url) {
+            Response.setThumbnail(url);
+        }
 
         return {
             custom: true,

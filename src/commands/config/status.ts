@@ -54,7 +54,7 @@ export default {
             embeds: [
                 new MessageEmbed()
                     .setDescription(
-                        `<:Success:935099107163394061> Status Changed to ${text}`
+                        `:white_check_mark: Status Changed to ${text}`
                     )
                     .setColor("GREEN"),
             ],

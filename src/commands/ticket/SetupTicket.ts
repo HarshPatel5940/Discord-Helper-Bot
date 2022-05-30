@@ -31,7 +31,6 @@ export default {
 
     slash: true,
     guildOnly: true,
-    testOnly: true,
 
     cooldown: "10s",
     permissions: ["ADMINISTRATOR"],
@@ -105,9 +104,27 @@ export default {
 
         interaction.reply({
             embeds: [
-                new MessageEmbed().setDescription(
-                    "Please Provide The Embed Description Content within 2 minutes"
-                ),
+                new MessageEmbed()
+                    .setDescription(
+                        `
+                    ⁉️ **DO YOU NEED OUR HELP?**
+                    If you have any questions or need further information that can not be found inside our project,
+                    do not hesitate to reach our team by creating a ticket.
+
+                    **🤯 WHERE IS MY TICKET?**
+                    *We close your ticket for the following reasons:*
+                    🔸 Your question is not asked when creating the ticket
+                    🔸 You didn't reply to our response for 24 hours
+                    🔸 Your issue is resolved
+
+                    create a ticket under a appropriate category by clicking one of the buttons below.
+                                    `
+                    )
+                    .addField(
+                        "This is the default description of ticket panel",
+                        'Reply With "**default**" to use this or just send the custom description you want to have',
+                        false
+                    ),
             ],
             ephemeral: true,
         });
@@ -122,7 +139,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:935098896919707700> Please use this command within a server and text channel"
+                            ":x: Please use this command within a server and text channel"
                         )
                         .setColor("RED"),
                 ],
@@ -137,9 +154,20 @@ export default {
             const SupportRole = options.getRole("supportrole");
             const EveryoneRole = options.getRole("everyonerole");
             const TitleMsg = options.getString("embed-title");
-            let DescriptionMsg =
-                "Click on the below buttons to create a ticket under appropriate category.";
-            let CDescriptionMsg = "--/--";
+            let DescriptionMsg = `
+                ⁉️ **DO YOU NEED OUR HELP?**
+If you have any questions or need further information that can not be found inside our project,
+do not hesitate to reach our team by creating a ticket.
+
+**🤯 WHERE IS MY TICKET?**
+*We close your ticket for the following reasons:*
+🔸 Your question is not asked when creating the ticket
+🔸 You didn't reply to our response for 24 hours
+🔸 Your issue is resolved
+
+create a ticket under a appropriate category by clicking one of the buttons below.
+                `;
+            let CDescriptionMsg = "default";
 
             const rawButton1 = options.getString("greenbutton");
             const rawButton2 = options.getString("bluebutton");
@@ -152,7 +180,7 @@ export default {
                         new MessageEmbed()
 
                             .setDescription(
-                                "<:Fail:935098896919707700> Please Provide Name and Id for Atleast Button 1"
+                                ":x: Please Provide Name and Id for Atleast Button 1"
                             )
                             .setColor("RED"),
                     ],
@@ -174,7 +202,7 @@ export default {
                         new MessageEmbed()
 
                             .setDescription(
-                                "<:Fail:935098896919707700> Please provide all the required fields."
+                                ":x: Please provide all the required fields."
                             )
                             .setColor("RED"),
                     ],
@@ -232,9 +260,7 @@ export default {
             collector.on("collect", async (message) => {
                 CDescriptionMsg = message.content;
 
-                console.log("==> ", CDescriptionMsg);
-
-                if (CDescriptionMsg !== "--/--") {
+                if (CDescriptionMsg !== "default") {
                     DescriptionMsg = CDescriptionMsg;
                 }
 
@@ -247,7 +273,6 @@ export default {
                 if (icon) Embed.setThumbnail(icon);
 
                 if (Channel.type === "GUILD_TEXT") {
-
                     await Channel.createWebhook(`${guild.name} Tickets`, {
                         avatar: guild.iconURL()?.toString(),
                         reason: `Ticket Setup Cmd by ${interaction.user.tag}`,
@@ -265,7 +290,7 @@ export default {
                     embeds: [
                         new MessageEmbed()
                             .setDescription(
-                                "<:Success:935099107163394061> saving configuration..."
+                                ":white_check_mark: saving configuration..."
                             )
                             .setColor("GREEN"),
                     ],
@@ -297,7 +322,7 @@ export default {
                     embeds: [
                         new MessageEmbed()
                             .setDescription(
-                                "<:Success:935099107163394061> Ticket System Setup Done!!"
+                                ":white_check_mark: Ticket System Setup Done!!"
                             )
                             .setColor("GREEN"),
                     ],
@@ -313,7 +338,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            `<:Fail:935098896919707700> **__AN ERROR OCCURRED__ While Setting Up Your Ticket System**
+                            `:x: **__AN ERROR OCCURRED__ While Setting Up Your Ticket System**
                     1) Make Sure None of your Buttons Names are Duplicated!
                     2) Make Sure you use the **FORMAT** => name,emoji
                     3) Make Sure Buttons Names are not more than 100 characters
