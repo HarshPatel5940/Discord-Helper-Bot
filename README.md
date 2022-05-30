@@ -1,4 +1,4 @@
-# Discord Helper Bot (1.1.0)
+# Discord Helper Bot (1.1.3)
 
 ### A Simple and Cool Discord Bot Written in Typescript (discord.js)
 

@@ -12,7 +12,7 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License. */
-   
+
 import DJS, { Guild, MessageEmbed, User } from "discord.js";
 import { ICommand } from "wokcommands";
 
@@ -83,9 +83,7 @@ export default {
                 custom: true,
                 embeds: [
                     new MessageEmbed()
-                        .setDescription(
-                            "<:Fail:935098896919707700> Please Mention the User to Ban!"
-                        )
+                        .setDescription(":x: Please Mention the User to Ban!")
                         .setColor("RED"),
                 ],
                 ephemeral: true,
@@ -96,9 +94,7 @@ export default {
                 custom: true,
                 embeds: [
                     new MessageEmbed()
-                        .setDescription(
-                            "<:Fail:935098896919707700> Cannot Ban this User!"
-                        )
+                        .setDescription(":x: Cannot Ban this User!")
                         .setColor("RED"),
                 ],
                 ephemeral: true,
@@ -109,9 +105,7 @@ export default {
                 custom: true,
                 embeds: [
                     new MessageEmbed()
-                        .setDescription(
-                            "<:Fail:935098896919707700> Cannot Ban Yourself **DUMB!!!**"
-                        )
+                        .setDescription(":x: Cannot Ban Yourself **DUMB!!!**")
                         .setColor("RED"),
                 ],
                 ephemeral: true,
@@ -124,7 +118,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:935098896919707700> Maximum Only 400 Characters are allowed!"
+                            ":x: Maximum Only 400 Characters are allowed!"
                         )
                         .setColor("RED"),
                 ],
@@ -140,9 +134,7 @@ export default {
                 custom: true,
                 embeds: [
                     new MessageEmbed()
-                        .setDescription(
-                            "<:Fail:935098896919707700> Cannot Ban that User!!!**"
-                        )
+                        .setDescription(":x: Cannot Ban that User!!!**")
                         .setColor("RED"),
                 ],
                 ephemeral: true,
@@ -154,7 +146,7 @@ export default {
             embeds: [
                 new MessageEmbed()
                     .setDescription(
-                        `<:Success:935099107163394061> @${target.id}> was **Banned** Indefinitely | \`${target.id}\``
+                        `:white_check_mark: @${target.id}> was **Banned** Indefinitely | \`${target.id}\``
                     )
                     .setColor("GREEN"),
             ],

@@ -110,7 +110,7 @@ Ticket Category: ${label1}
                         .setStyle("SECONDARY")
                 );
                 const msg1 = await channel.send({
-                    content: `<@${member.user.id}> Your Ticket Has Been Created!`,
+                    content: `<@&${SupportRoleID}> | <@${member.user.id}> Your Ticket Has Been Created!`,
                     embeds: [Embed],
                     components: [Buttons],
                 });
@@ -132,7 +132,7 @@ Ticket Category: ${label1}
                     Closed: false,
                 });
                 ButtonInteraction.editReply({
-                    content: `Created Ticket Channel ${channel}`,
+                    content: `:white_check_mark: Created Ticket Channel ${channel}`,
                 });
                 msg1.pin();
             });

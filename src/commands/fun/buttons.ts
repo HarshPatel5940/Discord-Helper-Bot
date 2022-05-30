@@ -17,13 +17,14 @@ import { MessageActionRow, MessageButton, MessageEmbed } from "discord.js";
 import { ICommand } from "wokcommands";
 
 export default {
+    name: "fun-buttons",
     category: "fun",
     description: "Check The Buttons in discord",
 
-    slash: "both",
+    slash: true,
     Cooldown: "10s",
 
-    serverOnly: true,
+    guildOnly: true,
 
     callback: async ({ interaction: msgInt, channel }) => {
         const row = new MessageActionRow()
@@ -73,7 +74,7 @@ export default {
         });
 
         const collector = channel.createMessageComponentCollector({
-            max: 4,
+            max: 1,
         });
 
         collector.on("end", async (collection) => {

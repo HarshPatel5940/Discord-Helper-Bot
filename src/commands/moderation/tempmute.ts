@@ -12,7 +12,7 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License. */
-   
+
 import { MessageEmbed, User } from "discord.js";
 import DJS from "discord.js";
 import { ICommand } from "wokcommands";
@@ -67,7 +67,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            "<:Fail:935098896919707700> Command Can Only Be Used In A Server"
+                            ":x: Command Can Only Be Used In A Server"
                         )
                         .setColor("RED"),
                 ],
@@ -96,7 +96,7 @@ export default {
                     embeds: [
                         new MessageEmbed()
                             .setDescription(
-                                `<:Fail:935098896919707700> Couldn't find user with id ${userId}`
+                                `:x: Couldn't find user with id ${userId}`
                             )
                             .setColor("RED"),
                     ],
@@ -110,9 +110,7 @@ export default {
                 custom: true,
                 embeds: [
                     new MessageEmbed()
-                        .setDescription(
-                            "<:Fail:935098896919707700> Cannot Mute Yourself **DUMB!!!**"
-                        )
+                        .setDescription(":x: Cannot Mute Yourself **DUMB!!!**")
                         .setColor("RED"),
                 ],
                 ephemeral: true,
@@ -133,9 +131,7 @@ export default {
                 custom: true,
                 embeds: [
                     new MessageEmbed()
-                        .setDescription(
-                            `<:Fail:935098896919707700> Invalid Time Format`
-                        )
+                        .setDescription(`:x: Invalid Time Format`)
                         .setColor("RED"),
                 ],
                 ephemeral: true,
@@ -174,7 +170,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            `<:Fail:935098896919707700> User is already muted \`${user.id}\``
+                            `:x: User is already muted \`${user.id}\``
                         )
                         .setColor("RED"),
                 ],
@@ -209,7 +205,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            `<:Fail:935098896919707700> Couldn't mute user with id ${user.id}`
+                            `:x: Couldn't mute user with id ${user.id}`
                         )
                         .setColor("RED"),
                 ],
@@ -221,7 +217,7 @@ export default {
             embeds: [
                 new MessageEmbed()
                     .setDescription(
-                        `<:Success:935099107163394061> <@${userId}> has been Muted for ${time}m! \`${user.id}\``
+                        `:white_check_mark: <@${userId}> has been Muted for ${time}m! \`${user.id}\``
                     )
                     .setColor("GREEN"),
             ],

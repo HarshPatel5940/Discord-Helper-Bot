@@ -1,6 +1,6 @@
 {
     "name": "discord-helper-bot",
-    "version": "1.1.2",
+    "version": "1.1.3",
     "description": "A Simple and Cool Discord Bot Written in Typescript (discord.js)",
     "main": "index.ts",
     "scripts": {
@@ -13,7 +13,7 @@
     },
     "keywords": [],
     "author": "HarshPatel5940",
-    "license": "SEE LICENSE IN \"LICENSE\".",
+    "license": "SEE LICENSE IN 'LICENSE' ",
     "bugs": {
         "url": "https://github.com/HarshPatel5940/Discord-Helper-Bot/issues"
     },
