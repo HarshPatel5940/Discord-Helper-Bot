@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License. */
 
-import DiscordJS from "discord.js";
+import DiscordJS, { MessageEmbed } from "discord.js";
 import WOKCommands from "wokcommands";
 import path from "path";
 import dotenv from "dotenv";
@@ -30,7 +30,13 @@ const client = new DiscordJS.Client({
 });
 
 client.on("ready", async () => {
-    new WOKCommands(client, {
+    await wait(1000);
+    if (!client.user) return;
+    console.log(
+        `(${client.user.id}) ${client.user.tag} is online | Prefix: >>\n`
+    );
+
+    const wokclient = new WOKCommands(client, {
         commandDir: path.join(__dirname, "commands"),
         featureDir: path.join(__dirname, "features"),
 
@@ -39,64 +45,24 @@ client.on("ready", async () => {
         testServers: ["896301214269063218"],
         botOwners: process.env.OWNER_ID,
         mongoUri: process.env.MONGO_URI,
+
+        disabledDefaultCommands: ["help", "language"],
+        debug: true,
     })
         .setDefaultPrefix(">>")
-        .setDefaultLanguage("en")
-        .setCategorySettings([
-            {
-                name: "help",
-                emoji: "📃",
-                description: "Help Commands",
-                color: "GREEN",
-                aliases: ["h", "help"],
-            },
-            {
-                name: "moderation",
-                emoji: "⚒️",
-                description: "Moderation Commands",
-                color: "BLURPLE",
-                aliases: ["m", "mod", "moderation"],
-            },
-            {
-                name: "fun",
-                emoji: "🎉",
-                description: "Fun Commands | Learn more about discord features",
-            },
-            {
-                name: "config",
-                emoji: "🔧",
-                description: "Config Commands",
-                color: "BLUE",
-                aliases: ["c", "config"],
-            },
-            {
-                name: "owner",
-                emoji: "👑",
-                description: "Owner Commands",
-                color: "RED",
-                aliases: ["o", "owner"],
-            },
-            {
-                name: "utility",
-                emoji: "👊",
-                description: "Utility Commands",
-                color: "PURPLE",
-                aliases: ["u", "utility"],
-            },
-            {
-                name: "ticket",
-                emoji: "🎫",
-                description: "Ticket Commands",
-                color: "YELLOW",
-                aliases: ["t", "ticket"],
-            },
-        ]);
+        .setDefaultLanguage("en");
 
-    await wait(1000);
-    if (!client.user) return;
-    console.log(
-        `(${client.user.id}) ${client.user.tag} is coming online | Prefix: >>\n`
-    );
+    wokclient.on("commandException", (command: any, error: any) => {
+        return {
+            custom: true,
+            content: `An exception occurred when using command "${command.names[0]}"! The error is:`,
+            embed: [
+                new MessageEmbed().setDescription(
+                    `\`\`\`console\n${error}\`\`\``
+                ),
+            ],
+        };
+    });
 });
 
 client.login(process.env.BOT_TOKEN);
