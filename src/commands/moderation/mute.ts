@@ -22,7 +22,7 @@ export default {
 
     slash: "both",
 
-    requireRoles: true,
+    permissions: ["MANAGE_MESSAGES"],
     guildOnly: true,
 
     minArgs: 2,
