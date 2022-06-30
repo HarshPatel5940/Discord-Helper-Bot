@@ -47,10 +47,10 @@ client.on("ready", async () => {
         mongoUri: process.env.MONGO_URI,
 
         disabledDefaultCommands: ["help", "language"],
-        debug: true,
     })
         .setDefaultPrefix(">>")
-        .setDefaultLanguage("en");
+        .setDefaultLanguage("en")
+        .setColor("00ffea");
 
     wokclient.on("commandException", (command: any, error: any) => {
         return {
