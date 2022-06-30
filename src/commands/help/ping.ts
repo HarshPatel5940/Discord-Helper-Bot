@@ -39,16 +39,17 @@ export default {
 
         const Response = new MessageEmbed()
             .setColor("GREEN")
-            .setTitle(`${client.user?.username} STATUS`)
+            .setTitle(`${client.user?.username} Status`)
             .setDescription(
                 `
-        **ClientSatus**: \`🟢 Online!\`
-        **Database Status**: \`${switchTo(connection.readyState)}\`
-        **Websocket Ping**: \`${client.ws.ping}ms\`
-        **Client Ping**: \` ${Math.abs(createdTimestamp - Date.now())}ms \`
-        **Uptime**: <t:${parseInt(timestamp1.toString())}:F> | <t:${parseInt(
+**Client Status**: \`🟢 Online!\`
+**Database Status**: \`${switchTo(connection.readyState)}\`
+**Websocket Ping**: \`${client.ws.ping}ms\`
+**Client Ping**: \` ${Math.abs(createdTimestamp - Date.now())}ms \`
+**Uptime**: <t:${parseInt(timestamp1.toString())}:F> | <t:${parseInt(
                     timestamp1.toString()
-                )}:R>`
+                )}:R>
+`
             );
 
         const url = client.user.avatarURL();

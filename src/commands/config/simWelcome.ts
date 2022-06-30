@@ -36,7 +36,7 @@ export default {
                     )
                     .setColor("GREEN"),
             ],
-            ephemeral: false,
+            ephemeral: true,
         };
     },
 } as ICommand;

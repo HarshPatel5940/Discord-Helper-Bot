@@ -26,7 +26,7 @@ import TicketConfigSchema from "../../models/ticketconfig-schema";
 const TYPES = DJS.Constants.ApplicationCommandOptionTypes;
 
 export default {
-    category: "ticket",
+    category: "config",
     description: "Setup Ticket System For Your Server!",
 
     slash: true,

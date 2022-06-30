@@ -22,8 +22,7 @@ export default {
     category: "moderation",
     description: "timeout a user from the server for a specific time.",
 
-    // permissions: ["MANAGE_ROLES"],
-    requireRoles: true,
+    permissions: ["MANAGE_MESSAGES"],
 
     minArgs: 3,
     expectedArgs: "<user> <duration> <reason>",
