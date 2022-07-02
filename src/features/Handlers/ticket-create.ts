@@ -28,6 +28,7 @@ export default (client: Client) => {
         if (!ButtonInteraction.isButton()) return;
         const { guild, member, customId } = ButtonInteraction;
 
+        if (!customId.startsWith("ticket-create")) return;
         if (!guild) return;
         if (!member) return;
 
@@ -40,8 +41,6 @@ export default (client: Client) => {
             ButtonsName,
         } = Data;
         if (!Data) return;
-
-        if (!customId.startsWith("ticket-create")) return;
 
         let label1 = "";
         try {
