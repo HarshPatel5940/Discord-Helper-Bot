@@ -102,7 +102,7 @@ export default {
     callback: async ({ interaction }) => {
         if (!interaction) return;
 
-        interaction.reply({
+        await interaction.reply({
             embeds: [
                 new MessageEmbed()
                     .setDescription(
@@ -286,7 +286,7 @@ create a ticket under a appropriate category by clicking one of the buttons belo
                         await webhook.delete();
                     });
                 }
-                interaction.editReply({
+                await interaction.editReply({
                     embeds: [
                         new MessageEmbed()
                             .setDescription(
@@ -318,7 +318,7 @@ create a ticket under a appropriate category by clicking one of the buttons belo
                     }
                 );
 
-                interaction.editReply({
+                await interaction.editReply({
                     embeds: [
                         new MessageEmbed()
                             .setDescription(
@@ -338,11 +338,12 @@ create a ticket under a appropriate category by clicking one of the buttons belo
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            `:x: **__AN ERROR OCCURRED__ While Setting Up Your Ticket System**
-                    1) Make Sure None of your Buttons Names are Duplicated!
-                    2) Make Sure you use the **FORMAT** => name,emoji
-                    3) Make Sure Buttons Names are not more than 100 characters
-                    4) Make Sure button Emojis, are Actually Accessible Emojis!!
+                            `
+:x: **__AN ERROR OCCURRED__ While Setting Up Your Ticket System**
+1) Make Sure None of your Buttons Names are Duplicated!
+2) Make Sure you use the **FORMAT** => name,emoji
+3) Make Sure Buttons Names are not more than 100 characters
+4) Make Sure button Emojis, are Actually Accessible Emojis!!
                     `
                         )
                         .setColor("RED"),
