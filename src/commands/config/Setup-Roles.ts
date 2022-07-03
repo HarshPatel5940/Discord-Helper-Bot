@@ -140,9 +140,9 @@ export default {
 
         let count: number = 0;
 
-        SERVER_ROLES.forEach((role) => {
-            if (role.editable) {
-                role.setPermissions(
+        SERVER_ROLES.forEach(async (role) => {
+            try {
+                await role.setPermissions(
                     role.permissions.remove([
                         "ADMINISTRATOR",
                         "MANAGE_CHANNELS",
@@ -165,7 +165,7 @@ export default {
                 count += 1;
 
                 if (role.tags?.botId) {
-                    role.setPermissions(
+                    await role.setPermissions(
                         role.permissions.add([
                             "VIEW_CHANNEL",
                             "SEND_MESSAGES",
@@ -175,17 +175,31 @@ export default {
                         `Role Setup Initiated by ${interaction.user.username}`
                     );
                 }
-            }
+            } catch {}
         });
 
         const mainR = await interaction.guild.roles.fetch(ROLES_MAIN);
         if (!mainR) return "MAIN ROLE refetch went wrong!!";
         mainR.setPermissions(
-            mainR.permissions.add([
-                "VIEW_CHANNEL",
-                "SEND_MESSAGES",
-                "SEND_MESSAGES_IN_THREADS",
-            ]),
+            mainR.permissions
+                .remove([
+                    "ADMINISTRATOR",
+                    "MANAGE_CHANNELS",
+                    "MANAGE_ROLES",
+                    "MANAGE_GUILD",
+                    "MANAGE_WEBHOOKS",
+
+                    "MENTION_EVERYONE",
+                    "MANAGE_NICKNAMES",
+
+                    "KICK_MEMBERS",
+                    "BAN_MEMBERS",
+                ])
+                .add([
+                    "VIEW_CHANNEL",
+                    "SEND_MESSAGES",
+                    "SEND_MESSAGES_IN_THREADS",
+                ]),
             `Role Setup Initiated by ${interaction.user.username}`
         );
 
@@ -202,7 +216,7 @@ export default {
                 EMBED.setDescription(DESC).addField(
                     "POINTS TO NOTE!!",
                     `
-1) "**Give Back Permissions To Server Mods/Admins & Your Bot's** cause this command has removed any dangerous permission the role had."
+1) "**Give Back Permissions To Server Mods, Admins & Bots** cause this command has removed all dangerous permissions from the roles!!"
 
 2) Make sure all the members in the server have the main role.
             `
