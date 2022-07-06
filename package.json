@@ -21,7 +21,7 @@
     "dependencies": {
         "black": "^0.3.0",
         "discord-html-transcripts": "^1.2.4",
-        "discord.js": "^13.7.0",
+        "discord.js": "^13.8.1",
         "dotenv": "^14.3.2",
         "mongoose": "^6.3.4",
         "ms": "^2.1.3",
