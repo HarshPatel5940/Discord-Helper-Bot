@@ -1,15 +1,6 @@
 <div align="center">
 <h1> Discord Helper Bot</h1>
 <h4> A Simple and Cool Utility Discord Bot Written in Typescript (discord.js) </h4>
-
-[![GitHub license](https://img.shields.io/github/license/HarshPatel5940/Discord-Helper-Bot?color=informational)](https://github.com/HarshPatel5940/Discord-Helper-Bot/blob/main/LICENSE)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/HarshPatel5940/Discord-Helper-Bot)
-![GitHub branch checks state](https://img.shields.io/github/checks-status/HarshPatel5940/Discord-Helper-Bot/main)
-
-[![Package - Typescript](https://img.shields.io/github/package-json/dependency-version/MichaelCurrin/badge-generator/dev/typescript?color=orange)](https://www.npmjs.com/package/typescript "Go to TypeScript on NPM")
-![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/HarshPatel5940/Discord-Helper-Bot/discord.js?color=yellow)
-![](https://img.shields.io/github/package-json/dependency-version/HarshPatel5940/Discord-Helper-Bot/wokcommands?color=white)
-
 </div>
 
 ---
