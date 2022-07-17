@@ -4,7 +4,7 @@
 
 [![GitHub license](https://img.shields.io/github/license/HarshPatel5940/Discord-Helper-Bot?color=informational)](https://github.com/HarshPatel5940/Discord-Helper-Bot/blob/main/LICENSE)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/HarshPatel5940/Discord-Helper-Bot)
-![GitHub branch checks state](https://img.shields.io/github/checks-status/HarshPatel5940/Discord-Helper-Bot/main)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/HarshPatel5940/Discord-Helper-Bot/CodeQL?label=Checks)
 
 [![Package - Typescript](https://img.shields.io/github/package-json/dependency-version/MichaelCurrin/badge-generator/dev/typescript?color=orange)](https://www.npmjs.com/package/typescript "Go to TypeScript on NPM")
 ![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/HarshPatel5940/Discord-Helper-Bot/discord.js?color=yellow)
