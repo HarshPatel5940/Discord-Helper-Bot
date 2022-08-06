@@ -30,6 +30,7 @@ async function CheckSelfBot(targetMsg: Message | PartialMessage) {
     if (!targetMsg.guild) return;
     if (targetMsg.author?.bot) return;
     if (!targetMsg.embeds) return;
+    if (targetMsg.attachments.size !== 0) return;
     if (targetMsg.content?.length !== 0) return;
 
     await targetMsg.delete();
@@ -37,7 +38,7 @@ async function CheckSelfBot(targetMsg: Message | PartialMessage) {
         embeds: [
             new MessageEmbed().setDescription(
                 `
-:skull: <@&${targetMsg.member?.id}> is a possibly a self bot account!!
+:skull: <@${targetMsg.member?.id}> is a possibly a self bot account!!
 
 Member Name: ${targetMsg.member?.user.username}#${targetMsg.member?.user.tag}
 Member ID:${targetMsg.member?.user.id}
