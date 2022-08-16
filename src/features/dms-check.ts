@@ -22,43 +22,27 @@ export default (client: Client) => {
         if (!interaction.isButton()) return;
         if (interaction.customId !== "DM-Close-Check") return;
         if (!interaction.member || !interaction.guild) return;
-
         const member = interaction.member;
 
         const user1 = await client.users.fetch(member.user.id);
+        interaction.reply({ content: "verifying...", ephemeral: true });
         try {
-            interaction.reply({ content: "verifying...", ephemeral: true });
             await user1.send({
                 embeds: [
                     new MessageEmbed()
-                        .setTitle("Turn off your DMs to access the server")
-                        .setDescription(
-                            `
-
-                            For your safety we just allow users whose DMs are turned off. To get access to the server you need to turn off your DMs for your own security.
-
-                            ❓ How to Turn off your Direct Messages (DMs)
-                            \`\`\`💻 On PC\`\`\`
-                            :one: Right-click on the server icon
-                            :two: Navigate to “Privacy Settings”
-                            :three: Turn off “Allow direct messages from server members”
-
-                            \`\`\`📱 On Mobile\`\`\`
-                            :one: Tap and hold the server icon
-                            :two: Navigate to more options and scroll down
-                            :three: Turn off “Direct Messages”
-    `
-                        )
-                        .setThumbnail(
-                            "https://images-ext-2.discordapp.net/external/WMCux1XvdlLmurrOZK3F0IBRQj1DM-9eTSowDBD1f-s/%3Fsize%3D128/https/cdn.discordapp.com/avatars/935082756642308096/f6c782bf3cdc21b10a57ad4f6a67c87e.webp?width=115&height=115"
-                        ),
-                    new MessageEmbed()
                         .setTitle("Why Getting this msg?")
                         .setDescription(
-                            "Follow the above steps to turn off dms and get access to the server"
-                        ),
+                            `Please Turn Of Your Dm's in ${interaction.guild.name} to proceed further verification`
+                        )
+                        .setFooter({
+                            text: `Guild ID: ${interaction.guild.id}`,
+                        })
+                        .setColor("RED"),
                 ],
             });
+            await interaction.editReply(
+                ":x: You Have Not Been Verified. \n> please close your dms in this server"
+            );
         } catch (error) {
             const DATA = await mainRoleSchema.findById({
                 _id: interaction.guild.id,
@@ -70,13 +54,15 @@ export default (client: Client) => {
             let member1 = await interaction.guild.members.fetch(
                 interaction.member.user.id
             );
+
+            await interaction.editReply("✅ You Have Been Verified!!");
             try {
                 await member1.roles.add(roleID);
-            } catch (error) {}
-            await interaction.followUp({
-                content: "you have been verified ✅",
-                ephemeral: true,
-            });
+            } catch (error) {
+                await interaction.editReply(
+                    "✅ You Have Been Verified!!\n\n> Bot was not able to give role to the user, please say the administrator to check the permissions"
+                );
+            }
         }
     });
 };

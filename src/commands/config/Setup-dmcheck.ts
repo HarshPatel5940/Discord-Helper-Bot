@@ -73,28 +73,22 @@ export default {
                     .setTitle("Turn off your DMs to access the server")
                     .setDescription(
                         `
+For your safety we just allow users whose DMs are turned off. To get access to the server you need to turn off your DMs for your own security.
 
-                        For your safety we just allow users whose DMs are turned off. To get access to the server you need to turn off your DMs for your own security.
+❓ How to Turn off your Direct Messages (DMs)
+\`\`\`💻 On PC\`\`\`
+:one: Right-click on the server icon
+:two: Navigate to “Privacy Settings”
+:three: Turn off “Allow direct messages from server members”
 
-                        ❓ How to Turn off your Direct Messages (DMs)
-                        \`\`\`💻 On PC\`\`\`
-                        :one: Right-click on the server icon
-                        :two: Navigate to “Privacy Settings”
-                        :three: Turn off “Allow direct messages from server members”
-
-                        \`\`\`📱 On Mobile\`\`\`
-                        :one: Tap and hold the server icon
-                        :two: Navigate to more options and scroll down
-                        :three: Turn off “Direct Messages”
+\`\`\`📱 On Mobile\`\`\`
+:one: Tap and hold the server icon
+:two: Navigate to more options and scroll down
+:three: Turn off “Direct Messages”
 `
                     )
                     .setThumbnail(
                         "https://images-ext-2.discordapp.net/external/WMCux1XvdlLmurrOZK3F0IBRQj1DM-9eTSowDBD1f-s/%3Fsize%3D128/https/cdn.discordapp.com/avatars/935082756642308096/f6c782bf3cdc21b10a57ad4f6a67c87e.webp?width=115&height=115"
-                    ),
-                new MessageEmbed()
-                    .setTitle("Why Getting stuck on 'verifying...' ?")
-                    .setDescription(
-                        "**since your dms are on**, please follow the above steps to turn off dms and get access to the server"
                     ),
             ],
             components: [Buttons],
