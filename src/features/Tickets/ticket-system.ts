@@ -65,7 +65,7 @@ export default (client: Client) => {
             ) => {
                 if (err) throw err;
                 if (!docs) {
-                    return ButtonInteraction.reply({
+                    return await ButtonInteraction.reply({
                         embeds: [
                             new MessageEmbed()
                                 .setColor("RED")
@@ -79,7 +79,7 @@ export default (client: Client) => {
                 switch (customId) {
                     case "ticket-close":
                         if (docs.Closed == true) {
-                            ButtonInteraction.reply({
+                            await ButtonInteraction.reply({
                                 embeds: [
                                     new MessageEmbed()
                                         .setColor("RED")
@@ -101,7 +101,7 @@ export default (client: Client) => {
                                 .setStyle("PRIMARY")
                         );
 
-                        ButtonInteraction.reply({
+                        await ButtonInteraction.reply({
                             content: `${ButtonInteraction.member}`,
                             embeds: [
                                 new MessageEmbed()
@@ -149,7 +149,7 @@ export default (client: Client) => {
                                         .setStyle("DANGER")
                                 );
 
-                                ButtonInteraction.followUp({
+                                await ButtonInteraction.followUp({
                                     embeds: [
                                         new MessageEmbed()
                                             .setColor("GREEN")
@@ -171,7 +171,7 @@ export default (client: Client) => {
 
                     case "ticket-reopen":
                         if (docs.Closed == false) {
-                            ButtonInteraction.reply({
+                            await ButtonInteraction.reply({
                                 embeds: [
                                     new MessageEmbed()
                                         .setColor("RED")
@@ -191,7 +191,7 @@ export default (client: Client) => {
                             { ChannelID: channel.id },
                             { Closed: false }
                         );
-                        ButtonInteraction.reply({
+                        await ButtonInteraction.reply({
                             embeds: [
                                 new MessageEmbed()
                                     .setColor("GREEN")
@@ -203,7 +203,7 @@ export default (client: Client) => {
                         break;
                     case "ticket-delete":
                         if (docs.Closed == false) {
-                            ButtonInteraction.reply({
+                            await ButtonInteraction.reply({
                                 embeds: [
                                     new MessageEmbed()
                                         .setColor("RED")
@@ -215,7 +215,7 @@ export default (client: Client) => {
                             });
                             return;
                         }
-                        ButtonInteraction.reply({
+                        await ButtonInteraction.reply({
                             embeds: [
                                 new MessageEmbed()
                                     .setColor("GREEN")
@@ -242,7 +242,7 @@ export default (client: Client) => {
                         );
 
                         try {
-                            TChannel.send({
+                            await TChannel.send({
                                 embeds: [
                                     new MessageEmbed()
                                         .setColor("GREEN")
@@ -256,7 +256,7 @@ export default (client: Client) => {
                                 files: [attachment],
                             });
 
-                            user1.send({
+                            await user1.send({
                                 embeds: [
                                     new MessageEmbed()
                                         .setColor("GREEN")

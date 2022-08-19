@@ -17,26 +17,26 @@ import dotenv from "dotenv";
 
 dotenv.config({ path: ".env.test" });
 
-export default (client: Client) => {
+export default async (client: Client) => {
     var title: string = "something went wrong";
     var desc: any = "> *unknown error messsage*";
 
-    process.on("unhandledRejection", (reason) => {
+    process.on("unhandledRejection", async (reason) => {
         title = "UNHANDLED REJECTION FOUND!!!";
         desc = reason;
-        ReportError(client, title, desc);
+        await ReportError(client, title, desc);
     });
 
-    process.on("uncaughtExceptionMonitor", (reason) => {
+    process.on("uncaughtExceptionMonitor", async (reason) => {
         title = "UNCAUGHT EXCEPTION FOUND!!!";
         desc = reason;
-        ReportError(client, title, desc);
+        await ReportError(client, title, desc);
     });
 
-    process.on("multipleResolves", (type, reason) => {
+    process.on("multipleResolves", async (type, reason) => {
         title = "MULTIPLE RESOLVES FOUND!!!";
         desc = `${reason}\n\ntype:${type}`;
-        ReportError(client, title, desc);
+        await ReportError(client, title, desc);
     });
 };
 
@@ -45,7 +45,7 @@ export const config = {
     displayName: "Error Handling",
 };
 
-function ReportError(client: Client, title: string, desc: string) {
+async function ReportError(client: Client, title: string, desc: string) {
     const ErrEmbed = new MessageEmbed()
         .setTitle(title)
         .setDescription(

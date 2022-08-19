@@ -51,7 +51,7 @@ export default (client: Client) => {
             console.log("Ticket Create ERROR: -->", err);
         }
 
-        ButtonInteraction.reply({
+        await ButtonInteraction.reply({
             content: "creating ticket...",
             ephemeral: true,
         });
@@ -131,7 +131,7 @@ Ticket Category: ${label1}
                     ChannelID: channel.id,
                     Closed: false,
                 });
-                ButtonInteraction.editReply({
+                await ButtonInteraction.editReply({
                     content: `:white_check_mark: Created Ticket Channel ${channel}`,
                 });
                 msg1.pin();
