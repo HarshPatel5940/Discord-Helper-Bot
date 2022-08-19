@@ -32,7 +32,7 @@ export default (client: Client) => {
                     new MessageEmbed()
                         .setTitle("Why Getting this msg?")
                         .setDescription(
-                            `Please Turn Of Your Dm's in ${interaction.guild.name} to proceed further verification`
+                            `Please Turn Of Your Dm's in __**${interaction.guild.name}**__ to proceed further verification`
                         )
                         .setFooter({
                             text: `Guild ID: ${interaction.guild.id}`,
