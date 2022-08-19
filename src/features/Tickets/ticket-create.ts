@@ -33,6 +33,8 @@ export default (client: Client) => {
         if (!member) return;
 
         const Data = await TicketConfigSchema.findById(guild.id);
+        if (!Data) return;
+
         let {
             EveryoneRoleID,
             SupportRoleID,
@@ -40,7 +42,6 @@ export default (client: Client) => {
             GuildTicketCount,
             ButtonsName,
         } = Data;
-        if (!Data) return;
 
         let label1 = "";
         try {
