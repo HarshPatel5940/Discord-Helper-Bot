@@ -32,7 +32,7 @@ export default {
             embeds: [
                 new MessageEmbed()
                     .setDescription(
-                        ":white_check_mark: Welcome Message Sent! **Event Has Triggered!**"
+                        "✅ Welcome Message Sent! **Event Has Triggered!**"
                     )
                     .setColor("GREEN"),
             ],

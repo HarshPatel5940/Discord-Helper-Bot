@@ -139,7 +139,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            ":x: Please use this command within a server and text channel"
+                            "❌ Please use this command within a server and text channel"
                         )
                         .setColor("RED"),
                 ],
@@ -180,7 +180,7 @@ create a ticket under a appropriate category by clicking one of the buttons belo
                         new MessageEmbed()
 
                             .setDescription(
-                                ":x: Please Provide Name and Id for Atleast Button 1"
+                                "❌ Please Provide Name and Id for Atleast Button 1"
                             )
                             .setColor("RED"),
                     ],
@@ -202,7 +202,7 @@ create a ticket under a appropriate category by clicking one of the buttons belo
                         new MessageEmbed()
 
                             .setDescription(
-                                ":x: Please provide all the required fields."
+                                "❌ Please provide all the required fields."
                             )
                             .setColor("RED"),
                     ],
@@ -289,9 +289,7 @@ create a ticket under a appropriate category by clicking one of the buttons belo
                 await interaction.editReply({
                     embeds: [
                         new MessageEmbed()
-                            .setDescription(
-                                ":white_check_mark: saving configuration..."
-                            )
+                            .setDescription("✅ saving configuration...")
                             .setColor("GREEN"),
                     ],
                 });
@@ -321,9 +319,7 @@ create a ticket under a appropriate category by clicking one of the buttons belo
                 await interaction.editReply({
                     embeds: [
                         new MessageEmbed()
-                            .setDescription(
-                                ":white_check_mark: Ticket System Setup Done!!"
-                            )
+                            .setDescription("✅ Ticket System Setup Done!!")
                             .setColor("GREEN"),
                     ],
                     // ephemeral: true,
@@ -339,7 +335,7 @@ create a ticket under a appropriate category by clicking one of the buttons belo
                     new MessageEmbed()
                         .setDescription(
                             `
-:x: **__AN ERROR OCCURRED__ While Setting Up Your Ticket System**
+❌ **__AN ERROR OCCURRED__ While Setting Up Your Ticket System**
 1) Make Sure None of your Buttons Names are Duplicated!
 2) Make Sure you use the **FORMAT** => name,emoji
 3) Make Sure Buttons Names are not more than 100 characters

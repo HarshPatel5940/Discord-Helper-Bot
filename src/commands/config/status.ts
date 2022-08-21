@@ -53,9 +53,7 @@ export default {
             custom: true,
             embeds: [
                 new MessageEmbed()
-                    .setDescription(
-                        `:white_check_mark: Status Changed to ${text}`
-                    )
+                    .setDescription(`✅ Status Changed to ${text}`)
                     .setColor("GREEN"),
             ],
             ephemeral: true,

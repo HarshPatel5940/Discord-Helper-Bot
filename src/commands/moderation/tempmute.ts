@@ -66,7 +66,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            ":x: Command Can Only Be Used In A Server"
+                            "❌ Command Can Only Be Used In A Server"
                         )
                         .setColor("RED"),
                 ],
@@ -95,7 +95,7 @@ export default {
                     embeds: [
                         new MessageEmbed()
                             .setDescription(
-                                `:x: Couldn't find user with id ${userId}`
+                                `❌ Couldn't find user with id ${userId}`
                             )
                             .setColor("RED"),
                     ],
@@ -109,7 +109,7 @@ export default {
                 custom: true,
                 embeds: [
                     new MessageEmbed()
-                        .setDescription(":x: Cannot Mute Yourself **DUMB!!!**")
+                        .setDescription("❌ Cannot Mute Yourself **DUMB!!!**")
                         .setColor("RED"),
                 ],
                 ephemeral: true,
@@ -130,7 +130,7 @@ export default {
                 custom: true,
                 embeds: [
                     new MessageEmbed()
-                        .setDescription(`:x: Invalid Time Format`)
+                        .setDescription(`❌ Invalid Time Format`)
                         .setColor("RED"),
                 ],
                 ephemeral: true,
@@ -169,7 +169,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            `:x: User is already muted \`${user.id}\``
+                            `❌ User is already muted \`${user.id}\``
                         )
                         .setColor("RED"),
                 ],
@@ -204,7 +204,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            `:x: Couldn't mute user with id ${user.id}`
+                            `❌ Couldn't mute user with id ${user.id}`
                         )
                         .setColor("RED"),
                 ],
@@ -216,7 +216,7 @@ export default {
             embeds: [
                 new MessageEmbed()
                     .setDescription(
-                        `:white_check_mark: <@${userId}> has been Muted for ${time}m! \`${user.id}\``
+                        `✅ <@${userId}> has been Muted for ${time}m! \`${user.id}\``
                     )
                     .setColor("GREEN"),
             ],

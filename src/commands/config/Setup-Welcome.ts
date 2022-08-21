@@ -60,7 +60,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            ":x: Please use this command within a server."
+                            "❌ Please use this command within a server."
                         )
                         .setColor("RED"),
                 ],
@@ -73,7 +73,7 @@ export default {
                 custom: true,
                 embeds: [
                     new MessageEmbed()
-                        .setDescription(":x: Please Tag a Valid Text Channel.")
+                        .setDescription("❌ Please Tag a Valid Text Channel.")
                         .setColor("RED"),
                 ],
                 ephemeral: true,
@@ -105,9 +105,7 @@ export default {
             custom: true,
             embeds: [
                 new MessageEmbed()
-                    .setDescription(
-                        ":white_check_mark: Welcome Channel is setup done!"
-                    )
+                    .setDescription("✅ Welcome Channel is setup done!")
                     .setColor("GREEN"),
             ],
             ephmeral: false,

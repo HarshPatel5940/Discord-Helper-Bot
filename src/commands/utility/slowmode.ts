@@ -55,7 +55,7 @@ export default {
                     embeds: [
                         new MessageEmbed()
                             .setDescription(
-                                `:x: Please Provide a valid number. convert into seconds!!`
+                                `❌ Please Provide a valid number. convert into seconds!!`
                             )
                             .setColor("RED"),
                     ],
@@ -75,7 +75,7 @@ export default {
                     new MessageEmbed()
                         .setDescription(
                             `
-:white_check_mark: Status Changed to ${Number(args)} seconds.
+✅ Status Changed to ${Number(args)} seconds.
 
 `
                         )
@@ -102,7 +102,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            `:white_check_mark: Status Changed to ${amount1} seconds.`
+                            `✅ Status Changed to ${amount1} seconds.`
                         )
                         .setColor("GREEN"),
                 ],

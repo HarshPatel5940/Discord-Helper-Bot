@@ -83,7 +83,7 @@ export default {
                 custom: true,
                 embeds: [
                     new MessageEmbed()
-                        .setDescription(":x: Please Mention the User to Ban!")
+                        .setDescription("❌ Please Mention the User to Ban!")
                         .setColor("RED"),
                 ],
                 ephemeral: true,
@@ -94,7 +94,7 @@ export default {
                 custom: true,
                 embeds: [
                     new MessageEmbed()
-                        .setDescription(":x: Cannot Ban this User!")
+                        .setDescription("❌ Cannot Ban this User!")
                         .setColor("RED"),
                 ],
                 ephemeral: true,
@@ -105,7 +105,7 @@ export default {
                 custom: true,
                 embeds: [
                     new MessageEmbed()
-                        .setDescription(":x: Cannot Ban Yourself **DUMB!!!**")
+                        .setDescription("❌ Cannot Ban Yourself **DUMB!!!**")
                         .setColor("RED"),
                 ],
                 ephemeral: true,
@@ -118,7 +118,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            ":x: Maximum Only 400 Characters are allowed!"
+                            "❌ Maximum Only 400 Characters are allowed!"
                         )
                         .setColor("RED"),
                 ],
@@ -134,7 +134,7 @@ export default {
                 custom: true,
                 embeds: [
                     new MessageEmbed()
-                        .setDescription(":x: Cannot Ban that User!!!**")
+                        .setDescription("❌ Cannot Ban that User!!!**")
                         .setColor("RED"),
                 ],
                 ephemeral: true,
@@ -146,7 +146,7 @@ export default {
             embeds: [
                 new MessageEmbed()
                     .setDescription(
-                        `:white_check_mark: @${target.id}> was **Banned** Indefinitely | \`${target.id}\``
+                        `✅ @${target.id}> was **Banned** Indefinitely | \`${target.id}\``
                     )
                     .setColor("GREEN"),
             ],

@@ -21,22 +21,22 @@ export default async (client: Client) => {
     var title: string = "something went wrong";
     var desc: any = "> *unknown error messsage*";
 
-    process.on("unhandledRejection", async (reason) => {
+    process.on("unhandledRejection", async (reason, p) => {
         title = "UNHANDLED REJECTION FOUND!!!";
         desc = reason;
-        await ReportError(client, title, desc);
+        await ReportError(client, title, desc, p);
     });
 
-    process.on("uncaughtExceptionMonitor", async (reason) => {
+    process.on("uncaughtExceptionMonitor", async (reason, p) => {
         title = "UNCAUGHT EXCEPTION FOUND!!!";
         desc = reason;
-        await ReportError(client, title, desc);
+        await ReportError(client, title, desc, p);
     });
 
-    process.on("multipleResolves", async (type, reason) => {
+    process.on("multipleResolves", async (type, p, reason) => {
         title = "MULTIPLE RESOLVES FOUND!!!";
         desc = `${reason}\n\ntype:${type}`;
-        await ReportError(client, title, desc);
+        await ReportError(client, title, desc, p);
     });
 };
 
@@ -45,13 +45,16 @@ export const config = {
     displayName: "Error Handling",
 };
 
-async function ReportError(client: Client, title: string, desc: string) {
+async function ReportError(client: Client, title: string, desc: any, p: any) {
     const ErrEmbed = new MessageEmbed()
         .setTitle(title)
         .setDescription(
             `
 \`\`\`
 ${desc}
+
+>>> ${p} <<<
+
 \`\`\`
 Error Reported at: <t:${parseInt((Date.now() / 1000).toString())}:F>
 `
@@ -70,5 +73,5 @@ Error Reported at: <t:${parseInt((Date.now() / 1000).toString())}:F>
         return;
     }
 
-    c.send({ embeds: [ErrEmbed] });
+    await c.send({ embeds: [ErrEmbed] });
 }

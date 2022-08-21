@@ -132,7 +132,7 @@ Ticket Category: ${label1}
                     Closed: false,
                 });
                 await ButtonInteraction.editReply({
-                    content: `:white_check_mark: Created Ticket Channel ${channel}`,
+                    content: `✅ Created Ticket Channel ${channel}`,
                 });
                 msg1.pin();
             });

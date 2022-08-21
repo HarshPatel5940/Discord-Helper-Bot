@@ -41,7 +41,7 @@ export default (client: Client) => {
                 ],
             });
             await interaction.editReply(
-                ":x: You Have Not Been Verified. \n> please close your dms in this server"
+                "❌ You Have Not Been Verified. \n> please close your dms in this server"
             );
         } catch (error) {
             const DATA = await mainRoleSchema.findById({

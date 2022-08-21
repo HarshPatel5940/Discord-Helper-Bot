@@ -39,7 +39,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            ":x: Command Can Only Be Used In A Server"
+                            "❌ Command Can Only Be Used In A Server"
                         )
                         .setColor("RED"),
                 ],
@@ -68,7 +68,7 @@ export default {
                     embeds: [
                         new MessageEmbed()
                             .setDescription(
-                                `:x: Could Not Find a user with the ID of \`${userId}\``
+                                `❌ Could Not Find a user with the ID of \`${userId}\``
                             )
                             .setColor("RED"),
                     ],
@@ -91,7 +91,7 @@ export default {
                 custom: true,
                 embeds: [
                     new MessageEmbed()
-                        .setDescription(":x: Invalid Time Format")
+                        .setDescription("❌ Invalid Time Format")
                         .setColor("RED"),
                 ],
                 ephemeral: true,
@@ -130,7 +130,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            `:x: <@${userId}> is already banned! \`${user.id}\``
+                            `❌ <@${userId}> is already banned! \`${user.id}\``
                         )
                         .setColor("RED"),
                 ],
@@ -153,7 +153,7 @@ export default {
                 custom: true,
                 embeds: [
                     new MessageEmbed()
-                        .setDescription(":x: Could Not Ban User")
+                        .setDescription("❌ Could Not Ban User")
                         .setColor("RED"),
                 ],
                 ephemeral: true,

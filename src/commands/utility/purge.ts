@@ -48,7 +48,7 @@ export default {
         messages.forEach((message) => message.delete());
 
         const emb = new MessageEmbed()
-            .setDescription(`:white_check_mark: Deleted ${size} messsages`)
+            .setDescription(`✅ Deleted ${size} messsages`)
             .setColor("GREEN");
 
         const msg1 = await channel.send({ embeds: [emb] });
