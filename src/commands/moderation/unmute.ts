@@ -84,9 +84,7 @@ export default {
                 custom: true,
                 embeds: [
                     new MessageEmbed()
-                        .setDescription(
-                            ":x: Please Mention the User to Unmute!"
-                        )
+                        .setDescription("❌ Please Mention the User to Unmute!")
                         .setColor("RED"),
                 ],
                 ephemeral: true,
@@ -98,9 +96,7 @@ export default {
                 custom: true,
                 embeds: [
                     new MessageEmbed()
-                        .setDescription(
-                            ":x: Cannot Unmute Yourself **DUMB!!!**"
-                        )
+                        .setDescription("❌ Cannot Unmute Yourself **DUMB!!!**")
                         .setColor("RED"),
                 ],
                 ephemeral: true,
@@ -113,7 +109,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            ":x: Maximum Only 400 Characters are allowed!"
+                            "❌ Maximum Only 400 Characters are allowed!"
                         )
                         .setColor("RED"),
                 ],
@@ -131,7 +127,7 @@ export default {
                         custom: true,
                         embeds: [
                             new MessageEmbed()
-                                .setDescription(":x: Cannot Find 'Muted' Role.")
+                                .setDescription("❌ Cannot Find 'Muted' Role.")
                                 .setColor("RED"),
                         ],
                         ephemeral: true,
@@ -145,7 +141,7 @@ export default {
                 custom: true,
                 embeds: [
                     new MessageEmbed()
-                        .setDescription(":x: Cannot Unmute that User!!")
+                        .setDescription("❌ Cannot Unmute that User!!")
                         .setColor("RED"),
                 ],
                 ephemeral: true,
@@ -157,7 +153,7 @@ export default {
             embeds: [
                 new MessageEmbed()
                     .setDescription(
-                        `:white_check_mark: <@${user.id}> has been Unmuted! | \`${user.id}\``
+                        `✅ <@${user.id}> has been Unmuted! | \`${user.id}\``
                     )
                     .setColor("GREEN"),
             ],

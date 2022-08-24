@@ -28,6 +28,8 @@ export default {
     category: "utility",
     description: "Send Messages Through Webhooks",
 
+    permissions: ["ADMINISTRATOR"],
+
     slash: true,
     guildOnly: true,
     Cooldown: "10s",
@@ -54,14 +56,13 @@ export default {
                     username: WEBHOOK_USERNAME,
                 });
             } catch (err) {
-                throw err
+                throw err;
             }
 
             interaction.reply({
-                content: `Successfully Sent Data Thorugh Webhook`,
-                ephemeral: true
-
-            })
+                content: `✅ Successfully Sent Data Thorugh Webhook`,
+                ephemeral: true,
+            });
         });
     },
 

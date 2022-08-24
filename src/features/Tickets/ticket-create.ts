@@ -33,6 +33,8 @@ export default (client: Client) => {
         if (!member) return;
 
         const Data = await TicketConfigSchema.findById(guild.id);
+        if (!Data) return;
+
         let {
             EveryoneRoleID,
             SupportRoleID,
@@ -40,7 +42,6 @@ export default (client: Client) => {
             GuildTicketCount,
             ButtonsName,
         } = Data;
-        if (!Data) return;
 
         let label1 = "";
         try {
@@ -50,7 +51,7 @@ export default (client: Client) => {
             console.log("Ticket Create ERROR: -->", err);
         }
 
-        ButtonInteraction.reply({
+        await ButtonInteraction.reply({
             content: "creating ticket...",
             ephemeral: true,
         });
@@ -130,8 +131,8 @@ Ticket Category: ${label1}
                     ChannelID: channel.id,
                     Closed: false,
                 });
-                ButtonInteraction.editReply({
-                    content: `:white_check_mark: Created Ticket Channel ${channel}`,
+                await ButtonInteraction.editReply({
+                    content: `✅ Created Ticket Channel ${channel}`,
                 });
                 msg1.pin();
             });

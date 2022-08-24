@@ -57,7 +57,7 @@ export default {
                 embeds: [
                     new MessageEmbed()
                         .setDescription(
-                            ":x: Please Use this Command within a Server."
+                            "❌ Please Use this Command within a Server."
                         )
                         .setColor("RED"),
                 ],
@@ -70,7 +70,7 @@ export default {
                 custom: true,
                 embeds: [
                     new MessageEmbed()
-                        .setDescription(":x: Please tag a valid text channel.")
+                        .setDescription("❌ Please tag a valid text channel.")
                         .setColor("RED"),
                 ],
                 ephemeral: true,

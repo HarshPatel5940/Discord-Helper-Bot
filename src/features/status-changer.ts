@@ -16,11 +16,10 @@ import { Client } from "discord.js";
 
 export default (client: Client) => {
     const statusOptions = [
-        "Discord.JS Bots",
-        "OpenSource Community",
         "HarshPatel5940#3210",
+        "Version: 1.1.4",
         ">>help - /help",
-        "Bot Version 1.1.3",
+        "OpenSource Community",
     ];
     let counter = 0;
 

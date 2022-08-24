@@ -50,12 +50,12 @@ export default (client: Client) => {
                     .setTitle(`Member Info`)
                     .setDescription(
                         `
-                    Member: <@${id}> | \`${id}\`
-                    Created: <t:${parseInt(
-                        timestamp1.toString()
-                    )}:R> | Joined: <t:${parseInt(timestamp2.toString())}:R>
-                    Total Server Members: ${guild.memberCount}
-                    `
+Member: <@${id}> | \`${id}\`
+Created: <t:${parseInt(timestamp1.toString())}:R> | Joined: <t:${parseInt(
+                            timestamp2.toString()
+                        )}:R>
+Total Server Members: ${guild.memberCount}
+`
                     ),
             ],
         });

@@ -65,12 +65,12 @@ export default (client: Client) => {
             ) => {
                 if (err) throw err;
                 if (!docs) {
-                    return ButtonInteraction.reply({
+                    return await ButtonInteraction.reply({
                         embeds: [
                             new MessageEmbed()
                                 .setColor("RED")
                                 .setDescription(
-                                    ":x: No Data Was Found about this Channel, Delete/close it Manually!"
+                                    "❌ No Data Was Found about this Channel, Delete/close it Manually!"
                                 ),
                         ],
                     });
@@ -79,14 +79,29 @@ export default (client: Client) => {
                 switch (customId) {
                     case "ticket-close":
                         if (docs.Closed == true) {
-                            ButtonInteraction.reply({
+                            const row1 = new MessageActionRow();
+                            row1.addComponents(
+                                new MessageButton()
+                                    .setCustomId("ticket-reopen")
+                                    .setLabel("Reopen Ticket")
+                                    .setEmoji("🔄")
+                                    .setStyle("SUCCESS"),
+
+                                new MessageButton()
+                                    .setCustomId("ticket-delete")
+                                    .setLabel("Delete Ticket")
+                                    .setEmoji("✅")
+                                    .setStyle("DANGER")
+                            );
+                            await ButtonInteraction.reply({
                                 embeds: [
                                     new MessageEmbed()
                                         .setColor("RED")
                                         .setDescription(
-                                            ":x: The Ticket is already Closed."
+                                            `❌ Ticket is already closed. `
                                         ),
                                 ],
+                                components: [row1],
                                 ephemeral: true,
                             });
                             return;
@@ -101,7 +116,7 @@ export default (client: Client) => {
                                 .setStyle("PRIMARY")
                         );
 
-                        ButtonInteraction.reply({
+                        await ButtonInteraction.reply({
                             content: `${ButtonInteraction.member}`,
                             embeds: [
                                 new MessageEmbed()
@@ -149,12 +164,12 @@ export default (client: Client) => {
                                         .setStyle("DANGER")
                                 );
 
-                                ButtonInteraction.followUp({
+                                await ButtonInteraction.followUp({
                                     embeds: [
                                         new MessageEmbed()
                                             .setColor("GREEN")
                                             .setDescription(
-                                                `:white_check_mark: Ticket Closed Successfully!`
+                                                `✅ Ticket Closed Successfully!`
                                             ),
                                     ],
                                     components: [row1],
@@ -171,12 +186,12 @@ export default (client: Client) => {
 
                     case "ticket-reopen":
                         if (docs.Closed == false) {
-                            ButtonInteraction.reply({
+                            await ButtonInteraction.reply({
                                 embeds: [
                                     new MessageEmbed()
                                         .setColor("RED")
                                         .setDescription(
-                                            ":x: The Ticket is already Open."
+                                            "❌ The Ticket is already Open."
                                         ),
                                 ],
                                 ephemeral: true,
@@ -191,36 +206,36 @@ export default (client: Client) => {
                             { ChannelID: channel.id },
                             { Closed: false }
                         );
-                        ButtonInteraction.reply({
+                        await ButtonInteraction.reply({
                             embeds: [
                                 new MessageEmbed()
                                     .setColor("GREEN")
                                     .setDescription(
-                                        `:white_check_mark: Ticket Reopened Successfully!`
+                                        `✅ Ticket Reopened Successfully!`
                                     ),
                             ],
                         });
                         break;
                     case "ticket-delete":
                         if (docs.Closed == false) {
-                            ButtonInteraction.reply({
+                            await ButtonInteraction.reply({
                                 embeds: [
                                     new MessageEmbed()
                                         .setColor("RED")
                                         .setDescription(
-                                            ":x: *PLEASE CLOSE this ticket first!!*"
+                                            "❌ *PLEASE CLOSE this ticket first!!*"
                                         ),
                                 ],
                                 ephemeral: true,
                             });
                             return;
                         }
-                        ButtonInteraction.reply({
+                        await ButtonInteraction.reply({
                             embeds: [
                                 new MessageEmbed()
                                     .setColor("GREEN")
                                     .setDescription(
-                                        `:white_check_mark: Ticket Deletion has been started!`
+                                        `✅ Ticket Deletion has been started!`
                                     ),
                             ],
                         });
@@ -242,7 +257,7 @@ export default (client: Client) => {
                         );
 
                         try {
-                            TChannel.send({
+                            await TChannel.send({
                                 embeds: [
                                     new MessageEmbed()
                                         .setColor("GREEN")
@@ -250,18 +265,18 @@ export default (client: Client) => {
                                             `Name: ${channel.name} | ID: ${channel.id}`
                                         )
                                         .setDescription(
-                                            `:white_check_mark: Channel Closed by ${member} `
+                                            `✅ Channel Closed by ${member} `
                                         ),
                                 ],
                                 files: [attachment],
                             });
 
-                            user1.send({
+                            await user1.send({
                                 embeds: [
                                     new MessageEmbed()
                                         .setColor("GREEN")
                                         .setTitle(
-                                            `:white_check_mark: Your Ticket has been Closed!`
+                                            `✅ Your Ticket has been Closed!`
                                         )
                                         .setDescription(
                                             `
