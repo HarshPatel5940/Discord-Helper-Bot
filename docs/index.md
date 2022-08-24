@@ -13,47 +13,18 @@
 
 This Bot also uses _**wokcommands handler**_ for handling the commands and event listeners of the bot.
 
----
-
-## Hosting
-
--   Install Node.js from [here.](https://nodejs.org/en/download/)
--   Clone This Repository.
-
-```
-git clone https://github.com/HarshPatel5940/Discord-Helper-Bot.git
-```
-
--   Installing Dependencies, first go to the project folder and run
-
-```
-npm install
-```
-
--   Save Your Token, ID & Mongo uri in the **[ENV](/.env)** carefully..
-
-```
-TOKEN=''
-
-OWNER_ID=''
-
-MONGO_URI=''
-```
-
--   Now You Can Run The Bot
-
-```
-npm run dev
-```
-
----
-
 ## Contributions
-
-Fork This Repository First. [🍴](https://github.com/HarshPatel5940/Discord-Helper-Bot/fork)
 
 Make sure to open a [Issue in "Feature Request"](https://github.com/HarshPatel5940/Discord-Helper-Bot/issues/new/choose) or [Discussion in "Ideas"](https://github.com/HarshPatel5940/Discord-Helper-Bot/discussions) before creating a pull request.
 
-## License
+---
 
-Released under [**Apache License 2.0**](/LICENSE) by [**@HarshPatel5940**](https://github.com/HarshPatel5940).
+### License
+
+Released under [**Apache License 2.0**](https://github.com/HarshPatel5940/Discord-Helper-Bot/blob/main/LICENSE) by [**@HarshPatel5940**](https://github.com/HarshPatel5940).
+
+---
+
+### Self Hosting
+
+Self-hosting your own copy of this bot is not supported nor recommended; the source code is provided here so users and other bot developers can see how the bot functions. No help will be provided for compiling, or building any code in this repository, and any changes must be documented as per the [license](https://github.com/HarshPatel5940/Discord-Helper-Bot/blob/main/LICENSE).
