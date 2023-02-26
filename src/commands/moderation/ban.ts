@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License. */
 
-import DJS, { Guild, MessageEmbed, User } from "discord.js";
+import DJS, { Guild, EmbedBuilder, User } from "discord.js";
 import { ICommand } from "wokcommands";
 
 export default {
@@ -82,7 +82,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription("❌ Please Mention the User to Ban!")
                         .setColor("RED"),
                 ],
@@ -93,7 +93,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription("❌ Cannot Ban this User!")
                         .setColor("RED"),
                 ],
@@ -104,7 +104,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription("❌ Cannot Ban Yourself **DUMB!!!**")
                         .setColor("RED"),
                 ],
@@ -116,7 +116,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription(
                             "❌ Maximum Only 400 Characters are allowed!"
                         )
@@ -133,7 +133,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription("❌ Cannot Ban that User!!!**")
                         .setColor("RED"),
                 ],
@@ -144,7 +144,7 @@ export default {
         return {
             custom: true,
             embeds: [
-                new MessageEmbed()
+                new EmbedBuilder()
                     .setDescription(
                         `✅ @${target.id}> was **Banned** Indefinitely | \`${target.id}\``
                     )

@@ -15,7 +15,7 @@
 
 import { ICommand } from "wokcommands";
 import DJS, {
-    MessageEmbed,
+    EmbedBuilder,
     MessageActionRow,
     MessageButton,
     Message,
@@ -104,7 +104,7 @@ export default {
 
         await interaction.reply({
             embeds: [
-                new MessageEmbed()
+                new EmbedBuilder()
                     .setDescription(
                         `
                     ⁉️ **DO YOU NEED OUR HELP?**
@@ -137,7 +137,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription(
                             "❌ Please use this command within a server and text channel"
                         )
@@ -177,7 +177,7 @@ create a ticket under a appropriate category by clicking one of the buttons belo
                 return {
                     custom: true,
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
 
                             .setDescription(
                                 "❌ Please Provide Name and Id for Atleast Button 1"
@@ -199,7 +199,7 @@ create a ticket under a appropriate category by clicking one of the buttons belo
                 return {
                     custom: true,
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
 
                             .setDescription(
                                 "❌ Please provide all the required fields."
@@ -264,7 +264,7 @@ create a ticket under a appropriate category by clicking one of the buttons belo
                     DescriptionMsg = CDescriptionMsg;
                 }
 
-                const Embed = new MessageEmbed()
+                const Embed = new EmbedBuilder()
                     .setTitle(TitleMsg)
                     .setDescription(DescriptionMsg)
                     .setColor("#0099ff");
@@ -288,7 +288,7 @@ create a ticket under a appropriate category by clicking one of the buttons belo
                 }
                 await interaction.editReply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setDescription("✅ saving configuration...")
                             .setColor("GREEN"),
                     ],
@@ -318,7 +318,7 @@ create a ticket under a appropriate category by clicking one of the buttons belo
 
                 await interaction.editReply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setDescription("✅ Ticket System Setup Done!!")
                             .setColor("GREEN"),
                     ],
@@ -332,7 +332,7 @@ create a ticket under a appropriate category by clicking one of the buttons belo
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription(
                             `
 ❌ **__AN ERROR OCCURRED__ While Setting Up Your Ticket System**

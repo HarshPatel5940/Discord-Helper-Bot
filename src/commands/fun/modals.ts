@@ -19,7 +19,7 @@ import {
     TextInputComponent,
     MessageActionRow,
     ModalActionRowComponent,
-    MessageEmbed,
+    EmbedBuilder,
 } from "discord.js";
 import { ICommand } from "wokcommands";
 
@@ -44,7 +44,7 @@ export default {
 
             interaction.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor("GREEN")
                         .setDescription(
                             `Your favorite color is ${favoriteColor} and your hobbies are ${hobbies}`

@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License. */
 
-import { MessageEmbed, User } from "discord.js";
+import { EmbedBuilder, User } from "discord.js";
 import { ICommand } from "wokcommands";
 import PunishmentSchema from "../../models/Punishment-schema";
 
@@ -37,7 +37,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription(
                             "❌ Command Can Only Be Used In A Server"
                         )
@@ -66,7 +66,7 @@ export default {
                 return {
                     custom: true,
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setDescription(
                                 `❌ Could Not Find a user with the ID of \`${userId}\``
                             )
@@ -90,7 +90,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription("❌ Invalid Time Format")
                         .setColor("RED"),
                 ],
@@ -106,7 +106,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription(
                             'Please Use "m" "h" or "d" for minutes, hours and days respectively'
                         )
@@ -128,7 +128,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription(
                             `❌ <@${userId}> is already banned! \`${user.id}\``
                         )
@@ -152,7 +152,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription("❌ Could Not Ban User")
                         .setColor("RED"),
                 ],
@@ -163,7 +163,7 @@ export default {
         return {
             custom: true,
             embeds: [
-                new MessageEmbed()
+                new EmbedBuilder()
                     .setDescription(
                         `<:Success:929607022675099648> <@${userId}> has been banned for ${time} | | \`${user.id}\`!`
                     )

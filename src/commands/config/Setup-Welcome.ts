@@ -14,7 +14,7 @@ import { ICommand } from "wokcommands";
    See the License for the specific language governing permissions and
    limitations under the License. */
 
-import DJS, { MessageEmbed } from "discord.js";
+import DJS, { EmbedBuilder } from "discord.js";
 import welcomeSchema from "../../models/welcome-schema";
 
 export default {
@@ -58,7 +58,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription(
                             "❌ Please use this command within a server."
                         )
@@ -72,7 +72,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription("❌ Please Tag a Valid Text Channel.")
                         .setColor("RED"),
                 ],
@@ -104,7 +104,7 @@ export default {
         return {
             custom: true,
             embeds: [
-                new MessageEmbed()
+                new EmbedBuilder()
                     .setDescription("✅ Welcome Channel is setup done!")
                     .setColor("GREEN"),
             ],

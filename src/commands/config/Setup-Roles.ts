@@ -17,7 +17,7 @@ import DJS, {
     Client,
     MessageActionRow,
     MessageButton,
-    MessageEmbed,
+    EmbedBuilder,
 } from "discord.js";
 import { ICommand } from "wokcommands";
 
@@ -66,7 +66,7 @@ export default {
 
             await interaction.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription(
                             "\n⌛ Fetching Members & Adding Role To Members"
                         )
@@ -78,7 +78,7 @@ export default {
             if (!role1) {
                 await interaction.followUp({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setDescription("⛔ Can't Fetch Members")
                             .setColor("RED"),
                     ],
@@ -102,7 +102,7 @@ export default {
             setTimeout(async () => {
                 await interaction.editReply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setDescription(
                                 `✅ Adding <@&${id1}> to **${counter} Members**`
                             )
@@ -116,7 +116,7 @@ export default {
 
     callback: async ({ interaction }) => {
         let DESC: string = `⌛ Fetching Roles`;
-        let EMBED = new MessageEmbed()
+        let EMBED = new EmbedBuilder()
             .setTitle(`Roles Setup Panel`)
             .setDescription(DESC)
             .setColor("#00ffea");

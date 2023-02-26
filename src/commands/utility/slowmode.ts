@@ -14,7 +14,7 @@
    limitations under the License. */
 
 import { ICommand } from "wokcommands";
-import DJS, { MessageEmbed } from "discord.js";
+import DJS, { EmbedBuilder } from "discord.js";
 
 const TYPES = DJS.Constants.ApplicationCommandOptionTypes;
 
@@ -53,7 +53,7 @@ export default {
             if (isNaN(Number(args))) {
                 await message.reply({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setDescription(
                                 `❌ Please Provide a valid number. convert into seconds!!`
                             )
@@ -72,7 +72,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription(
                             `
 ✅ Status Changed to ${Number(args)} seconds.
@@ -100,7 +100,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription(
                             `✅ Status Changed to ${amount1} seconds.`
                         )

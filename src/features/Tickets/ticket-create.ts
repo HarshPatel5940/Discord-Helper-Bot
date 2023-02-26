@@ -14,7 +14,7 @@
    limitations under the License. */
 
 import {
-    MessageEmbed,
+    EmbedBuilder,
     MessageActionRow,
     MessageButton,
     Client,
@@ -89,7 +89,7 @@ export default (client: Client) => {
                 ],
             })
             .then(async (channel) => {
-                const Embed = new MessageEmbed()
+                const Embed = new EmbedBuilder()
                     .setColor("BLURPLE")
                     .setTitle(`${member.user.username} | ${label1} Ticket `)
                     .setDescription(

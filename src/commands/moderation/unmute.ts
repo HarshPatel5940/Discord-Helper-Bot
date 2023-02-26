@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License. */
 
-import DJS, { MessageEmbed, User } from "discord.js";
+import DJS, { EmbedBuilder, User } from "discord.js";
 import { ICommand } from "wokcommands";
 
 export default {
@@ -83,7 +83,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription("❌ Please Mention the User to Unmute!")
                         .setColor("RED"),
                 ],
@@ -95,7 +95,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription("❌ Cannot Unmute Yourself **DUMB!!!**")
                         .setColor("RED"),
                 ],
@@ -107,7 +107,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription(
                             "❌ Maximum Only 400 Characters are allowed!"
                         )
@@ -126,7 +126,7 @@ export default {
                     return {
                         custom: true,
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setDescription("❌ Cannot Find 'Muted' Role.")
                                 .setColor("RED"),
                         ],
@@ -140,7 +140,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription("❌ Cannot Unmute that User!!")
                         .setColor("RED"),
                 ],
@@ -151,7 +151,7 @@ export default {
         return {
             custom: true,
             embeds: [
-                new MessageEmbed()
+                new EmbedBuilder()
                     .setDescription(
                         `✅ <@${user.id}> has been Unmuted! | \`${user.id}\``
                     )

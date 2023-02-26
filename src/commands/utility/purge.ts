@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License. */
 
-import { MessageEmbed } from "discord.js";
+import { EmbedBuilder } from "discord.js";
 import { ICommand } from "wokcommands";
 
 export default {
@@ -47,7 +47,7 @@ export default {
         const { size } = messages;
         messages.forEach((message) => message.delete());
 
-        const emb = new MessageEmbed()
+        const emb = new EmbedBuilder()
             .setDescription(`✅ Deleted ${size} messsages`)
             .setColor("GREEN");
 

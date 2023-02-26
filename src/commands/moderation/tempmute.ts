@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License. */
 
-import { MessageEmbed, User } from "discord.js";
+import { EmbedBuilder, User } from "discord.js";
 import DJS from "discord.js";
 import { ICommand } from "wokcommands";
 import PunishmentSchema from "../../models/Punishment-schema";
@@ -64,7 +64,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription(
                             "❌ Command Can Only Be Used In A Server"
                         )
@@ -93,7 +93,7 @@ export default {
                 return {
                     custom: true,
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setDescription(
                                 `❌ Couldn't find user with id ${userId}`
                             )
@@ -108,7 +108,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription("❌ Cannot Mute Yourself **DUMB!!!**")
                         .setColor("RED"),
                 ],
@@ -129,7 +129,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription(`❌ Invalid Time Format`)
                         .setColor("RED"),
                 ],
@@ -145,7 +145,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription(
                             'Please Use "m" "h" or "d" for minutes, hours and days respectively'
                         )
@@ -167,7 +167,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription(
                             `❌ User is already muted \`${user.id}\``
                         )
@@ -202,7 +202,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription(
                             `❌ Couldn't mute user with id ${user.id}`
                         )
@@ -214,7 +214,7 @@ export default {
         return {
             custom: true,
             embeds: [
-                new MessageEmbed()
+                new EmbedBuilder()
                     .setDescription(
                         `✅ <@${userId}> has been Muted for ${time}m! \`${user.id}\``
                     )

@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License. */
 
-import { MessageEmbed } from "discord.js";
+import { EmbedBuilder } from "discord.js";
 import { ICommand } from "wokcommands";
 import { connection } from "mongoose";
 import { timestamp1 } from "../../index";
@@ -37,7 +37,7 @@ export default {
             createdTimestamp = interaction.createdTimestamp;
         } else return "Cannot Fetch Created timestamp";
 
-        const Response = new MessageEmbed()
+        const Response = new EmbedBuilder()
             .setColor("GREEN")
             .setTitle(`${client.user?.username} Status`)
             .setDescription(

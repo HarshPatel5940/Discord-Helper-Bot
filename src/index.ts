@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License. */
 
-import DiscordJS, { MessageEmbed } from "discord.js";
+import DiscordJS, { EmbedBuilder } from "discord.js";
 import WOKCommands from "wokcommands";
 import path from "path";
 import dotenv from "dotenv";
@@ -28,7 +28,6 @@ dotenv.config();
 const client = new DiscordJS.Client({
     intents: 32767,
 });
-
 client.on("ready", async () => {
     await wait(1000);
     if (!client.user) return;
@@ -57,7 +56,7 @@ client.on("ready", async () => {
             custom: true,
             content: `An exception occurred when using command "${command.names[0]}"! The error is:`,
             embed: [
-                new MessageEmbed().setDescription(
+                new EmbedBuilder().setDescription(
                     `\`\`\`console\n${error}\`\`\``
                 ),
             ],

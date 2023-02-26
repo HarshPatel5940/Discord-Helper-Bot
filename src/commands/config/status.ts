@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License. */
 
-import DJS, { MessageEmbed } from "discord.js";
+import DJS, { EmbedBuilder } from "discord.js";
 import { ICommand } from "wokcommands";
 
 export default {
@@ -52,7 +52,7 @@ export default {
         return {
             custom: true,
             embeds: [
-                new MessageEmbed()
+                new EmbedBuilder()
                     .setDescription(`✅ Status Changed to ${text}`)
                     .setColor("GREEN"),
             ],

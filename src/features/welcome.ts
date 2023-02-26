@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License. */
 
-import { Client, TextChannel, MessageEmbed } from "discord.js";
+import { Client, TextChannel, EmbedBuilder } from "discord.js";
 import welcomeSchema from "../models/welcome-schema";
 
 const welcomeData = {} as {
@@ -45,7 +45,7 @@ export default (client: Client) => {
         data[0].send({
             content: data[1].replace(/@/g, `<@${id}>`),
             embeds: [
-                new MessageEmbed()
+                new EmbedBuilder()
                     .setColor("GREEN")
                     .setTitle(`Member Info`)
                     .setDescription(

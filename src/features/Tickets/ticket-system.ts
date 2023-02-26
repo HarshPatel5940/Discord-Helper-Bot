@@ -14,7 +14,7 @@
    limitations under the License. */
 
 import {
-    MessageEmbed,
+    EmbedBuilder,
     Client,
     MessageActionRow,
     MessageButton,
@@ -67,7 +67,7 @@ export default (client: Client) => {
                 if (!docs) {
                     return await ButtonInteraction.reply({
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setColor("RED")
                                 .setDescription(
                                     "❌ No Data Was Found about this Channel, Delete/close it Manually!"
@@ -95,7 +95,7 @@ export default (client: Client) => {
                             );
                             await ButtonInteraction.reply({
                                 embeds: [
-                                    new MessageEmbed()
+                                    new EmbedBuilder()
                                         .setColor("RED")
                                         .setDescription(
                                             `❌ Ticket is already closed. `
@@ -119,7 +119,7 @@ export default (client: Client) => {
                         await ButtonInteraction.reply({
                             content: `${ButtonInteraction.member}`,
                             embeds: [
-                                new MessageEmbed()
+                                new EmbedBuilder()
                                     .setDescription(
                                         "Are you sure you want to close this ticket?"
                                     )
@@ -166,7 +166,7 @@ export default (client: Client) => {
 
                                 await ButtonInteraction.followUp({
                                     embeds: [
-                                        new MessageEmbed()
+                                        new EmbedBuilder()
                                             .setColor("GREEN")
                                             .setDescription(
                                                 `✅ Ticket Closed Successfully!`
@@ -188,7 +188,7 @@ export default (client: Client) => {
                         if (docs.Closed == false) {
                             await ButtonInteraction.reply({
                                 embeds: [
-                                    new MessageEmbed()
+                                    new EmbedBuilder()
                                         .setColor("RED")
                                         .setDescription(
                                             "❌ The Ticket is already Open."
@@ -208,7 +208,7 @@ export default (client: Client) => {
                         );
                         await ButtonInteraction.reply({
                             embeds: [
-                                new MessageEmbed()
+                                new EmbedBuilder()
                                     .setColor("GREEN")
                                     .setDescription(
                                         `✅ Ticket Reopened Successfully!`
@@ -220,7 +220,7 @@ export default (client: Client) => {
                         if (docs.Closed == false) {
                             await ButtonInteraction.reply({
                                 embeds: [
-                                    new MessageEmbed()
+                                    new EmbedBuilder()
                                         .setColor("RED")
                                         .setDescription(
                                             "❌ *PLEASE CLOSE this ticket first!!*"
@@ -232,7 +232,7 @@ export default (client: Client) => {
                         }
                         await ButtonInteraction.reply({
                             embeds: [
-                                new MessageEmbed()
+                                new EmbedBuilder()
                                     .setColor("GREEN")
                                     .setDescription(
                                         `✅ Ticket Deletion has been started!`
@@ -259,7 +259,7 @@ export default (client: Client) => {
                         try {
                             await TChannel.send({
                                 embeds: [
-                                    new MessageEmbed()
+                                    new EmbedBuilder()
                                         .setColor("GREEN")
                                         .setTitle(
                                             `Name: ${channel.name} | ID: ${channel.id}`
@@ -273,7 +273,7 @@ export default (client: Client) => {
 
                             await user1.send({
                                 embeds: [
-                                    new MessageEmbed()
+                                    new EmbedBuilder()
                                         .setColor("GREEN")
                                         .setTitle(
                                             `✅ Your Ticket has been Closed!`

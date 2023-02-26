@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License. */
 
-import { MessageActionRow, MessageButton, MessageEmbed } from "discord.js";
+import { MessageActionRow, MessageButton, EmbedBuilder } from "discord.js";
 import { ICommand } from "wokcommands";
 
 export default {
@@ -65,7 +65,7 @@ export default {
 
         await msgInt.reply({
             embeds: [
-                new MessageEmbed()
+                new EmbedBuilder()
                     .setDescription("Choose one of the Buttons")
                     .setColor("BLURPLE"),
             ],

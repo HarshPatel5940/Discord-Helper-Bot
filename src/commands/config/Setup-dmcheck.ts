@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License. */
 
-import DJS, { MessageActionRow, MessageButton, MessageEmbed } from "discord.js";
+import DJS, { MessageActionRow, MessageButton, EmbedBuilder } from "discord.js";
 import { ICommand } from "wokcommands";
 import mainRoleSchema from "../../models/main-role-schema";
 
@@ -69,7 +69,7 @@ export default {
 
         await CChannel.send({
             embeds: [
-                new MessageEmbed()
+                new EmbedBuilder()
                     .setTitle("Turn off your DMs to access the server")
                     .setDescription(
                         `

@@ -16,7 +16,7 @@
 import {
     MessageActionRow,
     MessageSelectMenu,
-    MessageEmbed,
+    EmbedBuilder,
     Client,
 } from "discord.js";
 import { ICommand } from "wokcommands";
@@ -39,7 +39,7 @@ export default {
 
             interaction.reply({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setColor("RED")
                         .setDescription(`You have selected ${values}`),
                 ],
@@ -85,7 +85,7 @@ export default {
 
         Msg.reply({
             embeds: [
-                new MessageEmbed()
+                new EmbedBuilder()
                     .setColor(0x00ff00)
                     .setDescription("Please Choose a Colour from below"),
             ],

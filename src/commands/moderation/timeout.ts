@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License. */
 
-import { MessageEmbed, User } from "discord.js";
+import { EmbedBuilder, User } from "discord.js";
 import DJS from "discord.js";
 import { ICommand } from "wokcommands";
 import ms from "ms";
@@ -63,7 +63,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription(
                             "❌ Command Can Only Be Used In A Server"
                         )
@@ -92,7 +92,7 @@ export default {
                 return {
                     custom: true,
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setDescription(
                                 `❌ Couldn't find user with id ${userId}`
                             )
@@ -107,7 +107,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription("❌ Cannot Mute Yourself **DUMB!!!**")
                         .setColor("RED"),
                 ],
@@ -128,7 +128,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription(`❌ Invalid Time Format`)
                         .setColor("RED"),
                 ],
@@ -144,7 +144,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription(
                             'Please Use "m" "h" or "d" for minutes, hours and days respectively (min: 1m => max: 28d)\n\n**Example:`!timeout @user 1h`'
                         )
@@ -158,7 +158,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription(
                             `❌ You cannot timeout a user for more than 28 days`
                         )
@@ -181,7 +181,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription(
                             `❌ Couldn't timeout user with id ${user.id}`
                         )
@@ -193,7 +193,7 @@ export default {
         return {
             custom: true,
             embeds: [
-                new MessageEmbed()
+                new EmbedBuilder()
                     .setDescription(
                         `✅ <@${userId}> has been timeout for ${time}m! | \`${user.id}\``
                     )

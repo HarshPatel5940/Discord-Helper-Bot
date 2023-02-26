@@ -14,7 +14,7 @@
    limitations under the License. */
 
 import { ICommand } from "wokcommands";
-import DJS, { MessageActionRow, MessageButton, MessageEmbed } from "discord.js";
+import DJS, { MessageActionRow, MessageButton, EmbedBuilder } from "discord.js";
 
 const TYPES = DJS.Constants.ApplicationCommandOptionTypes;
 
@@ -40,7 +40,7 @@ export default {
 
         await interaction.reply({
             embeds: [
-                new MessageEmbed()
+                new EmbedBuilder()
                     .setTitle("CLOSED TICKETS DELETION PANEL")
                     .setColor("RED")
                     .setDescription(
@@ -84,7 +84,7 @@ Click The Button Below To Start The Deletion Proccess.
 
                 interaction.channel?.send({
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setColor("GREEN")
                             .setDescription(
                                 `✅ Successfully Deleted Closed Tickets`

@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License. */
 
-import DJS, { MessageEmbed } from "discord.js";
+import DJS, { EmbedBuilder } from "discord.js";
 import { ICommand } from "wokcommands";
 
 export default {
@@ -55,7 +55,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription(
                             "❌ Please Use this Command within a Server."
                         )
@@ -69,7 +69,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription("❌ Please tag a valid text channel.")
                         .setColor("RED"),
                 ],
@@ -81,14 +81,14 @@ export default {
 
         await target.send({
             embeds: [
-                new MessageEmbed().setDescription(text).setColor("BLURPLE"),
+                new EmbedBuilder().setDescription(text).setColor("BLURPLE"),
             ],
         });
 
         return {
             custom: true,
             embeds: [
-                new MessageEmbed()
+                new EmbedBuilder()
                     .setDescription(`Message Has Been sent to ${target}`)
                     .setColor("GREEN"),
             ],

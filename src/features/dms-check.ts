@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License. */
 
-import { Client, MessageEmbed } from "discord.js";
+import { Client, EmbedBuilder } from "discord.js";
 import mainRoleSchema from "../models/main-role-schema";
 
 export default (client: Client) => {
@@ -29,7 +29,7 @@ export default (client: Client) => {
         try {
             await user1.send({
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setTitle("Why Getting this msg?")
                         .setDescription(
                             `Please Turn Of Your Dm's in __**${interaction.guild.name}**__ to proceed further verification`

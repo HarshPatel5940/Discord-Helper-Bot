@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License. */
 
-import { MessageEmbed } from "discord.js";
+import { EmbedBuilder } from "discord.js";
 import { ICommand } from "wokcommands";
 
 export default {
@@ -30,7 +30,7 @@ export default {
         return {
             custom: true,
             embeds: [
-                new MessageEmbed()
+                new EmbedBuilder()
                     .setDescription(
                         "✅ Welcome Message Sent! **Event Has Triggered!**"
                     )

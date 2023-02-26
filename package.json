@@ -1,40 +1,31 @@
 {
-    "name": "discord-helper-bot",
-    "version": "1.1.5",
-    "description": "A Simple and Cool Discord Bot Written in Typescript (discord.js)",
-    "main": "index.ts",
-    "scripts": {
-        "start": "node dist/index.js",
-        "dev": "nodemon src/index.ts",
-        "web": "npx ts-node --transpile-only src/index.ts"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/HarshPatel5940/Discord-Helper-Bot.git"
-    },
-    "keywords": [],
-    "author": "HarshPatel5940",
-    "license": "SEE LICENSE IN 'LICENSE' ",
-    "bugs": {
-        "url": "https://github.com/HarshPatel5940/Discord-Helper-Bot/issues"
-    },
-    "homepage": "https://github.com/HarshPatel5940/Discord-Helper-Bot#readme",
-    "dependencies": {
-        "black": "^0.3.0",
-        "discord-html-transcripts": "^2.5.8",
-        "discord.js": "^13.8.1",
-        "dotenv": "^16.0.1",
-        "mongoose": "^6.4.4",
-        "ms": "^2.1.3",
-        "nodemon": "^2.0.19",
-        "ts-node": "^10.9.1",
-        "typescript": "^4.7.4",
-        "wokcommands": "^1.5.3"
-    },
-    "devDependencies": {
-        "@types/ms": "^0.7.31"
-    },
-    "directories": {
-        "doc": "docs"
-    }
+  "name": "discord-helper-bot",
+  "version": "1.1.0",
+  "description": "<div align=\"center\">\r <h1> Discord Helper Bot</h1>\r <h4> A Simple and Cool Utility Discord Bot Written in Typescript (discord.js) </h4>",
+  "main": "src/index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HarshPatel5940/Discord-Helper-Bot.git"
+  },
+  "author": "HarshPatel5940",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HarshPatel5940/Discord-Helper-Bot/issues"
+  },
+  "homepage": "https://github.com/HarshPatel5940/Discord-Helper-Bot#readme",
+  "dependencies": {
+    "ascii-table": "^0.0.9",
+    "discord.js": "^14.7.1",
+    "dotenv": "^16.0.3",
+    "glob": "^8.1.0"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.0.1"
+  }
 }

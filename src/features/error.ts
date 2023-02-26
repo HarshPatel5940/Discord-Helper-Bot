@@ -12,7 +12,7 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License. */
-import { Client, MessageEmbed } from "discord.js";
+import { Client, EmbedBuilder } from "discord.js";
 import dotenv from "dotenv";
 
 dotenv.config({ path: ".env.test" });
@@ -46,7 +46,7 @@ export const config = {
 };
 
 async function ReportError(client: Client, title: string, desc: any, p: any) {
-    const ErrEmbed = new MessageEmbed()
+    const ErrEmbed = new EmbedBuilder()
         .setTitle(title)
         .setDescription(
             `

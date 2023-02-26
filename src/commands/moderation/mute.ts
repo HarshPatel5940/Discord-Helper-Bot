@@ -13,7 +13,7 @@
    See the License for the specific language governing permissions and
    limitations under the License. */
 
-import DJS, { Guild, MessageEmbed, User } from "discord.js";
+import DJS, { Guild, EmbedBuilder, User } from "discord.js";
 import { ICommand } from "wokcommands";
 
 export default {
@@ -56,7 +56,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription(
                             "❌ Command Can Only Be Used In A Server"
                         )
@@ -84,7 +84,7 @@ export default {
                 return {
                     custom: true,
                     embeds: [
-                        new MessageEmbed()
+                        new EmbedBuilder()
                             .setDescription(
                                 `"❌ Could not find a user with id \`${userId}\``
                             )
@@ -102,7 +102,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription("❌ Please Mention the User to Mute!")
                         .setColor("RED"),
                 ],
@@ -114,7 +114,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription("❌ Cannot Mute Yourself **DUMB!!!**")
                         .setColor("RED"),
                 ],
@@ -126,7 +126,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription(
                             "❌ Maximum Only 400 Characters are allowed!"
                         )
@@ -145,7 +145,7 @@ export default {
                     return {
                         custom: true,
                         embeds: [
-                            new MessageEmbed()
+                            new EmbedBuilder()
                                 .setDescription("❌ Cannot Find 'Muted' Role.")
                                 .setColor("RED"),
                         ],
@@ -159,7 +159,7 @@ export default {
             return {
                 custom: true,
                 embeds: [
-                    new MessageEmbed()
+                    new EmbedBuilder()
                         .setDescription(
                             "❌ Cannot Mute that User!! \n" +
                                 "```" +
@@ -175,7 +175,7 @@ export default {
         return {
             custom: true,
             embeds: [
-                new MessageEmbed()
+                new EmbedBuilder()
                     .setDescription(
                         `✅ <@${target.id}> was **Muted** Indefinitely | \`${target.id}\``
                     )
