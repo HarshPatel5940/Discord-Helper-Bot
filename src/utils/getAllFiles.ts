@@ -2,7 +2,7 @@ import glob from "glob";
 import { promisify } from "util";
 const proGlob = promisify(glob);
 
-async function loadFiles(dirName: string) {
+export default async function (dirName: string) {
     const FILES = await proGlob(
         `${process.cwd().replace(/\\/g, "/")}/${dirName}/**/*.ts`
     );
@@ -11,5 +11,3 @@ async function loadFiles(dirName: string) {
     });
     return FILES;
 }
-
-export default loadFiles;
