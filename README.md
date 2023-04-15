@@ -20,7 +20,7 @@
 
 **Discord Helper Bot** is a custom discord bot mainly focused on server utility and automating things in discord. The main purpose of this bot is to get well known with the discord api and discord.js package.
 
-This Bot also uses _**wokcommands handler**_ for handling the commands and event listeners of the bot.
+This Bot is made using [**discord.js**](https://discord.js.org/#/) and This Youtube Video. [Link 🔗](https://youtu.be/4IxLBKPVyXE)
 
 ## Contributions
 
@@ -36,4 +36,4 @@ Released under [**Apache License 2.0**](https://github.com/HarshPatel5940/Discor
 
 ### Self Hosting
 
-Self-hosting your own copy of this bot is not supported nor recommended; the source code is provided here so users and other bot developers can see how the bot functions. No help will be provided for compiling, or building any code in this repository, and any changes must be documented as per the [license](https://github.com/HarshPatel5940/Discord-Helper-Bot/blob/main/LICENSE).
+Self-hosting your own copy of this bot is not recommended; the source code is provided here so users and other bot developers can see how the bot functions. Any changes must be documented as per the [license](https://github.com/HarshPatel5940/Discord-Helper-Bot/blob/main/LICENSE).
