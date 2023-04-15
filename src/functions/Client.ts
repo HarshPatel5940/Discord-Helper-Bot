@@ -39,6 +39,14 @@ export class ExtendedClient extends Client {
             this.commands.set(command.name, command);
             slashCommands.push(command);
         });
+
+        const eventFiles = await getAllFiles("src/events");
+        console.log(eventFiles);
+
+        eventFiles.forEach(async (filePath) => {
+            const event = await this.importFile(filePath);
+            this.on(event.event, event.run);
+        });
     }
 
     async registerSlashCommands({
