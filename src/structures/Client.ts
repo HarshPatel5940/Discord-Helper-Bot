@@ -25,7 +25,7 @@ export class ExtendedClient extends Client {
 
     async registerModules() {
         const slashCommands: ApplicationCommandDataResolvable[] = [];
-        const commandFiles = await getAllFiles("src/commands");
+        const commandFiles = await getAllFiles("commands");
         console.log(commandFiles);
 
         commandFiles.forEach(async (filePath) => {
@@ -38,9 +38,16 @@ export class ExtendedClient extends Client {
 
             this.commands.set(command.name, command);
             slashCommands.push(command);
+
+            this.on("ready", () => {
+                this.registerSlashCommands({
+                    commands: slashCommands,
+                    guildId: process.env.GUILD_ID,
+                });
+            });
         });
 
-        const eventFiles = await getAllFiles("src/events");
+        const eventFiles = await getAllFiles("events");
         console.log(eventFiles);
 
         eventFiles.forEach(async (filePath) => {
@@ -54,9 +61,8 @@ export class ExtendedClient extends Client {
         guildId,
     }: RegisterCommandsOptions) {
         if (guildId) {
-            const guild = await this.guilds.cache
-                .get(guildId)
-                ?.commands.set(commands);
+            await this.guilds.cache.get(guildId)?.commands.set(commands);
+            console.log("Registered slash commands");
         } else {
             await this.application?.commands.set(commands);
             console.log("Registered global slash commands");

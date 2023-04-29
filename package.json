@@ -8,7 +8,7 @@
     },
     "scripts": {
         "start": "ts-node src/index.ts",
-        "start:d dev": "ts-node-dev src/index.ts",
+        "start:dev": "ts-node-dev src/index.ts --watch ",
         "build": "tsc",
         "start:prod": "node dist/index.js"
     },

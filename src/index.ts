@@ -1,7 +1,7 @@
 require("dotenv").config({ path: ".env.example" });
 
-import { ExtendedClient } from "./functions/Client";
+import { ExtendedClient } from "./structures/Client";
 
 export const client = new ExtendedClient();
 
-client.login(process.env.BOT_TOKEN);
+client.start();
