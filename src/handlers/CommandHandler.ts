@@ -4,46 +4,40 @@ import { CommandType, RegisterCommandsOptions } from "../structures/Command";
 import { client } from "..";
 
 export default async function registerCommands() {
-    const slashCommandsGlobal: ApplicationCommandDataResolvable[] = [];
-    const slashCommandsTest: ApplicationCommandDataResolvable[] = [];
-    const slashCommands: ApplicationCommandDataResolvable[] = [];
+    let slashCommandsGlobal: ApplicationCommandDataResolvable[] = [];
+    let slashCommandsTest: ApplicationCommandDataResolvable[] = [];
     const commandFiles = await getAllFiles("commands");
-    console.log(commandFiles);
 
-    commandFiles.forEach(async (filePath) => {
+    for (const filePath of commandFiles) {
         const command: CommandType = await client.importFile(filePath);
         if (!command.name) {
-            return console.error(`Command ${filePath} does not have a name!`);
+            console.error(`Command ${filePath} does not have a name!`);
+            continue;
         }
-        if (command.testOnly) {
-            slashCommandsTest.push(command);
-            return;
-        }
-
-        if (command.permittedGuilds) {
-            slashCommands.push(command);
-            return;
-        }
-
         client.commands.set(command.name, command);
-        slashCommandsGlobal.push(command);
-    });
 
-    await registerSlashCommands({ commands: slashCommands, CmdType: "guild" });
-    await registerSlashCommands({ commands: slashCommandsTest, CmdType: "test" });
-    await registerSlashCommands({ commands: slashCommandsGlobal, CmdType: "global" });
+        if (command.testOnly as boolean) {
+            slashCommandsTest.push(command);
+        } else {
+            slashCommandsGlobal.push(command);
+        }
+    }
+
+    console.log(slashCommandsGlobal, "\n", slashCommandsTest);
+    await registerSlashCommands({ commands: slashCommandsTest, CmdInfo: "test" });
+    await registerSlashCommands({ commands: slashCommandsGlobal, CmdInfo: "global" });
 }
 
-async function registerSlashCommands({ commands, CmdType }: RegisterCommandsOptions) {
-    if (CmdType === "test") {
-        await client.guilds.cache.get(client.env.testGuildId as string)?.commands.set(commands);
+async function registerSlashCommands({ commands, CmdInfo }: RegisterCommandsOptions) {
+    if (CmdInfo === "test") {
+        let id = client.env.testGuild_ID as string;
+        console.log(id);
+        await client.guilds.cache.get(id)?.commands.set(commands);
         console.log("Registered slash commands for Test Guild");
-    } else if (CmdType === "global") {
+    } else if (CmdInfo === "global") {
         await client.application?.commands.set(commands);
         console.log("Registered global slash commands");
     } else {
-        let guilds: number[];
-
-        // TODO: Add support for multiple guilds
+        console.log("something did not strike right!");
     }
 }

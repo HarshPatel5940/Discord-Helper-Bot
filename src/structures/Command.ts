@@ -23,15 +23,13 @@ type RunFunction = (options: RunOptions) => any;
 export type CommandType = {
     name: string;
     description: string;
-    permittedGuilds?: number[] extends (infer T)[] ? T[] : number[];
     testOnly?: boolean;
     requiredPermissions?: PermissionResolvable[];
     userPermissions?: PermissionResolvable[];
     callback: RunFunction;
-} & ({ testOnly: true; permittedGuilds?: never } | { testOnly?: false }) &
-    ChatInputApplicationCommandData;
+} & ChatInputApplicationCommandData;
 
 export interface RegisterCommandsOptions {
-    CmdType?: "global" | "guild" | "test";
-    commands: ApplicationCommandDataResolvable[] & CommandType[];
+    CmdInfo?: "global" | "test";
+    commands: ApplicationCommandDataResolvable[];
 }
