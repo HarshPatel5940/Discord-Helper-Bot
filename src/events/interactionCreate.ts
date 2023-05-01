@@ -1,9 +1,11 @@
 import { CommandInteractionOptionResolver } from "discord.js";
 import { client } from "../index";
 import { Event } from "../structures/Events";
-import { ExtendedInteraction } from "../types/Command";
+import { ExtendedInteraction } from "../structures/Command";
 
 export default new Event("interactionCreate", async (interaction) => {
+    name: "Command Interaction";
+
     if (!interaction.isCommand()) return;
     // await interaction.deferReply({ ephemeral: true }).catch(() => {});
 
@@ -13,7 +15,7 @@ export default new Event("interactionCreate", async (interaction) => {
             content: "Command Does Not Exist. [404]",
         });
 
-    command.run({
+    command.callback({
         args: interaction.options as CommandInteractionOptionResolver,
         client,
         interaction: interaction as ExtendedInteraction,

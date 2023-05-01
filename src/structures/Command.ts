@@ -4,10 +4,9 @@ import {
     CommandInteraction,
     CommandInteractionOptionResolver,
     GuildMember,
-    Message,
     PermissionResolvable,
 } from "discord.js";
-import { ExtendedClient } from "../structures/Client";
+import { ExtendedClient } from "./Client";
 
 export interface ExtendedInteraction extends CommandInteraction {
     member: GuildMember;
@@ -16,18 +15,23 @@ export interface ExtendedInteraction extends CommandInteraction {
 interface RunOptions {
     client: ExtendedClient;
     interaction: ExtendedInteraction;
-    // message: Message; // ! THis is NOT NEEDED EVERYTIME
     args: CommandInteractionOptionResolver;
 }
 
 type RunFunction = (options: RunOptions) => any;
 
 export type CommandType = {
+    name: string;
+    description: string;
+    permittedGuilds?: number[] extends (infer T)[] ? T[] : number[];
+    testOnly?: boolean;
+    requiredPermissions?: PermissionResolvable[];
     userPermissions?: PermissionResolvable[];
-    run: RunFunction;
-} & ChatInputApplicationCommandData;
+    callback: RunFunction;
+} & ({ testOnly: true; permittedGuilds?: never } | { testOnly?: false }) &
+    ChatInputApplicationCommandData;
 
 export interface RegisterCommandsOptions {
-    guildId?: string;
-    commands: ApplicationCommandDataResolvable[];
+    CmdType?: "global" | "guild" | "test";
+    commands: ApplicationCommandDataResolvable[] & CommandType[];
 }

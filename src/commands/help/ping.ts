@@ -1,11 +1,11 @@
 // checking stuff
-import { Command } from "../../structures/Commands";
+import { Command } from "../../utils/Commands";
 
 export default new Command({
     name: "ping",
     description: "Pong!",
 
-    run: async ({ interaction }) => {
+    callback: async ({ interaction }) => {
         // await interaction.deleteReply();
         await interaction.reply("Pong!");
     },
