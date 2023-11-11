@@ -21,7 +21,7 @@
     "homepage": "https://github.com/HarshPatel5940/Discord-Helper-Bot#readme",
     "dependencies": {
         "black": "^0.3.0",
-        "discord-html-transcripts": "^2.5.8",
+        "discord-html-transcripts": "^3.2.0",
         "discord.js": "^13.8.1",
         "dotenv": "^16.0.1",
         "mongoose": "^6.12.0",
