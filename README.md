@@ -1,6 +1,6 @@
 <div align="center">
-<h1> Discord Helper Bot</h1>
-<h4> A Simple and Cool Utility Discord Bot Written in Typescript (discord.js) </h4>
+<h1> Discord Helper Bot (Deprecated)</h1>
+<h4> A Simple and Cool Utility Discord Bot Written in Typescript (discord.js). New Version [DHB-V2](https://github.com/HarshPatel5940/dhb-v2) </h4>
 
 [![GitHub license](https://img.shields.io/github/license/HarshPatel5940/Discord-Helper-Bot?color=informational)](https://github.com/HarshPatel5940/Discord-Helper-Bot/blob/main/LICENSE)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/HarshPatel5940/Discord-Helper-Bot)
